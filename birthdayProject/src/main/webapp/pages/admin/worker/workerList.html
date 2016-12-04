@@ -1,0 +1,70 @@
+<form id="pagerForm" method="get" action="worker/doSerach">
+	#parse("admin/core/paginationForm.html")
+</form>
+
+<div class="pageHeader">
+	<form onsubmit="return navTabSearch(this);" action="worker/doSerach" method="get">
+	<div class="searchBar">
+		<table class="searchContent">
+			<tr>
+				<td>
+					手机号：<input type="text" name="phoneNum" value="${worker.phoneNum}"/>
+				</td>
+				<td>
+					姓名：<input type="text" name="workName" value="${worker.workName}"/>
+				</td>
+				<td>
+					建档日期：<input type="text" class="date" readonly="true" />
+				</td>
+			</tr>
+		</table>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent" style="width: 50px; text-align: center;"><button type="submit">检索</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+			<li><a class="add" target="dialog" href="pages/admin/worker/addWorker.html"><span>添加</span></a></li>
+			<li><a class="delete" href="admin/core/ajaxDone.html?workid={workid}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
+			<li><a class="edit" href="demo_page4.html?workid={workid}" target="navTab"><span>修改</span></a></li>
+			<li class="line">line</li>
+			<li><a class="icon" href="demo/common/dwz-team.xls" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+			<tr>
+				<th width="40">序号</th>
+				<th width="80">姓名</th>
+				<th width="120">手机号</th>
+				<th width="80">生日</th>
+				<th width="40">权限</th>
+				<th width="80">最后更新时间</th>
+				<th width="80">创建时间</th>
+			</tr>
+		</thead>
+		<tbody>
+			#if($workers!= '' or $workers.size>0)
+				#foreach($worker in ${workers})
+					<tr target="workid" rel="${worker.phoneNum}">
+						<td>$worker.id</td>
+						<td>$worker.workName</td>
+						<td>$worker.phoneNum</td>
+						<td>$dateTool.format('yyyy-MM-dd',$worker.birthday)</td>
+						<td>$worker.workerRole</td>
+						<td>$dateTool.format('yyyy-MM-dd HH:mm:ss',$worker.updateTime)</td>
+						<td>$dateTool.format('yyyy-MM-dd HH:mm:ss',$worker.creteTime)</td>
+					</tr>
+				#end
+			#end
+		</tbody>
+	</table>
+	<div class="panelBar">
+		#parse("admin/core/paginaction.html")
+	</div>
+</div>

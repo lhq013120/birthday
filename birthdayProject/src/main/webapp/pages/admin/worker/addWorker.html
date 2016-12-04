@@ -1,0 +1,53 @@
+<div class="pageContent">
+	<form id="vtmInfoCreateFrom" name="vtmInfoCreateFrom" onsubmit="return validateCallback(this,dialogAjaxDone);"  class="required-validate" method="post"	action="createVtmInfoAction.action">
+	<div class="pageFormContent" layoutH="56">
+			<input id="provinceName" type="hidden" name="provinceName" value=""/>
+			<input id="cityName" type="hidden" name="cityName" value=""/>
+			<p>
+				<label>姓名：</label>
+				<input type="text" id="workName" name="workName" size="30" maxlength="10" class="required"/>
+			</p>
+			<p>
+				<label>手机号：</label>
+				<input type="text" id="phoneNum" name="phoneNum" size="30" maxlength="10" class="required"/>
+			</p>
+			<p>
+				<label>生日</label>
+				<input type="text" class="date required" id="birthday" name="birthday" format="yyyy-MM-dd" size="10" readonly="true"/>
+			</p>
+			<p>
+				<label>权限：</label>
+				<select class="combox required" name="workerRole" >
+						<option value="01" selected="selected">普通职工</option>
+						<option value="02">管理员</option>
+				</select>
+			</p>
+			<p>
+				<label>头像</label>
+				<input id="workerImg" type="file" name="workerImg"
+							uploader="uploadify/scripts"
+							cancelImg="uploadify/img/cancel.png"
+							script="admin/core/ajaxDone.html"
+							folder="/folder"
+							fileQueue="fileQueue" />
+			</p>
+  </div>
+  	<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button" onclick="pagerFormSubmit();">保存</button></div></div></li>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+		</form>
+	<script type="text/javascript">
+		function pagerFormSubmit(){
+			var province = $("select[name='province'] option:selected").html();
+			var city = $("#city option:selected").html();
+			var county = $("#county option:selected").html();
+			$("#provinceName").val(province);
+			$("#cityName").val(city);
+			$("#county option:selected").val(county);
+			$("#vtmInfoCreateFrom").submit();
+		}
+	</script>
+</div>

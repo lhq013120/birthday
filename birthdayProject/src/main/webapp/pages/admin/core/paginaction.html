@@ -1,0 +1,11 @@
+<div class="pages">
+	<span>显示</span>
+	<select class="combox" name="numPerPage" onchange="navTabPageBreak({numPerPage:this.value})">
+		<option value="20" #if($!paginator.limit == 20) selected #end>20</option>
+		<option value="50" #if($!paginator.limit == 50) selected #end>50</option>
+		<option value="100" #if($!paginator.limit == 100) selected #end>100</option>
+		<option value="200" #if($!paginator.limit == 200) selected #end>200</option>
+	</select>
+	<span>条，共${paginator.totalCount}条</span>
+</div>
+<div class="pagination" targetType="navTab" totalCount="${paginator.totalCount}" numPerPage="${paginator.limit}" pageNumShown="${paginator.getTotalPages()}" currentPage="${paginator.page}"></div>
