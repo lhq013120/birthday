@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+	<appender name="BIRTHDAY_FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Prudent>true</Prudent>
+		<Encoding>UTF-8</Encoding>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/app/logs/birthday/%d{yyyy_MM_dd}/birthday.%d{yyyyMMdd}.%i.log</fileNamePattern>   
+<!-- 			<maxHistory>30</maxHistory> -->
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+					<maxFileSize>5MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>
+				[smallpay-account][%d{yyyy-MM-dd HH:mm:ss SSS}] %-5level [%thread][%c:%line]- %msg%n
+			</Pattern>
+		</layout>
+	</appender>
+
+	<root level="DEBUG">
+		<appender-ref ref="BIRTHDAY_FILE" />
+	</root>
+
+</configuration>
