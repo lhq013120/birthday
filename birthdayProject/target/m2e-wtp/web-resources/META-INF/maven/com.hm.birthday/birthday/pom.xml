@@ -16,8 +16,31 @@
 		<org.slf4j-version>1.6.4</org.slf4j-version>
 		<spring.version>3.2.10.RELEASE</spring.version>
 		<mysql.version>5.1.21</mysql.version>
+		<logback.version>1.1.7</logback.version>
 	</properties>
 	<dependencies>
+		<!-- logback -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-access</artifactId>
+			<version>${logback.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.7</version>
+		</dependency>
 		
 		<dependency>
 			<groupId>mysql</groupId>
