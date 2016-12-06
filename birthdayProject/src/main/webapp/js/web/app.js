@@ -3,7 +3,6 @@ app.config(['$routeProvider',function($routeProvider)
 {
 	$routeProvider
 	.when("/",{
-		template:'这是电脑分类页面',
 		templateUrl:"login.html"
 	})
 	.when("/login",{
