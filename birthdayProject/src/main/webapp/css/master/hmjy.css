@@ -10,8 +10,24 @@ html,body,document{
 	src: url(../../fonts/fzcyjt.ttf);
 }
 @font-face {
-	font-family:ltch;
+	font-family:ltchGBK;
 	src: url(../../fonts/ltchGBK.TTF);
+}
+@font-face {
+	font-family:FZLTXHJW;
+	src: url(../../fonts/FZLTXHJW.TTF);
+}
+@font-face {
+	font-family:HYG3GJM;
+	src: url(../../fonts/HYG3GJM.TTF);
+}
+@font-face {
+	font-family:msyh;
+	src: url(../../fonts/msyh.ttf);
+}
+@font-face {
+	font-family:msyhbd;
+	src: url(../../fonts/msyhbd.ttf);
 }
 .super{
 	height: 100%;
@@ -21,12 +37,21 @@ html,body,document{
 @media(max-width: 768px){
 	.login_containere{
 		background: url(../../imgs/master/login/login.jpg) no-repeat;
-		background-size: contain;
+		background-size: 100% 100%;
 		width: 100%;
-		height: 1334px;
+		height: 100%;
 	}
 	.login_btn{
-		
+		font-family: fzcyjt;
+		font-size: 28px;
+		/*width: 339px;
+		height: 67px;*/
+		display: inline-block;
+		background-color: #ffd66b;
+		border-radius: 50px;
+		text-align: center;
+		line-height: 66px;
+		margin: 0 auto;
 	}
 	.login_img{
 		width: 100%;
