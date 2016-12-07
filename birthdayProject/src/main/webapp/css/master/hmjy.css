@@ -40,6 +40,7 @@ html,body,document{
 		background-size: 100% 100%;
 		width: 100%;
 		height: 100%;
+		min-height: 500px;
 	}
 	.login_btn{
 		font-family: fzcyjt;
@@ -54,9 +55,10 @@ html,body,document{
 		position: absolute;
 		margin: 0 auto;
 		height: 30px;
-		top: 90%;
+		bottom: 1.9%;
 		left: 0;
 		right: 0;
+		color: #e72920;
 	}
 	.login_img{
 		width: 100%;
