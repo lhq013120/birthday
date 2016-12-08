@@ -15,9 +15,9 @@ import sun.misc.BASE64Encoder;
  * @author hanyd
  *
  */
-public class MD5 {
+public class MD5Utils {
 	
-	private final static Logger logger = LoggerFactory.getLogger(MD5.class);
+	private final static Logger logger = LoggerFactory.getLogger(MD5Utils.class);
 	
 	/**
 	 * MD5加密转换
