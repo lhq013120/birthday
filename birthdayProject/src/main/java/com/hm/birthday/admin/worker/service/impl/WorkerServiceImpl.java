@@ -9,7 +9,7 @@ import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.hm.birthday.admin.worker.dao.WorkerMapper;
 import com.hm.birthday.admin.worker.service.IWorkerService;
-import com.hm.birthday.entity.Worker;
+import com.hm.birthday.entity.WorkerInfo;
 
 
 @Service("workerService")
@@ -21,7 +21,7 @@ public class WorkerServiceImpl implements IWorkerService {
 	private WorkerMapper workerMapper;
 	
 	@Override
-	public PageList<Worker> queryWithPage(Worker w,PageBounds pageBounds) {
+	public PageList<WorkerInfo> queryWithPage(WorkerInfo w,PageBounds pageBounds) {
 		
 		try {
 			return workerMapper.queryWithPage(w, pageBounds);

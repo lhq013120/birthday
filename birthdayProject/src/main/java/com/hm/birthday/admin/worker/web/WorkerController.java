@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.hm.birthday.admin.worker.service.IWorkerService;
 import com.hm.birthday.core.controller.AbstractDisplayController;
-import com.hm.birthday.entity.Worker;
+import com.hm.birthday.entity.WorkerInfo;
 
 @Controller
 @RequestMapping("worker")
@@ -29,10 +29,10 @@ public class WorkerController extends AbstractDisplayController {
 		Integer limit = params.get("numPerPage") == null ? null : Integer.parseInt(params.get("numPerPage").toString());
 		String phoneNum = params.get("phoneNum") == null ? "" : params.get("phoneNum").toString();
 		String workNm = params.get("workNm") == null ? "" : params.get("workNm").toString();
-		Worker worker = new Worker();
+		WorkerInfo worker = new WorkerInfo();
 		worker.setPhoneNum(phoneNum);
 		worker.setWorkName(workNm);
-		PageList<Worker> list = workerService.queryWithPage(worker, buildPageBounds(limit, pageNum));
+		PageList<WorkerInfo> list = workerService.queryWithPage(worker, buildPageBounds(limit, pageNum));
 		
 		Map<String,Object> modelMap = new HashMap<String,Object>();
 		modelMap.put("worker", worker);

@@ -20,12 +20,12 @@
 	<filter>
 		<filter-name>LoginFilter</filter-name>
 		<display-name>LoginFilter</display-name>
-		<description></description>
+		<description>登录过滤器</description>
 		<filter-class>com.hm.birthday.filter.LoginFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>LoginFilter</filter-name>
-		<url-pattern>/LoginFilter</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
 	<listener>

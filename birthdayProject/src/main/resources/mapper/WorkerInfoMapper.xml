@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hm.birthday.admin.worker.dao.WorkerMapper" >
+  <resultMap id="BaseResultMap" type="com.hm.birthday.entity.WorkerInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="phone_num" property="phoneNum" jdbcType="VARCHAR" />
+    <result column="work_name" property="workName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="worker_role" property="workerRole" jdbcType="VARCHAR" />
+    <result column="worker_img" property="workerImg" jdbcType="VARCHAR" />
+    <result column="worker_constellation" property="workerConstellation" jdbcType="VARCHAR" />
+    <result column="blood_type" property="bloodType" jdbcType="VARCHAR" />
+    <result column="worker_hobby" property="workerHobby" jdbcType="VARCHAR" />
+    <result column="isfirst_login" property="isfirstLogin" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="crete_time" property="creteTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, phone_num, work_name, password, birthday, worker_role, worker_img, worker_constellation, 
+    blood_type, worker_hobby, isfirst_login, update_time, crete_time
+  </sql>
+	<sql id="paramsSql">
+		<if test="phoneNum != null and phoneNum != '' "> and phone_num = #{phoneNum}</if>
+		<if test="workName != null and workName != '' "> and work_name = #{workNm}</if>
+	</sql>
+	<select id="queryWithPage" resultMap="BaseResultMap" parameterType="com.hm.birthday.entity.WorkerInfo">
+		select 
+		<include refid="Base_Column_List"/>
+		from worker_info
+		where 1 = 1
+		<include refid="paramsSql"/> 
+		order by id
+  </select>
+	
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from worker_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from worker_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hm.birthday.entity.WorkerInfo" >
+    insert into worker_info (id, phone_num, work_name, 
+      password, birthday, worker_role, 
+      worker_img, worker_constellation, blood_type, 
+      worker_hobby, isfirst_login, update_time, 
+      crete_time)
+    values (#{id,jdbcType=INTEGER}, #{phoneNum,jdbcType=VARCHAR}, #{workName,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{workerRole,jdbcType=VARCHAR}, 
+      #{workerImg,jdbcType=VARCHAR}, #{workerConstellation,jdbcType=VARCHAR}, #{bloodType,jdbcType=VARCHAR}, 
+      #{workerHobby,jdbcType=VARCHAR}, #{isfirstLogin,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{creteTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hm.birthday.entity.WorkerInfo" >
+    insert into worker_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="phoneNum != null" >
+        phone_num,
+      </if>
+      <if test="workName != null" >
+        work_name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="workerRole != null" >
+        worker_role,
+      </if>
+      <if test="workerImg != null" >
+        worker_img,
+      </if>
+      <if test="workerConstellation != null" >
+        worker_constellation,
+      </if>
+      <if test="bloodType != null" >
+        blood_type,
+      </if>
+      <if test="workerHobby != null" >
+        worker_hobby,
+      </if>
+      <if test="isfirstLogin != null" >
+        isfirst_login,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="creteTime != null" >
+        crete_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="phoneNum != null" >
+        #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="workName != null" >
+        #{workName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="workerRole != null" >
+        #{workerRole,jdbcType=VARCHAR},
+      </if>
+      <if test="workerImg != null" >
+        #{workerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="workerConstellation != null" >
+        #{workerConstellation,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodType != null" >
+        #{bloodType,jdbcType=VARCHAR},
+      </if>
+      <if test="workerHobby != null" >
+        #{workerHobby,jdbcType=VARCHAR},
+      </if>
+      <if test="isfirstLogin != null" >
+        #{isfirstLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creteTime != null" >
+        #{creteTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hm.birthday.entity.WorkerInfo" >
+    update worker_info
+    <set >
+      <if test="phoneNum != null" >
+        phone_num = #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="workName != null" >
+        work_name = #{workName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="workerRole != null" >
+        worker_role = #{workerRole,jdbcType=VARCHAR},
+      </if>
+      <if test="workerImg != null" >
+        worker_img = #{workerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="workerConstellation != null" >
+        worker_constellation = #{workerConstellation,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodType != null" >
+        blood_type = #{bloodType,jdbcType=VARCHAR},
+      </if>
+      <if test="workerHobby != null" >
+        worker_hobby = #{workerHobby,jdbcType=VARCHAR},
+      </if>
+      <if test="isfirstLogin != null" >
+        isfirst_login = #{isfirstLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creteTime != null" >
+        crete_time = #{creteTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hm.birthday.entity.WorkerInfo" >
+    update worker_info
+    set phone_num = #{phoneNum,jdbcType=VARCHAR},
+      work_name = #{workName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      worker_role = #{workerRole,jdbcType=VARCHAR},
+      worker_img = #{workerImg,jdbcType=VARCHAR},
+      worker_constellation = #{workerConstellation,jdbcType=VARCHAR},
+      blood_type = #{bloodType,jdbcType=VARCHAR},
+      worker_hobby = #{workerHobby,jdbcType=VARCHAR},
+      isfirst_login = #{isfirstLogin,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      crete_time = #{creteTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
