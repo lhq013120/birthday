@@ -34,4 +34,6 @@ public interface WorkerMapper {
 			+ " AND password = #{password}"
 			)
 	public Map<String , Object> selectByPhoneNumAndPass(@Param("phoneNum") String phoneNum, @Param("password") String password) throws Exception;
+	
+	public int updateByPrimaryKeySelective(WorkerInfo workerInfo) throws Exception;
 }

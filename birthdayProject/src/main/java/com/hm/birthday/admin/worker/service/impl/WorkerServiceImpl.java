@@ -1,5 +1,6 @@
 package com.hm.birthday.admin.worker.service.impl;
 
+import java.util.Date;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -37,6 +38,16 @@ public class WorkerServiceImpl implements IWorkerService {
 	public Map<String,Object> login(String phoneNum,String password) throws Exception{
 		Map<String,Object> map = workerMapper.selectByPhoneNumAndPass(phoneNum, password);
 		return map;
+	}
+
+	@Override
+	public int setFirstLogin(Integer id) throws Exception {
+		WorkerInfo workerInfo = new WorkerInfo();
+		workerInfo.setId(id);
+		workerInfo.setIsfirstLogin("02");
+		workerInfo.setUpdateTime(new Date());
+		int update = workerMapper.updateByPrimaryKeySelective(workerInfo);
+		return update;
 	}
 	
 }

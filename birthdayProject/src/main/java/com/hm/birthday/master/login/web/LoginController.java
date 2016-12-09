@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,8 +51,13 @@ public class LoginController extends AbstractDisplayController{
 		
 		try {
 			Map<String,Object> loginUser = workerService.login(userName, password);
+			if (CollectionUtils.isEmpty(loginUser)) {
+				result = setResultMap(RetMsg.USER_PASSWORD_ERROR.code());
+				return result.toString();
+			}
 			session.setAttribute("loginUser", loginUser);
 			result = setResultMap("userinfo", loginUser);
+			workerService.setFirstLogin((Integer)loginUser.get("id")); // 修改首次登陆
 			return result.toString();
 		} catch (Exception e) {
 			result = setResultMap(RetMsg.SYSTEM_ERROR.code());

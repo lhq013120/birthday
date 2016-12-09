@@ -7,6 +7,7 @@ public enum RetMsg {
 	USER_NOT_EXIST("1002","用户不存在"),
 	PASSWORD_NULL("1101","密码为空"),
 	PASSWORD_ERROR("1102","密码错误"),
+	USER_PASSWORD_ERROR("1103","用户名或密码错误"),
 	SYSTEM_ERROR("9999","系统异常");
 	
 	
