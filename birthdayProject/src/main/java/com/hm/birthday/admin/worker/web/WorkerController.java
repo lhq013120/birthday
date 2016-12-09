@@ -21,9 +21,8 @@ public class WorkerController extends AbstractDisplayController {
 	@Autowired
 	private IWorkerService workerService;
 	
-	
 	@RequestMapping(value="doSerach")
-	public ModelAndView doSerach(@RequestParam Map<String, Object> params ) {
+	public ModelAndView doSerach(@RequestParam Map<String, Object> params ) throws Exception {
 		
 		Integer pageNum = params.get("pageNum") == null ? null : Integer.parseInt(params.get("pageNum").toString());
 		Integer limit = params.get("numPerPage") == null ? null : Integer.parseInt(params.get("numPerPage").toString());

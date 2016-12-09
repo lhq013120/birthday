@@ -1,5 +1,6 @@
 package com.hm.birthday.core.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,11 +12,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.hm.birthday.core.exception.ViewNullException;
+import com.hm.birthday.enums.RetMsg;
 
 public class AbstractDisplayController {
 	
 	private static final int DEFAULT_LIMIT = 10;
 	private static final int FIRST_PAGE = 1;
+	
+	private Map<String,Object> result = new HashMap<String, Object>();
 	
 	/**
 	 * 分页绑定工具类
@@ -55,6 +59,37 @@ public class AbstractDisplayController {
 	 */
 	protected ModelAndView setModelView(String view) {
 		return setModelView(view,null);
+	}
+	
+	protected Map<String,Object> setResultMap(Object o) {
+		result.put("result", o);
+		return result;
+	}
+	
+	protected Map<String,Object> setResultMap(String key, Object o) {
+		result.put(key, o);
+		setResultMap(RetMsg.SUCCESS.code());
+		return result;
+	}
+	
+	
+	/**
+	 * 设置返回的ModelMap
+	 * 
+	 * @param modelMap
+	 * @return
+	 */
+	protected Map<String,Object> setModelMap(Map<String,Object> modelMap) {
+		if( !CollectionUtils.isEmpty(modelMap)) {
+			Set<String> keys = modelMap.keySet();
+			for(String key : keys) {
+				if (modelMap.get(key) instanceof PageList) {
+					modelMap.put("paginator", ((PageList)modelMap.get(key)).getPaginator());
+				}
+			}
+			modelMap.put("dateTool", new DateTool());
+		}
+		return modelMap;
 	}
 	
 	/**

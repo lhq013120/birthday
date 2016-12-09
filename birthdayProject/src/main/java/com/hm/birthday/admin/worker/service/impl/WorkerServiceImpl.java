@@ -1,5 +1,7 @@
 package com.hm.birthday.admin.worker.service.impl;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,7 @@ public class WorkerServiceImpl implements IWorkerService {
 	private WorkerMapper workerMapper;
 	
 	@Override
-	public PageList<WorkerInfo> queryWithPage(WorkerInfo w,PageBounds pageBounds) {
+	public PageList<WorkerInfo> queryWithPage(WorkerInfo w,PageBounds pageBounds) throws Exception {
 		
 		try {
 			return workerMapper.queryWithPage(w, pageBounds);
@@ -30,8 +32,11 @@ public class WorkerServiceImpl implements IWorkerService {
 		};
 		return null;
 	}
-	
-	
-	
+
+	@Override
+	public Map<String,Object> login(String phoneNum,String password) throws Exception{
+		Map<String,Object> map = workerMapper.selectByPhoneNumAndPass(phoneNum, password);
+		return map;
+	}
 	
 }
