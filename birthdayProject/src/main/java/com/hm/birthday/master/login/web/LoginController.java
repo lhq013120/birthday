@@ -52,6 +52,7 @@ public class LoginController extends AbstractDisplayController{
 		try {
 			Map<String,Object> loginUser = workerService.login(userName, password);
 			if (CollectionUtils.isEmpty(loginUser)) {
+				// TODO 返回值有问题
 				result = setResultMap(RetMsg.USER_PASSWORD_ERROR.code());
 				return result.toString();
 			}
