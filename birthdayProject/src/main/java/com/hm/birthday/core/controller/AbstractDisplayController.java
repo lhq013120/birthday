@@ -59,24 +59,27 @@ public class AbstractDisplayController {
 		return setModelView(view,null);
 	}
 	
-	private Map<String,Object> setResultMap(String o,Map<String,Object> map) {
+	private Map<String,Object> setResultMap(RetMsg rm,Map<String,Object> map) {
 		if (map ==null) {
-			return setResultMap(o);
+			return setResultMap(rm);
+		} else {
+			map.put("result", rm.name());
+			map.put("info", rm.value());
 		}
-		map.put("result", o);
 		return map;
 	}
 	
-	protected Map<String,Object> setResultMap(Object o) {
+	protected Map<String,Object> setResultMap(RetMsg rm) {
 		Map<String,Object> result = new HashMap<String, Object>();
-		result.put("result", o);
+		result.put("result", rm.name());
+		result.put("info", rm.value());
 		return result;
 	}
 	
 	protected Map<String,Object> setResultMap(String key, Object o) {
 		Map<String,Object> result = new HashMap<String, Object>();
 		result.put(key, o);
-		return setResultMap(RetMsg.SUCCESS.code(),result);
+		return setResultMap(RetMsg.SUCCESS,result);
 	}
 	
 	
