@@ -1,4 +1,82 @@
-<div class="login_containere " >
-	<a class="login_btn btn col-xs-6">登录</a>
-	<!--<img class="login_img" src="../../imgs/master/login/login.jpg" />-->
+<div class="login_containere " ng-controller="login">
+	<a class="login_btn btn col-xs-6" ng-click="login_Handler()">登录</a>
+</div>
+<!--<div class="modal fade" id="login" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header border_none">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			</div>
+			<div class="modal-body">
+				<div class="pdLR10">
+					<div class="positionR">
+						<span class="userIcon login_icon"></span>
+						<input class="userIpt" placeholder="手机号" maxlength="11" />
+					</div>
+					<div class="positionR">
+						<span class="passwordIcon login_icon"></span>
+						<input class="userIpt" placeholder="密码"/>
+					</div>
+				</div>
+				
+			</div>
+			<div class="modal-footer text-center border_none">
+				<button type="button" class="login">登录</button>
+			</div>
+		</div>
+	</div>
+</div>-->
+<!--<div class="modal fade" id="login" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header border_none bckRed">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title changePassword-title">修改密码</h4>
+			</div>
+			<div class="modal-body">
+				<div class="pdLR10">
+					<div class="text-center">
+						<p class="font-red ft16">第一次登录请修改密码</p>
+					</div>
+					<div class="positionR overflow_hidden login-border-bottom mt20">
+						<label class="col-xs-4">新密码</label>
+						<input class="col-xs-8 border_none outline-none" placeholder="请填写4~6位密码" />
+					</div>
+					<div class="positionR overflow_hidden login-border-bottom mt20">
+						<label class="col-xs-4">确认密码</label>
+						<input class="col-xs-8 border_none outline-none" placeholder="请再次填写你的密码"/>
+					</div>
+				</div>
+				
+			</div>
+			<div class="modal-footer text-center border_none">
+				<button type="button" class="changePassword col-xs-6 outline-none">确认修改</button>
+			</div>
+		</div>
+	</div>
+</div>-->
+
+<div class="modal fade" id="login" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header border_none bckRed">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<div class="modal-title changePassword-title">
+					<img class="reminder" src="../../imgs/master/login/reminder.png" />
+					<!--<span class="reminder-img reminder"></span>-->
+					<span class="ft16">提示</span>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="pdLR10 pdL40 mt10 ft16">
+					<p class="font-bold">小主生日快乐!<img class="cake" src="../../imgs/master/login/cake.png"></img></p>
+					<p>请在本月前三天完成抽奖!</p>
+					<p>祝您好运!</p>
+				</div>
+			</div>
+			<div class="modal-footer text-center border_none">
+				<button type="button" class="changePassword col-xs-6 outline-none">确认</button>
+			</div>
+		</div>
+	</div>
 </div>
