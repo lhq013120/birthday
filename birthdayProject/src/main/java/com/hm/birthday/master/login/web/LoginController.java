@@ -22,6 +22,7 @@ import com.hm.birthday.enums.RetMsg;
 import com.hm.birthday.utils.JsonUtils;
 
 @Controller()
+@RequestMapping("user")
 public class LoginController extends AbstractDisplayController{
 	
 	private final static Logger logger = LoggerFactory.getLogger(WorkerController.class);
