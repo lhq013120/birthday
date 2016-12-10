@@ -74,7 +74,9 @@ public class LoginController extends AbstractDisplayController{
 	 * @param session
 	 * @return
 	 */
-	public String loginOut(HttpSession session) {
+	@ResponseBody
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
 		if (session.getAttribute("loginUser") != null) {
 			session.removeAttribute("loginUser");
 		}
