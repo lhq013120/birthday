@@ -7,12 +7,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.hm.birthday.admin.worker.dao.WorkerMapper;
 import com.hm.birthday.admin.worker.service.IWorkerService;
 import com.hm.birthday.entity.WorkerInfo;
+import com.hm.birthday.utils.DateUtils;
 
 
 @Service("workerService")
@@ -37,6 +39,19 @@ public class WorkerServiceImpl implements IWorkerService {
 	@Override
 	public Map<String,Object> login(String phoneNum,String password) throws Exception{
 		Map<String,Object> map = workerMapper.selectByPhoneNumAndPass(phoneNum, password);
+		if (!CollectionUtils.isEmpty(map)) {
+			// 查询用户生日的月份
+			final String crrMonthBir = DateUtils.dateFormat(6, map.containsKey("birthday")? (Date) map.get("birthday"): null);
+			final String nowMonth = DateUtils.dateFormat(6, new Date());
+			boolean isLucky = false; // 是否已抽奖
+			boolean isBirthday = false; // 是否本月生日
+			if (nowMonth.equals(crrMonthBir)) {
+				isBirthday = true;
+			}
+			map.put("birthday", DateUtils.dateFormat(3, (Date)map.get("birthday")));
+			map.put("isLucky", isLucky); // 是否已抽奖
+			map.put("isBirthday", isBirthday);// 是否生日
+		}
 		return map;
 	}
 
