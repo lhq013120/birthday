@@ -19,8 +19,6 @@ public class AbstractDisplayController {
 	private static final int DEFAULT_LIMIT = 10;
 	private static final int FIRST_PAGE = 1;
 	
-	private Map<String,Object> result = new HashMap<String, Object>();
-	
 	/**
 	 * 分页绑定工具类
 	 * @param limit
@@ -61,15 +59,24 @@ public class AbstractDisplayController {
 		return setModelView(view,null);
 	}
 	
+	private Map<String,Object> setResultMap(String o,Map<String,Object> map) {
+		if (map ==null) {
+			return setResultMap(o);
+		}
+		map.put("result", o);
+		return map;
+	}
+	
 	protected Map<String,Object> setResultMap(Object o) {
+		Map<String,Object> result = new HashMap<String, Object>();
 		result.put("result", o);
 		return result;
 	}
 	
 	protected Map<String,Object> setResultMap(String key, Object o) {
+		Map<String,Object> result = new HashMap<String, Object>();
 		result.put(key, o);
-		setResultMap(RetMsg.SUCCESS.code());
-		return result;
+		return setResultMap(RetMsg.SUCCESS.code(),result);
 	}
 	
 	

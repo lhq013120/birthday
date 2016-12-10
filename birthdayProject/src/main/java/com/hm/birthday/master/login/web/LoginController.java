@@ -19,6 +19,7 @@ import com.hm.birthday.admin.worker.service.IWorkerService;
 import com.hm.birthday.admin.worker.web.WorkerController;
 import com.hm.birthday.core.controller.AbstractDisplayController;
 import com.hm.birthday.enums.RetMsg;
+import com.hm.birthday.utils.JsonUtils;
 
 @Controller()
 public class LoginController extends AbstractDisplayController{
@@ -42,28 +43,27 @@ public class LoginController extends AbstractDisplayController{
 		Map<String,Object> result = new HashMap<String, Object>();
 		if (StringUtils.isEmpty(userName)) {
 			result = setResultMap(RetMsg.USER_ANME_NULL.code());
-			return result.toString();
+			return JsonUtils.toJsonString(result);
 		}
 		if (StringUtils.isEmpty(password)) {
 			result = setResultMap(RetMsg.PASSWORD_NULL.code());
-			return result.toString();
+			return JsonUtils.toJsonString(result);
 		}
 		
 		try {
 			Map<String,Object> loginUser = workerService.login(userName, password);
 			if (CollectionUtils.isEmpty(loginUser)) {
-				// TODO 返回值有问题
 				result = setResultMap(RetMsg.USER_PASSWORD_ERROR.code());
-				return result.toString();
+				return JsonUtils.toJsonString(result);
 			}
 			session.setAttribute("loginUser", loginUser);
 			result = setResultMap("userinfo", loginUser);
 			workerService.setFirstLogin((Integer)loginUser.get("id")); // 修改首次登陆
-			return result.toString();
+			return JsonUtils.toJsonString(result);
 		} catch (Exception e) {
 			result = setResultMap(RetMsg.SYSTEM_ERROR.code());
 			logger.error("用户登录，获取用户信息失败.", e);
-			return result.toString();
+			return JsonUtils.toJsonString(result);
 		}
 	}
 	
@@ -77,7 +77,7 @@ public class LoginController extends AbstractDisplayController{
 		if (session.getAttribute("loginUser") != null) {
 			session.removeAttribute("loginUser");
 		}
-		return setResultMap(RetMsg.SUCCESS).toString();
+		return setResultMap(RetMsg.SUCCESS.code()).toString();
 	}
 	
 }
