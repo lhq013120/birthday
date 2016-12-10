@@ -9,7 +9,7 @@ public class BaseDicInfo {
 
     private String name;
 
-    private String index;
+    private String orderIdx;
 
     public Integer getId() {
         return id;
@@ -43,11 +43,11 @@ public class BaseDicInfo {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getIndex() {
-        return index;
+    public String getOrderIdx() {
+        return orderIdx;
     }
 
-    public void setIndex(String index) {
-        this.index = index == null ? null : index.trim();
+    public void setOrderIdx(String orderIdx) {
+        this.orderIdx = orderIdx == null ? null : orderIdx.trim();
     }
 }

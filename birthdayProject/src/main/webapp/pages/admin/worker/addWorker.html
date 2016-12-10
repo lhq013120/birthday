@@ -1,6 +1,6 @@
 <div class="pageContent">
 	<form id="vtmInfoCreateFrom" name="vtmInfoCreateFrom" onsubmit="return validateCallback(this,dialogAjaxDone);"  class="required-validate" method="post"	action="createVtmInfoAction.action">
-	<div class="pageFormContent" layoutH="56">
+	<div class="pageFormContent" layoutH="86">
 			<input id="provinceName" type="hidden" name="provinceName" value=""/>
 			<input id="cityName" type="hidden" name="cityName" value=""/>
 			<p>
@@ -16,21 +16,37 @@
 				<input type="text" class="date required" id="birthday" name="birthday" format="yyyy-MM-dd" size="10" readonly="true"/>
 			</p>
 			<p>
+				<label>血型</label>
+				<select class="combox required" name="bloodType" >
+					#foreach($bloodType in $bloodTypes)
+						<option value="$!{bloodType.code}">$!{bloodType.name}</option>
+					#end
+				</select>
+			</p>
+			<p>
 				<label>权限：</label>
 				<select class="combox required" name="workerRole" >
 						<option value="01" selected="selected">普通职工</option>
 						<option value="02">管理员</option>
 				</select>
 			</p>
-			<p>
-				<label>头像</label>
-				<input id="workerImg" type="file" name="workerImg"
-							uploader="uploadify/scripts"
-							cancelImg="uploadify/img/cancel.png"
-							script="admin/core/ajaxDone.html"
-							folder="/folder"
-							fileQueue="fileQueue" />
-			</p>
+			<dl>
+				<dt>机具描述：</dt>
+				<dd>
+					<textarea class="textInput" name="vtmDes" cols="50" rows="5" maxlength="30" ></textarea>
+				</dd>
+				<dl>
+					<p>
+						<label>头像</label>
+						<input id="workerImg" type="file" name="workerImg"
+									uploader="uploadify/scripts"
+									cancelImg="uploadify/img/cancel.png"
+									script="admin/core/ajaxDone.html"
+									folder="/folder"
+									fileQueue="fileQueue" />
+					</p>
+				</dl>
+			</dl>
   </div>
   	<div class="formBar">
 			<ul>

@@ -6,10 +6,10 @@
     <result column="type" property="type" jdbcType="VARCHAR" />
     <result column="code" property="code" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="index" property="index" jdbcType="VARCHAR" />
+    <result column="order_idx" property="orderIdx" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, type, code, name, index
+    id, type, code, name, order_idx
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -17,15 +17,22 @@
     from base_dic_info
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByType" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from base_dic_info
+    where type = #{type,jdbcType=VARCHAR}
+    order by order_idx asc
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from base_dic_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hm.birthday.entity.BaseDicInfo" >
     insert into base_dic_info (id, type, code, 
-      name, index)
+      name, order_idx)
     values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{index,jdbcType=VARCHAR})
+      #{name,jdbcType=VARCHAR}, #{orderIdx,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.hm.birthday.entity.BaseDicInfo" >
     insert into base_dic_info
@@ -42,8 +49,8 @@
       <if test="name != null" >
         name,
       </if>
-      <if test="index != null" >
-        index,
+      <if test="orderIdx != null" >
+        order_idx,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -59,8 +66,8 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="index != null" >
-        #{index,jdbcType=VARCHAR},
+      <if test="orderIdx != null" >
+        #{orderIdx,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -76,8 +83,8 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="index != null" >
-        index = #{index,jdbcType=VARCHAR},
+      <if test="orderIdx != null" >
+        order_idx = #{orderIdx,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -87,7 +94,7 @@
     set type = #{type,jdbcType=VARCHAR},
       code = #{code,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
-      index = #{index,jdbcType=VARCHAR}
+      order_idx = #{orderIdx,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
