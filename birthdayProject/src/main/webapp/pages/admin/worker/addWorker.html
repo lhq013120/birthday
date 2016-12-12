@@ -18,6 +18,7 @@
 					//alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
 					var data = jQuery.parseJSON(data);
 					$("#iworkerImg").attr("src",data['shrinkFile']); // 缩略图
+					$("#shrinkImg").val(data['shrinkFile']); // 缩略图
 					$("#workerImg").val(data['srcFile']); // 原尺寸图片
 				},
 				'onUploadComplete':function(){  
@@ -27,10 +28,10 @@
 	});
 </script>
 <div class="pageContent">
-	<form id="vtmInfoCreateFrom" name="vtmInfoCreateFrom" onsubmit="return validateCallback(this,dialogAjaxDone);"  class="required-validate" method="post"	>
+	<form id="workerCreateFrom" name="workerCreateFrom" onsubmit="return validateCallback(this,dialogAjaxDone);" action="worker/add"  class="required-validate" method="post">
 	<div class="pageFormContent" layoutH="86">
-			<input id="provinceName" type="hidden" name="provinceName" value=""/>
-			<input id="cityName" type="hidden" name="cityName" value=""/>
+			<input id="workerImg" type="hidden" name="workerImg" value="">
+			<input id="shrinkImg" type="hidden" name="shrinkImg" value="">
 			<table>
 				<tr>
 					<td>
@@ -40,11 +41,11 @@
 						</p>
 						<p>
 							<label>手机号：</label>
-							<input type="text" id="phoneNum" name="phoneNum" size="30" maxlength="10" class="required"/>
+							<input type="text" id="phoneNum" name="phoneNum" size="30" maxlength="11" class="required"/>
 						</p>
 						<p>
 							<label>生日</label>
-							<input type="text" class="date required" id="birthday" name="birthday" format="yyyy-MM-dd" size="10" readonly="true"/>
+							<input type="text" class="date required" id="birthday" name="birthday" onchange="pagerFormSubmit()" format="yyyy-MM-dd" size="10" readonly="true"/>
 						</p>
 						<p>
 							<label>血型</label>
@@ -64,7 +65,7 @@
 						<dl>
 							<dt>爱好：</dt>
 							<dd>
-								<textarea class="textInput" name="vtmDes" cols="30" rows="5" maxlength="30" ></textarea>
+								<textarea class="textInput" name="workerHobby" cols="30" rows="5" maxlength="30" ></textarea>
 							</dd>
 							<dl>
 								<p>
@@ -75,7 +76,6 @@
 											</td>
 											<td>
 												<input id="fileimg" type="file" name="fileimg"/>
-												<input id="workerImg" type="hidden" name="workerImg" value="">
 											</td>
 										</tr>
 									</table>
@@ -97,20 +97,17 @@
 	</div>
 		<div class="formBar">
 			<ul>
-				<li><div class="buttonActive"><div class="buttonContent"><button type="button" onclick="pagerFormSubmit();">保存</button></div></div></li>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit" >保存</button></div></div></li>
 				<li><div class="buttonActive"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
 			</ul>
 		</div>
 		</form>
 	<script type="text/javascript">
 		function pagerFormSubmit(){
-			var province = $("select[name='province'] option:selected").html();
-			var city = $("#city option:selected").html();
-			var county = $("#county option:selected").html();
-			$("#provinceName").val(province);
-			$("#cityName").val(city);
-			$("#county option:selected").val(county);
-			$("#vtmInfoCreateFrom").submit();
+			alert();
+			var v = $("#birthday").val();
+			
+			alert(v);
 		}
 	</script>
 </div>
