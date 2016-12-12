@@ -24,4 +24,6 @@ public interface IWorkerService {
 	public int AddWorker(WorkerInfo workerInfo) throws Exception;
 	
 	public int deleteWorker(Integer id) throws Exception;
+	
+	public WorkerInfo getWorker(Integer id) throws Exception;
 }

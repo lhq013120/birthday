@@ -86,20 +86,20 @@ public class WorkerController extends AbstractDisplayController {
 	 */
 	@RequestMapping("add")
 	public ModelAndView add(@RequestParam Map<String, Object> params) throws Exception {
-		final String phoneNum = (String) params.get("phoneNum");
+		final String phoneNum = (String) params.get("phoneNum") == null ? "" : ((String) params.get("phoneNum")).trim();
 		if(phoneNum.length() != 11) {
 			Map<String,Object> modelMap = setResultMap(RetMsg.PHONENUM_ERROR);
 			return setModelView(Constants.page_ajaxError,modelMap);
 		}
 		final String password = MD5Utils.MD5Encoder(phoneNum.substring(7));
-		final String workName = (String) params.get("workName");
+		final String workName = (String) params.get("workName") == null ? "" :((String) params.get("workName")).trim();
 		final Date birthday = DateUtils.StringtoDate((String) params.get("birthday"), DateUtils.pattern_ymd_interval );
-		final String workerRole = (String) params.get("workerRole");
-		final String workerImg = (String) params.get("workerImg");
-		final String shrinkImg = (String) params.get("shrinkImg");
+		final String workerRole = (String) params.get("workerRole") == null ? "": ((String) params.get("workerRole")).trim();
+		final String workerImg = (String) params.get("workerImg") == null ? "" : ((String) params.get("workerImg")).trim();
+		final String shrinkImg = (String) params.get("shrinkImg") == null ? "" : ((String) params.get("shrinkImg")).trim();
 		final String workerConstellation = Constellation.date2Constellation(birthday);
 		final String bloodType = (String) params.get("bloodType");
-		final String workerHobby = (String) params.get("workerHobby");
+		final String workerHobby = (String) params.get("workerHobby") == null? "" : ((String) params.get("workerHobby")).trim();
 		
 		Date sysDate = DateUtils.now();
 		
@@ -136,5 +136,32 @@ public class WorkerController extends AbstractDisplayController {
 		workerService.deleteWorker(id);
 		
 		return setModelView(Constants.page_ajaxDone);
+	}
+	
+	/**
+	 * 展示更新用户信息页面
+	 * 
+	 * @param workid
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("showEdit")
+	public ModelAndView showEdit(@RequestParam String workid) throws Exception {
+		if (StringUtils.isEmpty(workid)) {
+			Map<String,Object> modelMap = setResultMap(RetMsg.ILLEGALITY_OPERATION);
+			return setModelView(Constants.page_ajaxError,modelMap);
+		}
+		
+		Integer id = Integer.parseInt(workid);
+		
+		WorkerInfo worker = workerService.getWorker(id);
+		List<BaseDicInfo> bloodTypes = baseDicInfoMapper.selectByType("blood_type");
+		
+		Map<String,Object> modelMap = new HashMap<String,Object>();
+		modelMap.put("worker", worker);
+		modelMap.put("bloodTypes", bloodTypes);
+		
+		return setModelView("admin/worker/editWorker",modelMap);
+		
 	}
 }

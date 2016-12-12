@@ -120,5 +120,17 @@ public class WorkerServiceImpl implements IWorkerService {
 			throw e;
 		}
 	}
+
+	@Override
+	public WorkerInfo getWorker(Integer id) throws Exception {
+		WorkerInfo worker = null;
+		try {
+			worker = workerMapper.selectByPrimaryKey(id);
+		} catch (Exception e) {
+			logger.error("按id查询用户信息失败", e);
+			throw e;
+		}
+		return worker;
+	}
 	
 }
