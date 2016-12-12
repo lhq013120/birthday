@@ -9,6 +9,7 @@
     <result column="birthday" property="birthday" jdbcType="DATE" />
     <result column="worker_role" property="workerRole" jdbcType="VARCHAR" />
     <result column="worker_img" property="workerImg" jdbcType="VARCHAR" />
+    <result column="shrink_img" property="shrinkImg" jdbcType="VARCHAR" />
     <result column="worker_constellation" property="workerConstellation" jdbcType="VARCHAR" />
     <result column="blood_type" property="bloodType" jdbcType="VARCHAR" />
     <result column="worker_hobby" property="workerHobby" jdbcType="VARCHAR" />
@@ -17,14 +18,14 @@
     <result column="crete_time" property="creteTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, phone_num, work_name, password, birthday, worker_role, worker_img, worker_constellation, 
-    blood_type, worker_hobby, isfirst_login, update_time, crete_time
+    id, phone_num, work_name, password, birthday, worker_role, worker_img, shrink_img, 
+    worker_constellation, blood_type, worker_hobby, isfirst_login, update_time, crete_time
   </sql>
-	<sql id="paramsSql">
+  <sql id="paramsSql">
 		<if test="phoneNum != null and phoneNum != '' "> and phone_num = #{phoneNum}</if>
-		<if test="workName != null and workName != '' "> and work_name = #{workNm}</if>
-	</sql>
-	<select id="queryWithPage" resultMap="BaseResultMap" parameterType="com.hm.birthday.entity.WorkerInfo">
+		<if test="workName != null and workName != '' "> and work_name = #{workName}</if>
+  </sql>
+  <select id="queryWithPage" resultMap="BaseResultMap" parameterType="com.hm.birthday.entity.WorkerInfo">
 		select 
 		<include refid="Base_Column_List"/>
 		from worker_info
@@ -32,7 +33,6 @@
 		<include refid="paramsSql"/> 
 		order by id
   </select>
-	
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -46,14 +46,14 @@
   <insert id="insert" parameterType="com.hm.birthday.entity.WorkerInfo" >
     insert into worker_info (id, phone_num, work_name, 
       password, birthday, worker_role, 
-      worker_img, worker_constellation, blood_type, 
-      worker_hobby, isfirst_login, update_time, 
-      crete_time)
+      worker_img, shrink_img, worker_constellation, 
+      blood_type, worker_hobby, isfirst_login, 
+      update_time, crete_time)
     values (#{id,jdbcType=INTEGER}, #{phoneNum,jdbcType=VARCHAR}, #{workName,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{workerRole,jdbcType=VARCHAR}, 
-      #{workerImg,jdbcType=VARCHAR}, #{workerConstellation,jdbcType=VARCHAR}, #{bloodType,jdbcType=VARCHAR}, 
-      #{workerHobby,jdbcType=VARCHAR}, #{isfirstLogin,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{creteTime,jdbcType=TIMESTAMP})
+      #{workerImg,jdbcType=VARCHAR}, #{shrinkImg,jdbcType=VARCHAR}, #{workerConstellation,jdbcType=VARCHAR}, 
+      #{bloodType,jdbcType=VARCHAR}, #{workerHobby,jdbcType=VARCHAR}, #{isfirstLogin,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{creteTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.hm.birthday.entity.WorkerInfo" >
     insert into worker_info
@@ -78,6 +78,9 @@
       </if>
       <if test="workerImg != null" >
         worker_img,
+      </if>
+      <if test="shrinkImg != null" >
+        shrink_img,
       </if>
       <if test="workerConstellation != null" >
         worker_constellation,
@@ -120,6 +123,9 @@
       <if test="workerImg != null" >
         #{workerImg,jdbcType=VARCHAR},
       </if>
+      <if test="shrinkImg != null" >
+        #{shrinkImg,jdbcType=VARCHAR},
+      </if>
       <if test="workerConstellation != null" >
         #{workerConstellation,jdbcType=VARCHAR},
       </if>
@@ -161,6 +167,9 @@
       <if test="workerImg != null" >
         worker_img = #{workerImg,jdbcType=VARCHAR},
       </if>
+      <if test="shrinkImg != null" >
+        shrink_img = #{shrinkImg,jdbcType=VARCHAR},
+      </if>
       <if test="workerConstellation != null" >
         worker_constellation = #{workerConstellation,jdbcType=VARCHAR},
       </if>
@@ -190,6 +199,7 @@
       birthday = #{birthday,jdbcType=DATE},
       worker_role = #{workerRole,jdbcType=VARCHAR},
       worker_img = #{workerImg,jdbcType=VARCHAR},
+      shrink_img = #{shrinkImg,jdbcType=VARCHAR},
       worker_constellation = #{workerConstellation,jdbcType=VARCHAR},
       blood_type = #{bloodType,jdbcType=VARCHAR},
       worker_hobby = #{workerHobby,jdbcType=VARCHAR},
