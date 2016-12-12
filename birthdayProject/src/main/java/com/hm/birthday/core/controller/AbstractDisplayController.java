@@ -119,6 +119,7 @@ public class AbstractDisplayController {
 			for(String key : keys) {
 				if (modelMap.get(key) instanceof PageList) {
 					modelMap.put("paginator", ((PageList)modelMap.get(key)).getPaginator());
+					break;
 				}
 			}
 			modelMap.put("dateTool", new DateTool());

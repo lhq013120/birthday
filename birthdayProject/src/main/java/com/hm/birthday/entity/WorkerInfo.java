@@ -17,6 +17,8 @@ public class WorkerInfo {
 
     private String workerImg;
 
+    private String shrinkImg;
+
     private String workerConstellation;
 
     private String bloodType;
@@ -29,7 +31,29 @@ public class WorkerInfo {
 
     private Date creteTime;
 
-    public Integer getId() {
+    public WorkerInfo() {
+	}
+
+	public WorkerInfo(String phoneNum, String workName, String password, Date birthday, String workerRole,
+			String workerImg, String shrinkImg, String workerConstellation, String bloodType, String workerHobby,
+			String isfirstLogin, Date updateTime, Date creteTime) {
+		super();
+		this.phoneNum = phoneNum;
+		this.workName = workName;
+		this.password = password;
+		this.birthday = birthday;
+		this.workerRole = workerRole;
+		this.workerImg = workerImg;
+		this.shrinkImg = shrinkImg;
+		this.workerConstellation = workerConstellation;
+		this.bloodType = bloodType;
+		this.workerHobby = workerHobby;
+		this.isfirstLogin = isfirstLogin;
+		this.updateTime = updateTime;
+		this.creteTime = creteTime;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -83,6 +107,14 @@ public class WorkerInfo {
 
     public void setWorkerImg(String workerImg) {
         this.workerImg = workerImg == null ? null : workerImg.trim();
+    }
+
+    public String getShrinkImg() {
+        return shrinkImg;
+    }
+
+    public void setShrinkImg(String shrinkImg) {
+        this.shrinkImg = shrinkImg == null ? null : shrinkImg.trim();
     }
 
     public String getWorkerConstellation() {

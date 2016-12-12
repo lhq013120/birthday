@@ -37,32 +37,67 @@ public class WorkerServiceImpl implements IWorkerService {
 	}
 
 	@Override
-	public Map<String,Object> login(String phoneNum,String password) throws Exception{
-		Map<String,Object> map = workerMapper.selectByPhoneNumAndPass(phoneNum, password);
-		if (!CollectionUtils.isEmpty(map)) {
-			// 查询用户生日的月份
-			final String crrMonthBir = DateUtils.dateFormat(6, map.containsKey("birthday")? (Date) map.get("birthday"): null);
-			final String nowMonth = DateUtils.dateFormat(6, new Date());
-			boolean isLucky = false; // 是否已抽奖
-			boolean isBirthday = false; // 是否本月生日
-			if (nowMonth.equals(crrMonthBir)) {
-				isBirthday = true;
+	public Map<String,Object> login(String phoneNum,String password) throws Exception {
+		Map<String, Object> map = null;
+		try {
+			map = workerMapper.selectByPhoneNumAndPass(phoneNum, password);
+			if (!CollectionUtils.isEmpty(map)) {
+				// 查询用户生日的月份
+				final String crrMonthBir = DateUtils.dateFormat(6, map.containsKey("birthday")? (Date) map.get("birthday"): null);
+				final String nowMonth = DateUtils.dateFormat(6, new Date());
+				boolean isLucky = false; // 是否已抽奖
+				boolean isBirthday = false; // 是否本月生日
+				if (nowMonth.equals(crrMonthBir)) {
+					isBirthday = true;
+				}
+				map.put("birthday", DateUtils.dateFormat(3, (Date)map.get("birthday")));
+				map.put("isLucky", isLucky); // 是否已抽奖
+				map.put("isBirthday", isBirthday);// 是否生日
 			}
-			map.put("birthday", DateUtils.dateFormat(3, (Date)map.get("birthday")));
-			map.put("isLucky", isLucky); // 是否已抽奖
-			map.put("isBirthday", isBirthday);// 是否生日
+		} catch (Exception e) {
+			logger.error("用户登录查询失败", e);
+			throw e;
 		}
+		
 		return map;
 	}
 
 	@Override
-	public int setFirstLogin(Integer id) throws Exception {
+	public int setFirstLogin(Integer id) throws Exception  {
 		WorkerInfo workerInfo = new WorkerInfo();
 		workerInfo.setId(id);
 		workerInfo.setIsfirstLogin("02");
 		workerInfo.setUpdateTime(new Date());
-		int update = workerMapper.updateByPrimaryKeySelective(workerInfo);
+		int update = 0;
+		try {
+			update = workerMapper.updateByPrimaryKeySelective(workerInfo);
+		} catch (Exception e) {
+			logger.error("设置用户首次登陆的标志失败", e);
+			throw e;
+		}
 		return update;
+	}
+
+	@Override
+	public int AddWorker(WorkerInfo workerInfo) throws Exception {
+		int count = 0;
+		try {
+			count = workerMapper.insertSelective(workerInfo);
+		} catch (Exception e) {
+			logger.error("用户信息插入失败", e);
+			throw e;
+		}
+		return count;
+	}
+
+	@Override
+	public int deleteWorker(Integer id) throws Exception  {
+		try {
+			return  workerMapper.deleteByPrimaryKey(id);
+		} catch (Exception e) {
+			logger.error("删除用户信息失败", e);
+			throw e;
+		}
 	}
 	
 }

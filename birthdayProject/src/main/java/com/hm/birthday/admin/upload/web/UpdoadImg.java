@@ -28,6 +28,15 @@ public class UpdoadImg {
 	private final static String prefix = "shrink_";
 	private final static String base_path = "imgs/headpro/";
 	
+	/**
+	 * 上传用户头像
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
 	@ResponseBody
 	@RequestMapping("updoad")
 	public String updoadimg(HttpServletRequest request, HttpServletResponse response)

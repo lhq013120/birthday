@@ -13,4 +13,8 @@ public interface IWorkerService {
 	public Map<String,Object> login(String phoneNum,String password) throws Exception;
 	
 	public int setFirstLogin(Integer id) throws Exception;
+	
+	public int AddWorker(WorkerInfo workerInfo) throws Exception;
+	
+	public int deleteWorker(Integer id) throws Exception;
 }
