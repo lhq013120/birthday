@@ -40,7 +40,7 @@ public class LoginController extends AbstractDisplayController{
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="login", method=RequestMethod.POST)
+	@RequestMapping(value="login", method=RequestMethod.GET)
 	public String login(@RequestParam String userName, @RequestParam String password, HttpSession session) {
 		Map<String,Object> result = new HashMap<String, Object>();
 		if (StringUtils.isEmpty(userName)) {
@@ -59,6 +59,9 @@ public class LoginController extends AbstractDisplayController{
 				return JsonUtils.toJsonString(result);
 			}
 			session.setAttribute("loginUser", loginUser);
+			if (loginUser.containsKey("password")) {
+				loginUser.remove("password");
+			}
 			result = setResultMap("userinfo", loginUser);
 			workerService.setFirstLogin((Integer)loginUser.get("id")); // 修改首次登陆
 			return JsonUtils.toJsonString(result);

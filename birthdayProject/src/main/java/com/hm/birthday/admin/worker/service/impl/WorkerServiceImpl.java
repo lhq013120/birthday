@@ -1,6 +1,7 @@
 package com.hm.birthday.admin.worker.service.impl;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -8,11 +9,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
+import com.hm.birthday.admin.dict.dao.BaseDicInfoMapper;
 import com.hm.birthday.admin.worker.dao.WorkerMapper;
 import com.hm.birthday.admin.worker.service.IWorkerService;
+import com.hm.birthday.entity.BaseDicInfo;
 import com.hm.birthday.entity.WorkerInfo;
 import com.hm.birthday.utils.DateUtils;
 
@@ -24,6 +28,9 @@ public class WorkerServiceImpl implements IWorkerService {
 	
 	@Autowired
 	private WorkerMapper workerMapper;
+	
+	@Autowired
+	private BaseDicInfoMapper baseDicInfoMapper;
 	
 	@Override
 	public PageList<WorkerInfo> queryWithPage(WorkerInfo w,PageBounds pageBounds) throws Exception {
@@ -41,7 +48,21 @@ public class WorkerServiceImpl implements IWorkerService {
 		Map<String, Object> map = null;
 		try {
 			map = workerMapper.selectByPhoneNumAndPass(phoneNum, password);
+			
 			if (!CollectionUtils.isEmpty(map)) {
+				// 查询血型字典
+				List<BaseDicInfo> bloodTypes = baseDicInfoMapper.selectByType("blood_type");
+				final String btCode = (String) map.get("bloodType"); // 血型的字典码
+				String btName = "A型";
+				if(StringUtils.isEmpty(btCode)) {
+					for(BaseDicInfo bdi : bloodTypes) {
+						if (btCode.equals(bdi.getCode())) {
+							btName = bdi.getName();
+							break;
+						}
+					}
+				}
+				map.put("bloodType", btName); // 设置血型
 				// 查询用户生日的月份
 				final String crrMonthBir = DateUtils.dateFormat(6, map.containsKey("birthday")? (Date) map.get("birthday"): null);
 				final String nowMonth = DateUtils.dateFormat(6, new Date());
