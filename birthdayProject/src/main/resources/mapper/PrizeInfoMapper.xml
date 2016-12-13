@@ -3,13 +3,14 @@
 <mapper namespace="com.hm.birthday.admin.prize.dao.PrizeInfoMapper" >
   <resultMap id="BaseResultMap" type="com.hm.birthday.entity.PrizeInfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="prize_no" property="prizeNo" jdbcType="VARCHAR" />
     <result column="prize_grade" property="prizeGrade" jdbcType="VARCHAR" />
     <result column="prize_name" property="prizeName" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="crete_time" property="creteTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, prize_grade, prize_name, update_time, crete_time
+    id, prize_no, prize_grade, prize_name, update_time, crete_time
   </sql>
   <select id="queryWithPage" resultMap="BaseResultMap" parameterType="com.hm.birthday.entity.PrizeInfo">
 		select 
@@ -29,9 +30,9 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hm.birthday.entity.PrizeInfo" >
-    insert into prize_info (id, prize_grade, prize_name, 
+    insert into prize_info (id, prize_no, prize_grade, prize_name, 
       update_time, crete_time)
-    values (#{id,jdbcType=INTEGER}, #{prizeGrade,jdbcType=VARCHAR}, #{prizeName,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{prizeNo,jdbcType=VARCHAR},, #{prizeGrade,jdbcType=VARCHAR}, #{prizeName,jdbcType=VARCHAR}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{creteTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.hm.birthday.entity.PrizeInfo" >
@@ -39,6 +40,9 @@
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+      <if test="prizeNo != null" >
+        prize_no,
       </if>
       <if test="prizeGrade != null" >
         prize_grade,
@@ -57,6 +61,9 @@
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
+      <if test="prizeNo != null" >
+        #{prizeNo,jdbcType=VARCHAR},
+      </if>
       <if test="prizeGrade != null" >
         #{prizeGrade,jdbcType=VARCHAR},
       </if>
@@ -74,6 +81,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.hm.birthday.entity.PrizeInfo" >
     update prize_info
     <set >
+      <if test="prizeNo != null" >
+        prize_no = #{prizeNo,jdbcType=VARCHAR},
+      </if>
       <if test="prizeGrade != null" >
         prize_grade = #{prizeGrade,jdbcType=VARCHAR},
       </if>
@@ -91,7 +101,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hm.birthday.entity.PrizeInfo" >
     update prize_info
-    set prize_grade = #{prizeGrade,jdbcType=VARCHAR},
+    set prize_no = #{prizeNo,jdbcType=VARCHAR},
+      prize_grade = #{prizeGrade,jdbcType=VARCHAR},
       prize_name = #{prizeName,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       crete_time = #{creteTime,jdbcType=TIMESTAMP}

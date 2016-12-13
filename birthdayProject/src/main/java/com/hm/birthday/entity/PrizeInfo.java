@@ -5,6 +5,8 @@ import java.util.Date;
 public class PrizeInfo {
     private Integer id;
 
+    private String prizeNo;
+    
     private String prizeGrade;
 
     private String prizeName;
@@ -21,7 +23,15 @@ public class PrizeInfo {
         this.id = id;
     }
 
-    public String getPrizeGrade() {
+    public String getPrizeNo() {
+		return prizeNo;
+	}
+
+	public void setPrizeNo(String prizeNo) {
+		this.prizeNo = prizeNo;
+	}
+
+	public String getPrizeGrade() {
         return prizeGrade;
     }
 
