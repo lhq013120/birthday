@@ -1,4 +1,4 @@
-package com.hm.birthday.admin.prize.servic.impl;
+package com.hm.birthday.admin.prize.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.hm.birthday.admin.prize.dao.PrizeInfoMapper;
-import com.hm.birthday.admin.prize.servic.IPrizeInfoService;
+import com.hm.birthday.admin.prize.service.IPrizeInfoService;
 import com.hm.birthday.admin.worker.service.impl.WorkerServiceImpl;
 import com.hm.birthday.entity.PrizeInfo;
 

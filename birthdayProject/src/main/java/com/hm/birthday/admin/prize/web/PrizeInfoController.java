@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
-import com.hm.birthday.admin.prize.servic.IPrizeInfoService;
+import com.hm.birthday.admin.prize.service.IPrizeInfoService;
 import com.hm.birthday.core.controller.AbstractDisplayController;
 import com.hm.birthday.entity.PrizeInfo;
 

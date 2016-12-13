@@ -1,4 +1,4 @@
-package com.hm.birthday.admin.prize.servic;
+package com.hm.birthday.admin.prize.service;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
