@@ -5,12 +5,16 @@
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="phone_num" property="phoneNum" jdbcType="VARCHAR" />
     <result column="work_name" property="workName" jdbcType="VARCHAR" />
+    <result column="prize_no" property="prizeNo" jdbcType="VARCHAR" />
+    <result column="prize_grade" property="prizeGrade" jdbcType="VARCHAR" />
     <result column="prize_name" property="prizeName" jdbcType="VARCHAR" />
+    <result column="work_address" property="workAddress" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, phone_num, work_name, prize_name, update_time, create_time
+    id, phone_num, work_name, prize_no, prize_grade, prize_name, work_address, update_time, 
+    create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,10 +28,12 @@
   </delete>
   <insert id="insert" parameterType="com.hm.birthday.entity.WinPrizeInfo" >
     insert into win_prize_info (id, phone_num, work_name, 
-      prize_name, update_time, create_time
+      prize_no, prize_grade, prize_name, 
+      work_address, update_time, create_time
       )
     values (#{id,jdbcType=INTEGER}, #{phoneNum,jdbcType=VARCHAR}, #{workName,jdbcType=VARCHAR}, 
-      #{prizeName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}
+      #{prizeNo,jdbcType=VARCHAR}, #{prizeGrade,jdbcType=VARCHAR}, #{prizeName,jdbcType=VARCHAR}, 
+      #{workAddress,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.hm.birthday.entity.WinPrizeInfo" >
@@ -42,8 +48,17 @@
       <if test="workName != null" >
         work_name,
       </if>
+      <if test="prizeNo != null" >
+        prize_no,
+      </if>
+      <if test="prizeGrade != null" >
+        prize_grade,
+      </if>
       <if test="prizeName != null" >
         prize_name,
+      </if>
+      <if test="workAddress != null" >
+        work_address,
       </if>
       <if test="updateTime != null" >
         update_time,
@@ -62,8 +77,17 @@
       <if test="workName != null" >
         #{workName,jdbcType=VARCHAR},
       </if>
+      <if test="prizeNo != null" >
+        #{prizeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prizeGrade != null" >
+        #{prizeGrade,jdbcType=VARCHAR},
+      </if>
       <if test="prizeName != null" >
         #{prizeName,jdbcType=VARCHAR},
+      </if>
+      <if test="workAddress != null" >
+        #{workAddress,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
@@ -82,8 +106,17 @@
       <if test="workName != null" >
         work_name = #{workName,jdbcType=VARCHAR},
       </if>
+      <if test="prizeNo != null" >
+        prize_no = #{prizeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prizeGrade != null" >
+        prize_grade = #{prizeGrade,jdbcType=VARCHAR},
+      </if>
       <if test="prizeName != null" >
         prize_name = #{prizeName,jdbcType=VARCHAR},
+      </if>
+      <if test="workAddress != null" >
+        work_address = #{workAddress,jdbcType=VARCHAR},
       </if>
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
@@ -98,7 +131,10 @@
     update win_prize_info
     set phone_num = #{phoneNum,jdbcType=VARCHAR},
       work_name = #{workName,jdbcType=VARCHAR},
+      prize_no = #{prizeNo,jdbcType=VARCHAR},
+      prize_grade = #{prizeGrade,jdbcType=VARCHAR},
       prize_name = #{prizeName,jdbcType=VARCHAR},
+      work_address = #{workAddress,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}

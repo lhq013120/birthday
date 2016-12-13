@@ -9,7 +9,13 @@ public class WinPrizeInfo {
 
     private String workName;
 
+    private String prizeNo;
+
+    private String prizeGrade;
+
     private String prizeName;
+
+    private String workAddress;
 
     private Date updateTime;
 
@@ -39,12 +45,36 @@ public class WinPrizeInfo {
         this.workName = workName == null ? null : workName.trim();
     }
 
+    public String getPrizeNo() {
+        return prizeNo;
+    }
+
+    public void setPrizeNo(String prizeNo) {
+        this.prizeNo = prizeNo == null ? null : prizeNo.trim();
+    }
+
+    public String getPrizeGrade() {
+        return prizeGrade;
+    }
+
+    public void setPrizeGrade(String prizeGrade) {
+        this.prizeGrade = prizeGrade == null ? null : prizeGrade.trim();
+    }
+
     public String getPrizeName() {
         return prizeName;
     }
 
     public void setPrizeName(String prizeName) {
         this.prizeName = prizeName == null ? null : prizeName.trim();
+    }
+
+    public String getWorkAddress() {
+        return workAddress;
+    }
+
+    public void setWorkAddress(String workAddress) {
+        this.workAddress = workAddress == null ? null : workAddress.trim();
     }
 
     public Date getUpdateTime() {
