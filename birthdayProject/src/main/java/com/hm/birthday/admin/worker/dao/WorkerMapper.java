@@ -42,6 +42,8 @@ public interface WorkerMapper {
 	public int insertSelective(WorkerInfo record) throws Exception;
 
 	public WorkerInfo selectByPrimaryKey(Integer id) throws Exception;
+	
+	public WorkerInfo selectByPhone(String phoneNum) throws Exception;
 
 	public int updateByPrimaryKey(WorkerInfo record) throws Exception;
 }

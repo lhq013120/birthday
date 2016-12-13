@@ -31,13 +31,22 @@
 		from worker_info
 		where 1 = 1
 		<include refid="paramsSql"/> 
-		order by id
+		order by id DESC
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from worker_info
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPhone" parameterType="java.lang.String" resultType="com.hm.birthday.entity.WorkerInfo">
+	SELECT
+		<include refid="Base_Column_List"/>
+	FROM
+		worker_info
+	WHERE
+		phone_num = #{phoneNum,jdbcType=VARCHAR}
+		LIMIT 1
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from worker_info

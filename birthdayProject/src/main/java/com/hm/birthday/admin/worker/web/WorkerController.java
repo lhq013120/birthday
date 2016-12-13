@@ -113,8 +113,13 @@ public class WorkerController extends AbstractDisplayController {
 				workerConstellation,
 				bloodType,
 				workerHobby,null, sysDate,sysDate);
-		workerService.AddWorker(workerInfo);
-		return setModelView("admin/worker/edit_ajaxSuccess");
+		RetMsg rm = workerService.AddWorker(workerInfo);
+		if (RetMsg.SUCCESS.code().equals(rm.code())) {
+			return setModelView("admin/worker/edit_ajaxSuccess");
+		} else {
+			return setModelView(Constants.page_ajaxError, setResultMap(rm));
+		}
+		
 	}
 	
 	/**
@@ -162,6 +167,47 @@ public class WorkerController extends AbstractDisplayController {
 		modelMap.put("bloodTypes", bloodTypes);
 		
 		return setModelView("admin/worker/editWorker",modelMap);
-		
 	}
+	
+	/**
+	 * 更新用户信息
+	 * 
+	 * @param params
+	 * @return
+	 */
+	@RequestMapping("edit")
+	public ModelAndView edit(@RequestParam Map<String, Object> params) throws Exception {
+		
+		Integer id = Integer.parseInt(params.get("id").toString());
+		final String phoneNum = (String) params.get("phoneNum") == null ? "" : ((String) params.get("phoneNum")).trim();
+		if(phoneNum.length() != 11) {
+			Map<String,Object> modelMap = setResultMap(RetMsg.PHONENUM_ERROR);
+			return setModelView(Constants.page_ajaxError,modelMap);
+		}
+		final String workName = (String) params.get("workName") == null ? "" :((String) params.get("workName")).trim();
+		final Date birthday = DateUtils.StringtoDate((String) params.get("birthday"), DateUtils.pattern_ymd_interval );
+		final String workerRole = (String) params.get("workerRole") == null ? "": ((String) params.get("workerRole")).trim();
+		final String workerImg = (String) params.get("workerImg") == null ? "" : ((String) params.get("workerImg")).trim();
+		final String shrinkImg = (String) params.get("shrinkImg") == null ? "" : ((String) params.get("shrinkImg")).trim();
+		final String workerConstellation = Constellation.date2Constellation(birthday);
+		final String bloodType = (String) params.get("bloodType");
+		final String workerHobby = (String) params.get("workerHobby") == null? "" : ((String) params.get("workerHobby")).trim();
+		
+		Date sysDate = DateUtils.now();
+		
+		WorkerInfo workerInfo = new WorkerInfo(phoneNum,
+				workName,
+				null,
+				birthday,
+				workerRole,
+				workerImg,
+				shrinkImg,
+				workerConstellation,
+				bloodType,
+				workerHobby,null, sysDate,null);
+		workerInfo.setId(id);
+		workerService.updateWorker(workerInfo);
+		return setModelView("admin/worker/edit_ajaxSuccess");
+	}
+	
 }

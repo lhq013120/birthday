@@ -18,6 +18,7 @@ import com.hm.birthday.admin.worker.dao.WorkerMapper;
 import com.hm.birthday.admin.worker.service.IWorkerService;
 import com.hm.birthday.entity.BaseDicInfo;
 import com.hm.birthday.entity.WorkerInfo;
+import com.hm.birthday.enums.RetMsg;
 import com.hm.birthday.utils.DateUtils;
 
 
@@ -100,15 +101,21 @@ public class WorkerServiceImpl implements IWorkerService {
 	}
 
 	@Override
-	public int AddWorker(WorkerInfo workerInfo) throws Exception {
-		int count = 0;
+	public RetMsg AddWorker(WorkerInfo workerInfo) throws Exception {
 		try {
-			count = workerMapper.insertSelective(workerInfo);
+			WorkerInfo w = workerMapper.selectByPhone(workerInfo.getPhoneNum());
+			if (w != null) {
+				return RetMsg.USER_EXIST;
+			}
+			int count = workerMapper.insertSelective(workerInfo);
+			if(count == 1 ) {
+				return RetMsg.SUCCESS;
+			}
 		} catch (Exception e) {
 			logger.error("用户信息插入失败", e);
 			throw e;
 		}
-		return count;
+		return RetMsg.USER_ADD_FAIL;
 	}
 
 	@Override
@@ -131,6 +138,30 @@ public class WorkerServiceImpl implements IWorkerService {
 			throw e;
 		}
 		return worker;
+	}
+
+	@Override
+	public WorkerInfo getWorkerByPhone(String phoneNum) throws Exception {
+		WorkerInfo workerInfo = null;
+		try {
+			workerInfo = workerMapper.selectByPhone(phoneNum);
+		} catch (Exception e) {
+			logger.error("按手机号查询用户信息失败", e);
+			throw e;
+		}
+		return workerInfo;
+	}
+
+	@Override
+	public int updateWorker(WorkerInfo workerInfo) throws Exception  {
+		int count = 0;
+		try {
+			count = workerMapper.updateByPrimaryKeySelective(workerInfo);
+		} catch (Exception e) {
+			logger.error("更新用户信息失败", e);
+			throw e;
+		}
+		return count;
 	}
 	
 }

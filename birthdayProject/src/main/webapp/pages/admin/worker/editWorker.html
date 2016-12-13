@@ -28,10 +28,11 @@
 	});
 </script>
 <div class="pageContent">
-	<form id="workerCreateFrom" name="workerCreateFrom" onsubmit="return validateCallback(this,dialogAjaxDone);" action="worker/add"  class="required-validate" method="post">
+	<form id="workerCreateFrom" name="workerCreateFrom" onsubmit="return validateCallback(this,dialogAjaxDone);" action="worker/edit"  class="required-validate" method="post">
 	<div class="pageFormContent" layoutH="86">
 			<input id="workerImg" type="hidden" name="workerImg" value="$!{worker.workerImg}">
 			<input id="shrinkImg" type="hidden" name="shrinkImg" value="$!{worker.shrinkImg}">
+			<input id="id" type="hidden" name="id" value="$!{worker.id}">
 			<table>
 				<tr>
 					<td>

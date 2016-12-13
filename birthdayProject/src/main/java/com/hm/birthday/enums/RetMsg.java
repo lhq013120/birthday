@@ -5,6 +5,8 @@ public enum RetMsg {
 	SUCCESS("0000","操作成功"),
 	USER_ANME_NULL("1001","用户名为空"),
 	USER_NOT_EXIST("1002","用户不存在"),
+	USER_EXIST("1003","用户已经存在"),
+	USER_ADD_FAIL("1004","用户已经存在"),
 	PASSWORD_NULL("1101","密码为空"),
 	PASSWORD_ERROR("1102","密码错误"),
 	PHONENUM_ERROR("1201","手机号格式不正确"),

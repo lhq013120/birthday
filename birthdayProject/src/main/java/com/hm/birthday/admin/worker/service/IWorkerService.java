@@ -5,6 +5,7 @@ import java.util.Map;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.hm.birthday.entity.WorkerInfo;
+import com.hm.birthday.enums.RetMsg;
 
 public interface IWorkerService {
 	
@@ -21,9 +22,13 @@ public interface IWorkerService {
 	
 	public int setFirstLogin(Integer id) throws Exception;
 	
-	public int AddWorker(WorkerInfo workerInfo) throws Exception;
+	public RetMsg AddWorker(WorkerInfo workerInfo) throws Exception;
+	
+	public int updateWorker(WorkerInfo workerInfo) throws Exception;
 	
 	public int deleteWorker(Integer id) throws Exception;
 	
 	public WorkerInfo getWorker(Integer id) throws Exception;
+	
+	public WorkerInfo getWorkerByPhone(String phoneNum) throws Exception;
 }
