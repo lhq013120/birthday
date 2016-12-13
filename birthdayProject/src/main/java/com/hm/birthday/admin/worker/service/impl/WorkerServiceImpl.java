@@ -39,9 +39,9 @@ public class WorkerServiceImpl implements IWorkerService {
 		try {
 			return workerMapper.queryWithPage(w, pageBounds);
 		} catch (Exception e) {
-			logger.error("插叙员工信息失败", e);
-		};
-		return null;
+			logger.error("查询员工信息失败", e);
+			throw e;
+		}
 	}
 
 	@Override

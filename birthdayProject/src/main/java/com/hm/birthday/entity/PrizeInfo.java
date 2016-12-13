@@ -5,6 +5,8 @@ import java.util.Date;
 public class PrizeInfo {
     private Integer id;
 
+    private String prizeGrade;
+
     private String prizeName;
 
     private Date updateTime;
@@ -17,6 +19,14 @@ public class PrizeInfo {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getPrizeGrade() {
+        return prizeGrade;
+    }
+
+    public void setPrizeGrade(String prizeGrade) {
+        this.prizeGrade = prizeGrade == null ? null : prizeGrade.trim();
     }
 
     public String getPrizeName() {
