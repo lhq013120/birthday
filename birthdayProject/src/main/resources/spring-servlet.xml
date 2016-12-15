@@ -56,8 +56,6 @@
 	<mvc:resources location="/themes/**" mapping="/themes/"/>
 	<mvc:resources location="/uploadify/**" mapping="/uploadify/"/>
 	
-	<mvc:view-controller path="/" view-name="login"/>
-	
 	<bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
 		<property name="resourceLoaderPath" value="/pages/"/>
 		<property name="configLocation" value="classpath:velocity.properties"/>

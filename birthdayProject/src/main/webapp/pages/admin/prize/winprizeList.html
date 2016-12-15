@@ -1,0 +1,65 @@
+<form id="pagerForm" method="get" action="winPrize/doSerach">
+	#parse("admin/core/paginationForm.html")
+</form>
+
+<div class="pageHeader">
+	<form onsubmit="return navTabSearch(this);" action="winPrize/doSerach" method="get">
+	<div class="searchBar">
+		<table class="searchContent">
+			<tr>
+				<td>
+					手机号：<input type="text" name="phoneNum" value="$!{phoneNum}"/>
+				</td>
+				<td>
+					姓名：<input type="text" name="workName" value="$!{workName}"/>
+				</td>
+				<td>
+					中奖日期：
+					<input type="text" class="date" id="losestartDate" name="tcDateStart" format="yyyy-MM-dd" size="10" readonly="true" value="$!{tcDateStart}"/>至
+					<input type="text" class="date" id="loseendDate" name="tcDateEnd" format="yyyy-MM-dd" size="10" readonly="true" value="$!{tcDateEnd}"/>
+				</td>
+			</tr>
+		</table>
+		<div class="subBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent" style="width: 50px; text-align: center;"><button type="submit">检索</button></div></div></li>
+			</ul>
+		</div>
+	</div>
+	</form>
+</div>
+<div class="pageContent">
+	<div class="panelBar">
+		<ul class="toolBar">
+		</ul>
+	</div>
+	<table class="table" width="100%" layoutH="138">
+		<thead>
+			<tr>
+				<th width="40">序号</th>
+				<th width="40">姓名</th>
+				<th width="80">手机号</th>
+				<th width="40">奖品</th>
+				<th width="150">描述</th>
+				<th width="40">抽奖时间</th>
+			</tr>
+		</thead>
+		<tbody>
+			#if($winprizes!= '' or $winprizes.size>0)
+				#foreach($winprize in ${winprizes})
+					<tr target="workid" rel="${worker.id}">
+						<td>$!winprize.id</td>
+						<td>$!winprize.workName</td>
+						<td>$!winprize.phoneNum</td>
+						<td>$!winprize.prizeGrade</td>
+						<td>$!winprize.prizeName</td>
+						<td>$!dateTool.format('yyyy-MM-dd HH:mm:ss',$!winprize.createTime)</td>
+					</tr>
+				#end
+			#end
+		</tbody>
+	</table>
+	<div class="panelBar">
+		#parse("admin/core/paginaction.html")
+	</div>
+</div>
