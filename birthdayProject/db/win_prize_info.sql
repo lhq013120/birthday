@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2016-12-13 23:42:05
+Date: 2016-12-15 17:04:00
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,7 +20,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `win_prize_info`;
 CREATE TABLE `win_prize_info` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `phone_num` varchar(15) NOT NULL COMMENT '手机号',
   `work_name` varchar(10) NOT NULL,
   `prize_no` varchar(3) DEFAULT NULL COMMENT '奖品编号',
@@ -30,8 +30,4 @@ CREATE TABLE `win_prize_info` (
   `update_time` datetime DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户获奖信息表';
-
--- ----------------------------
--- Records of win_prize_info
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户获奖信息表';
