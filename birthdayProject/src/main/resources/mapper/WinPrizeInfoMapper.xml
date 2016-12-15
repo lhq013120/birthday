@@ -16,6 +16,34 @@
     id, phone_num, work_name, prize_no, prize_grade, prize_name, work_address, update_time, 
     create_time
   </sql>
+  <sql id="paramsSql">
+		<if test="phoneNum != null and phoneNum != '' "> and phone_num = #{phoneNum}</if>
+		<if test="workName != null and workName != '' "> and work_name = #{workName}</if>
+		<if test="tcDateStart != null and tcDateEnd != null ">
+			<![CDATA[
+				and create_time >= #{tcDateStart}
+				and create_time <= date_add(#{tcDateEnd}, INTERVAL 1 day)
+			]]>
+		</if>
+		<if test="tcDateStart == null and tcDateEnd != null ">
+			<![CDATA[
+				and create_time <= date_add(#{tcDateEnd}, INTERVAL 1 day)
+			]]>
+		</if>
+		<if test="tcDateStart != null and tcDateEnd == null ">
+			<![CDATA[
+				and create_time >= #{tcDateStart}
+			]]>
+		</if>
+  </sql>
+  <select id="queryWithPage" resultMap="BaseResultMap" parameterType="com.hm.birthday.entity.WorkerInfo">
+		select 
+		<include refid="Base_Column_List"/>
+		from win_prize_info
+		where 1 = 1
+		<include refid="paramsSql"/> 
+		order by id DESC
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

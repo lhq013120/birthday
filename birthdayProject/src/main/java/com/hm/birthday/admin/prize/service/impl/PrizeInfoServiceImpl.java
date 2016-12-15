@@ -9,13 +9,12 @@ import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.hm.birthday.admin.prize.dao.PrizeInfoMapper;
 import com.hm.birthday.admin.prize.service.IPrizeInfoService;
-import com.hm.birthday.admin.worker.service.impl.WorkerServiceImpl;
 import com.hm.birthday.entity.PrizeInfo;
 
 @Service("prizeInfoService")
 public class PrizeInfoServiceImpl implements IPrizeInfoService {
 	
-	private final Logger logger = LoggerFactory.getLogger(WorkerServiceImpl.class);
+	private final Logger logger = LoggerFactory.getLogger(PrizeInfoServiceImpl.class);
 	
 	@Autowired
 	private PrizeInfoMapper prizeInfoMapper;

@@ -2,6 +2,13 @@ package com.hm.birthday.master.praise.dao;
 
 import com.hm.birthday.entity.WinPraise;
 
+/**
+ * 
+ * 用户点赞 DAO
+ * 
+ * @author hanyd
+ *
+ */
 public interface WinPraiseMapper {
     int deleteByPrimaryKey(Integer id);
 
