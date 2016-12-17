@@ -15,16 +15,19 @@ public class BirthBlessingServiceImpl implements IBirthBlessingService {
 
 	@Override
 	public BirthBlessing addBlessing(BirthBlessing blessing) {
+		// TODO
 		return null;
 	}
 
 	@Override
 	public List<BirthBlessing> newBlessing() {
+		// TODO
 		return null;
 	}
 
 	@Override
 	public List<BirthBlessing> allBlessing(String birthPerson) {
+		// TODO
 		return null;
 	}
 	

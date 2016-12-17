@@ -56,11 +56,13 @@ public class WinPrizeInfoServiceImpl implements IWinPrizeInfoService {
 
 	@Override
 	public List<WinPrizeInfo> queryWithPage(Map<String, Object> param) throws Exception {
+		// TODO
 		return null;
 	}
 
 	@Override
 	public WinPrizeInfo luckyDraw(String phoneNum) throws Exception {
+		// TODO
 		return null;
 	}
 
