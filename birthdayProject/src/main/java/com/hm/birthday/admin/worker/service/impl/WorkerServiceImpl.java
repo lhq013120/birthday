@@ -163,5 +163,17 @@ public class WorkerServiceImpl implements IWorkerService {
 		}
 		return count;
 	}
+
+	@Override
+	public int updateByPhone(WorkerInfo workerInfo) throws Exception {
+		int count = 0;
+		try {
+			count = workerMapper.updateByPhoneNumSelective(workerInfo);
+		} catch (Exception e) {
+			logger.error("更新用户信息失败", e);
+			throw e;
+		}
+		return count;
+	}
 	
 }

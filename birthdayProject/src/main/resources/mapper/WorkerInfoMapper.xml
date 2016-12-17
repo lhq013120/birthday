@@ -200,6 +200,53 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+    <update id="updateByPhoneNumSelective" parameterType="com.hm.birthday.entity.WorkerInfo" >
+    update worker_info
+    <set >
+      <if test="phoneNum != null" >
+        phone_num = #{phoneNum,jdbcType=VARCHAR},
+      </if>
+      <if test="workName != null" >
+        work_name = #{workName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="workerRole != null" >
+        worker_role = #{workerRole,jdbcType=VARCHAR},
+      </if>
+      <if test="workerImg != null" >
+        worker_img = #{workerImg,jdbcType=VARCHAR},
+      </if>
+      <if test="shrinkImg != null" >
+        shrink_img = #{shrinkImg,jdbcType=VARCHAR},
+      </if>
+      <if test="workerConstellation != null" >
+        worker_constellation = #{workerConstellation,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodType != null" >
+        blood_type = #{bloodType,jdbcType=VARCHAR},
+      </if>
+      <if test="workerHobby != null" >
+        worker_hobby = #{workerHobby,jdbcType=VARCHAR},
+      </if>
+      <if test="isfirstLogin != null" >
+        isfirst_login = #{isfirstLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creteTime != null" >
+        crete_time = #{creteTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where phone_num = #{phoneNum,jdbcType=VARCHAR}
+  </update>
+  
   <update id="updateByPrimaryKey" parameterType="com.hm.birthday.entity.WorkerInfo" >
     update worker_info
     set phone_num = #{phoneNum,jdbcType=VARCHAR},

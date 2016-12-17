@@ -1,5 +1,6 @@
 package com.hm.birthday.master.login.web;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,8 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.hm.birthday.admin.worker.service.IWorkerService;
 import com.hm.birthday.admin.worker.web.WorkerController;
 import com.hm.birthday.core.controller.AbstractDisplayController;
+import com.hm.birthday.entity.WorkerInfo;
 import com.hm.birthday.enums.RetMsg;
 import com.hm.birthday.utils.JsonUtils;
+import com.hm.birthday.utils.MD5Utils;
 
 @Controller()
 @RequestMapping("user")
@@ -71,6 +74,42 @@ public class UserController extends AbstractDisplayController{
 			return JsonUtils.toJsonString(result);
 		}
 	}
+	
+	/**
+	 * 用户修改密码
+	 * 
+	 * @param userName 用户名
+	 * @param oldPass 旧密码
+	 * @param newPass 新密码
+	 * @return
+	 * @throws Exception 
+	 */
+	@ResponseBody
+	@RequestMapping("editPass")
+	public String editPass(@RequestParam String userName, @RequestParam String oldPass, @RequestParam String newPass) {
+		
+		Map<String,Object> result = new HashMap<String, Object>();
+		WorkerInfo w;
+		try {
+			w = workerService.getWorkerByPhone(userName);
+			if (w == null || !MD5Utils.checkEq(oldPass,w.getPassword())){
+				result = setResultMap(RetMsg.USER_PASSWORD_ERROR);
+			} else {
+				WorkerInfo wi = new WorkerInfo();
+				wi.setPhoneNum(userName);
+				wi.setPassword(MD5Utils.MD5Encoder(newPass));
+				wi.setUpdateTime(new Date());
+				workerService.updateByPhone(wi);
+				result = setResultMap(RetMsg.SUCCESS);
+			}
+		} catch (Exception e) {
+			logger.error("用户修改密码系统异常.", e);
+			result = setResultMap(RetMsg.SYSTEM_ERROR);
+		}
+		return JsonUtils.toJsonString(result);
+	}
+	
+	
 	
 	/**
 	 * 用户登出
