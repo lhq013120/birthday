@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hm.birthday.admin.worker.service.IWorkerService;
 import com.hm.birthday.admin.worker.web.WorkerController;
@@ -40,7 +41,7 @@ public class LoginController extends AbstractDisplayController{
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="login", method=RequestMethod.POST)
+	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String login(@RequestParam String userName, @RequestParam String password, HttpSession session) {
 		Map<String,Object> result = new HashMap<String, Object>();
 		if (StringUtils.isEmpty(userName)) {
@@ -79,7 +80,7 @@ public class LoginController extends AbstractDisplayController{
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping("logout")
+	@RequestMapping("logout.do")
 	public String logout(HttpSession session) {
 		if (session.getAttribute("loginUser") != null) {
 			session.removeAttribute("loginUser");

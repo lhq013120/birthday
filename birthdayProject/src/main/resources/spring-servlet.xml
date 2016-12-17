@@ -62,6 +62,7 @@
 	</bean>
 	
 	<bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="requestContextAttribute" value="context"/>
 		<property name="contentType" value="text/html;charset=UTF-8"/>
 		<property name="suffix" value=".html"/>
 	</bean>

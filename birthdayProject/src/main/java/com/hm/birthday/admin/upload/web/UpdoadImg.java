@@ -38,7 +38,7 @@ public class UpdoadImg {
 	 * @throws IOException
 	 */
 	@ResponseBody
-	@RequestMapping("updoad")
+	@RequestMapping("updoad.do")
 	public String updoadimg(HttpServletRequest request, HttpServletResponse response)
 			throws IllegalStateException, IOException {
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;

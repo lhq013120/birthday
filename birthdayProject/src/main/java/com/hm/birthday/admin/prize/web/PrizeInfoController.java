@@ -21,7 +21,7 @@ public class PrizeInfoController extends AbstractDisplayController {
 	@Autowired
 	private IPrizeInfoService prizeInfoService;
 	
-	@RequestMapping(value="doSerach")
+	@RequestMapping(value="doSerach.do")
 	public ModelAndView doSerach(@RequestParam Map<String, Object> params ) throws Exception {
 		Integer pageNum = params.get("pageNum") == null ? null : Integer.parseInt(params.get("pageNum").toString());
 		Integer limit = params.get("numPerPage") == null ? null : Integer.parseInt(params.get("numPerPage").toString());

@@ -5,7 +5,7 @@
 				'width'         : 100,
 				'buttonText'    : '添加附件',  
 				'swf'           : 'uploadify/scripts/uploadify.swf?ver=' + Math.random(),  
-				'uploader'      : 'img/updoad',  
+				'uploader'      : 'img/updoad.do',  
 				'auto'          : true,
 				'fileSizeLimit' : '512KB',
 				'fileTypeExts'  : '*.png; *.jpg', 
@@ -28,7 +28,7 @@
 	});
 </script>
 <div class="pageContent">
-	<form id="workerCreateFrom" name="workerCreateFrom" onsubmit="return validateCallback(this,dialogAjaxDone);" action="worker/edit"  class="required-validate" method="post">
+	<form id="workerCreateFrom" name="workerCreateFrom" onsubmit="return validateCallback(this,dialogAjaxDone);" action="worker/edit.do"  class="required-validate" method="post">
 	<div class="pageFormContent" layoutH="86">
 			<input id="workerImg" type="hidden" name="workerImg" value="$!{worker.workerImg}">
 			<input id="shrinkImg" type="hidden" name="shrinkImg" value="$!{worker.shrinkImg}">

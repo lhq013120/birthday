@@ -39,7 +39,7 @@ public class WorkerController extends AbstractDisplayController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="doSerach")
+	@RequestMapping(value="doSerach.do")
 	public ModelAndView doSerach(@RequestParam Map<String, Object> params ) throws Exception {
 		
 		Integer pageNum = params.get("pageNum") == null ? null : Integer.parseInt(params.get("pageNum").toString());
@@ -66,7 +66,7 @@ public class WorkerController extends AbstractDisplayController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value="showAdd")
+	@RequestMapping(value="showAdd.do")
 	public ModelAndView showAdd() throws Exception {
 		
 		Map<String,Object> modelMap = new HashMap<String,Object>();
@@ -84,7 +84,7 @@ public class WorkerController extends AbstractDisplayController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("add")
+	@RequestMapping("add.do")
 	public ModelAndView add(@RequestParam Map<String, Object> params) throws Exception {
 		final String phoneNum = (String) params.get("phoneNum") == null ? "" : ((String) params.get("phoneNum")).trim();
 		if(phoneNum.length() != 11) {
@@ -129,7 +129,7 @@ public class WorkerController extends AbstractDisplayController {
 	 * @return
 	 * @throws Exception 
 	 */
-	@RequestMapping("del")
+	@RequestMapping("del.do")
 	public ModelAndView delete(@RequestParam String workid) throws Exception {
 		if (StringUtils.isEmpty(workid)) {
 			Map<String,Object> modelMap = setResultMap(RetMsg.ILLEGALITY_OPERATION);
@@ -150,7 +150,7 @@ public class WorkerController extends AbstractDisplayController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("showEdit")
+	@RequestMapping("showEdit.do")
 	public ModelAndView showEdit(@RequestParam String workid) throws Exception {
 		if (StringUtils.isEmpty(workid)) {
 			Map<String,Object> modelMap = setResultMap(RetMsg.ILLEGALITY_OPERATION);
@@ -175,7 +175,7 @@ public class WorkerController extends AbstractDisplayController {
 	 * @param params
 	 * @return
 	 */
-	@RequestMapping("edit")
+	@RequestMapping("edit.do")
 	public ModelAndView edit(@RequestParam Map<String, Object> params) throws Exception {
 		
 		Integer id = Integer.parseInt(params.get("id").toString());

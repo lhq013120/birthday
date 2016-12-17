@@ -9,12 +9,12 @@ import com.hm.birthday.core.controller.AbstractDisplayController;
 @Controller
 public class WelcomeController extends AbstractDisplayController{
 	
-	@RequestMapping("admin")
+	@RequestMapping("admin.do")
 	public ModelAndView adminWelcomePage() {
 		return setModelView("admin/login");
 	}
 	
-	@RequestMapping("login")
+	@RequestMapping("login.do")
 	public ModelAndView welcomePage() {
 		return setModelView("master/login");
 	}
