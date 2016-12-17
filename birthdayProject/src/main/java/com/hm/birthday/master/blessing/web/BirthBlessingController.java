@@ -2,6 +2,7 @@ package com.hm.birthday.master.blessing.web;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import com.hm.birthday.core.controller.AbstractDisplayController;
 import com.hm.birthday.entity.BirthBlessing;
 import com.hm.birthday.enums.RetMsg;
 import com.hm.birthday.master.blessing.service.IBirthBlessingService;
+import com.hm.birthday.master.blessing.vo.BlessingVo;
 import com.hm.birthday.utils.DateUtils;
 import com.hm.birthday.utils.JsonUtils;
 
@@ -63,4 +65,21 @@ public class BirthBlessingController extends AbstractDisplayController{
 		return  JsonUtils.toJsonString(setResultMap(RetMsg.SUCCESS));
 	}
 	
+	/**
+	 * 获取寿星当年的所以留言祝福
+	 * 
+	 * @param birthPerson 寿星用户名
+	 * @return 
+	 */
+	@ResponseBody
+	@RequestMapping("all.do")
+	public String allBlessing(@RequestParam String birthPersonPnum){
+		logger.info("获取寿星当年的所以留言祝福请求参数：{}",birthPersonPnum);
+		try {
+			List<BlessingVo> list = birthBlessingService.allBlessing(birthPersonPnum);
+			return  JsonUtils.toJsonString(setResultMap("blessings",list));
+		} catch (Exception e) {
+			return JsonUtils.toJsonString(setResultMap(RetMsg.SYSTEM_ERROR));
+		}
+	}
 }

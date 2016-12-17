@@ -21,10 +21,18 @@
     from birth_blessing
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from birth_blessing
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+  <!-- 获取用户本月所有留言 -->
+  <select id="selectAllByMonth" resultMap="BaseResultMap" parameterType="java.lang.String">
+	SELECT
+	<include refid="Base_Column_List" />
+	FROM
+		birth_blessing
+	WHERE
+		birth_person_pnum = #{birthPersonPnum,jdbcType=VARCHAR}
+		AND date_format(create_time, '%Y-%m') = date_format(now(), '%Y-%m')
+	ORDER BY
+		id DESC
+  </select>
   <insert id="insert" parameterType="com.hm.birthday.entity.BirthBlessing" >
     insert into birth_blessing (id, birth_person, birth_person_pnum, 
       ble_person, ble_person_pnum, ble_content, 
@@ -33,97 +41,4 @@
       #{blePerson,jdbcType=VARCHAR}, #{blePersonPnum,jdbcType=VARCHAR}, #{bleContent,jdbcType=VARCHAR}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.hm.birthday.entity.BirthBlessing" >
-    insert into birth_blessing
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="birthPerson != null" >
-        birth_person,
-      </if>
-      <if test="birthPersonPnum != null" >
-        birth_person_pnum,
-      </if>
-      <if test="blePerson != null" >
-        ble_person,
-      </if>
-      <if test="blePersonPnum != null" >
-        ble_person_pnum,
-      </if>
-      <if test="bleContent != null" >
-        ble_content,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="birthPerson != null" >
-        #{birthPerson,jdbcType=VARCHAR},
-      </if>
-      <if test="birthPersonPnum != null" >
-        #{birthPersonPnum,jdbcType=VARCHAR},
-      </if>
-      <if test="blePerson != null" >
-        #{blePerson,jdbcType=VARCHAR},
-      </if>
-      <if test="blePersonPnum != null" >
-        #{blePersonPnum,jdbcType=VARCHAR},
-      </if>
-      <if test="bleContent != null" >
-        #{bleContent,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hm.birthday.entity.BirthBlessing" >
-    update birth_blessing
-    <set >
-      <if test="birthPerson != null" >
-        birth_person = #{birthPerson,jdbcType=VARCHAR},
-      </if>
-      <if test="birthPersonPnum != null" >
-        birth_person_pnum = #{birthPersonPnum,jdbcType=VARCHAR},
-      </if>
-      <if test="blePerson != null" >
-        ble_person = #{blePerson,jdbcType=VARCHAR},
-      </if>
-      <if test="blePersonPnum != null" >
-        ble_person_pnum = #{blePersonPnum,jdbcType=VARCHAR},
-      </if>
-      <if test="bleContent != null" >
-        ble_content = #{bleContent,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hm.birthday.entity.BirthBlessing" >
-    update birth_blessing
-    set birth_person = #{birthPerson,jdbcType=VARCHAR},
-      birth_person_pnum = #{birthPersonPnum,jdbcType=VARCHAR},
-      ble_person = #{blePerson,jdbcType=VARCHAR},
-      ble_person_pnum = #{blePersonPnum,jdbcType=VARCHAR},
-      ble_content = #{bleContent,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
 </mapper>

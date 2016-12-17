@@ -1,5 +1,6 @@
 package com.hm.birthday.admin.worker.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
@@ -33,4 +34,12 @@ public interface IWorkerService {
 	public WorkerInfo getWorker(Integer id) throws Exception;
 	
 	public WorkerInfo getWorkerByPhone(String phoneNum) throws Exception;
+	
+	/**
+	 * 获取所有当月过生日的用户信息
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<WorkerInfo> allBirthWorker() throws Exception;
 }

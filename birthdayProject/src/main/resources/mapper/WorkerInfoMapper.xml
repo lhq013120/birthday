@@ -33,6 +33,16 @@
 		<include refid="paramsSql"/> 
 		order by id DESC
   </select>
+  <!-- 获取当月过生日的所以用户信息 -->
+  <select id="selectAllBirthWorker" resultMap="BaseResultMap">
+  	SELECT
+		<include refid="Base_Column_List"/>
+	FROM
+		worker_info
+	WHERE
+		MONTH(birthday) = MONTH(NOW()) 
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

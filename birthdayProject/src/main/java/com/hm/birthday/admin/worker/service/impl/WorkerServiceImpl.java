@@ -175,5 +175,17 @@ public class WorkerServiceImpl implements IWorkerService {
 		}
 		return count;
 	}
+
+	@Override
+	public List<WorkerInfo> allBirthWorker() throws Exception {
+		List<WorkerInfo> list = null;
+		try {
+			list = workerMapper.selectAllBirthWorker();
+		} catch (Exception e) {
+			logger.error("获取所有当月过生日的用户信息系统异常", e);
+			throw e;
+		}
+		return list;
+	}
 	
 }

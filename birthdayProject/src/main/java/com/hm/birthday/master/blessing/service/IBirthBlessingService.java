@@ -3,6 +3,7 @@ package com.hm.birthday.master.blessing.service;
 import java.util.List;
 
 import com.hm.birthday.entity.BirthBlessing;
+import com.hm.birthday.master.blessing.vo.BlessingVo;
 
 /**
  * 
@@ -35,6 +36,6 @@ public interface IBirthBlessingService {
 	 * @param birthPerson 寿星用户名
 	 * @return 
 	 */
-	public List<BirthBlessing> allBlessing(String birthPerson) throws Exception;
+	public List<BlessingVo> allBlessing(String birthPersonPnum) throws Exception;
 	
 }

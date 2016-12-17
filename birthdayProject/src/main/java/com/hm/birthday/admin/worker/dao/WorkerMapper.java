@@ -1,5 +1,6 @@
 package com.hm.birthday.admin.worker.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
@@ -49,4 +50,14 @@ public interface WorkerMapper {
 	public int updateByPrimaryKey(WorkerInfo record) throws Exception;
 	
 	public int updateByPhoneNumSelective(WorkerInfo record) throws Exception;
+	
+	/**
+	 * 查当月过生日的所有用户信息
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<WorkerInfo> selectAllBirthWorker() throws Exception;
+	
+	
 }

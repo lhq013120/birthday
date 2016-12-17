@@ -1,5 +1,6 @@
 package com.hm.birthday.master.blessing.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.hm.birthday.entity.BirthBlessing;
 import com.hm.birthday.master.blessing.dao.BirthBlessingMapper;
 import com.hm.birthday.master.blessing.service.IBirthBlessingService;
+import com.hm.birthday.master.blessing.vo.BlessingVo;
+import com.hm.birthday.utils.DateUtils;
 
 /**
  * 生日祝福服务类
@@ -48,9 +51,26 @@ public class BirthBlessingServiceImpl implements IBirthBlessingService {
 	}
 
 	@Override
-	public List<BirthBlessing> allBlessing(String birthPerson) {
-		// TODO
-		return null;
+	public List<BlessingVo> allBlessing(String birthPersonPnum) throws Exception {
+		List<BlessingVo> voList = new ArrayList<BlessingVo>();
+		try {
+			List<BirthBlessing> list = birthBlessingMapper.selectAllByMonth(birthPersonPnum);
+			for(BirthBlessing blessing : list) {
+				BlessingVo bVo = new BlessingVo(blessing.getId(),
+						blessing.getBirthPerson(),
+						blessing.getBirthPersonPnum(),
+						blessing.getBlePerson(),
+						blessing.getBlePersonPnum(),
+						blessing.getBleContent(),
+						DateUtils.dateFormat(2, blessing.getCreateTime()));
+				voList.add(bVo);
+			}
+		} catch (Exception e) {
+			logger.error("获取寿星当年的所以留言祝福系统异常", e);
+			throw e;
+		}
+		
+		return voList;
 	}
 	
 }
