@@ -25,7 +25,7 @@ import com.hm.birthday.enums.RetMsg;
 import com.hm.birthday.utils.JsonUtils;
 import com.hm.birthday.utils.MD5Utils;
 
-@Controller()
+@Controller
 @RequestMapping("user")
 public class UserController extends AbstractDisplayController{
 	
@@ -85,7 +85,7 @@ public class UserController extends AbstractDisplayController{
 	 * @throws Exception 
 	 */
 	@ResponseBody
-	@RequestMapping("editPass")
+	@RequestMapping("editPass.do")
 	public String editPass(@RequestParam String userName, @RequestParam String oldPass, @RequestParam String newPass) {
 		
 		Map<String,Object> result = new HashMap<String, Object>();

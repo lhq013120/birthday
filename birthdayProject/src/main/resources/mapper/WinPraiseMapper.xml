@@ -10,73 +10,25 @@
   <sql id="Base_Column_List" >
     id, phone_num, update_time, crete_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from win_praise
-    where id = #{id,jdbcType=INTEGER}
+  
+  <select id="selectCount" resultType="java.lang.Integer">
+  	SELECT
+		count(id)
+	FROM
+		win_praise
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from win_praise
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+  <select id="selectByPhoneNum" parameterType="java.lang.String" resultType="com.hm.birthday.entity.WinPraise">
+	select 
+	<include refid="Base_Column_List" />
+	from win_praise
+	where phone_num = #{phoneNum,jdbcType=VARCHAR}
+	limit 1
+  </select>
   <insert id="insert" parameterType="com.hm.birthday.entity.WinPraise" >
     insert into win_praise (id, phone_num, update_time, 
       crete_time)
     values (#{id,jdbcType=INTEGER}, #{phoneNum,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{creteTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.hm.birthday.entity.WinPraise" >
-    insert into win_praise
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="phoneNum != null" >
-        phone_num,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-      <if test="creteTime != null" >
-        crete_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="phoneNum != null" >
-        #{phoneNum,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="creteTime != null" >
-        #{creteTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hm.birthday.entity.WinPraise" >
-    update win_praise
-    <set >
-      <if test="phoneNum != null" >
-        phone_num = #{phoneNum,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="creteTime != null" >
-        crete_time = #{creteTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hm.birthday.entity.WinPraise" >
-    update win_praise
-    set phone_num = #{phoneNum,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      crete_time = #{creteTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+  
 </mapper>

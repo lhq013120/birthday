@@ -10,6 +10,7 @@ PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
 		<setting name="useColumnLabel" value="true" />
 		<setting name="defaultExecutorType" value="REUSE" />
 		<setting name="defaultStatementTimeout" value="25000" />
+		<setting name="logImpl" value="STDOUT_LOGGING" />
 	</settings>
 
 	<!-- 必须放到settings下面 -->

@@ -10,15 +10,12 @@ import com.hm.birthday.entity.WinPraise;
  *
  */
 public interface WinPraiseMapper {
-    int deleteByPrimaryKey(Integer id);
+	
+	int selectCount() throws Exception;
 
-    int insert(WinPraise record);
+    int insert(WinPraise record) throws Exception;
 
-    int insertSelective(WinPraise record);
-
-    WinPraise selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(WinPraise record);
-
-    int updateByPrimaryKey(WinPraise record);
+    WinPraise selectByPhoneNum(String phoneNum) throws Exception;
+    
+    
 }

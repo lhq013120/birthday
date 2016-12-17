@@ -1,7 +1,6 @@
 package com.hm.birthday.master.praise.service;
 
 import com.hm.birthday.entity.WinPraise;
-import com.hm.birthday.enums.RetMsg;
 
 /**
  * 
@@ -11,8 +10,27 @@ import com.hm.birthday.enums.RetMsg;
  *
  */
 public interface IWinPraiseService {
-	
+	/**
+	 * 用户点赞总数
+	 * 
+	 * @return
+	 */
 	int getPraise();
 	
-	RetMsg add(WinPraise Praise);
+	/**
+	 * 
+	 * 用户是否已经点过赞
+	 * 
+	 * @param phoneNum
+	 * @return
+	 */
+	WinPraise get(String phoneNum);
+	
+	/**
+	 * 插入用户点赞，并返回当前点赞的总数
+	 * 
+	 * @param phoneNum
+	 * @return
+	 */
+	int add(String phoneNum);
 }
