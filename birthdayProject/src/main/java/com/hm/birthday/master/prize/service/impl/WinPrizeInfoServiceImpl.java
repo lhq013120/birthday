@@ -2,6 +2,7 @@ package com.hm.birthday.master.prize.service.impl;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
+import com.hm.birthday.entity.PrizeInfo;
 import com.hm.birthday.entity.WinPrizeInfo;
 import com.hm.birthday.master.prize.dao.WinPrizeInfoMapper;
 import com.hm.birthday.master.prize.service.IWinPrizeInfoService;
@@ -46,4 +48,18 @@ public class WinPrizeInfoServiceImpl implements IWinPrizeInfoService {
 		}
 	}
 
+	@Override
+	public List<WinPrizeInfo> queryWithPage(Map<String, Object> param) throws Exception {
+		return null;
+	}
+
+	@Override
+	public WinPrizeInfo luckyDraw(String phoneNum) throws Exception {
+		return null;
+	}
+
+	@Override
+	public List<PrizeInfo> allPrize() throws Exception {
+		return null;
+	}
 }
