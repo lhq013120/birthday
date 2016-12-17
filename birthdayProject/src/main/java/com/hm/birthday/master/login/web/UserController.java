@@ -56,6 +56,7 @@ public class UserController extends AbstractDisplayController{
 		}
 		
 		try {
+			password = MD5Utils.MD5Encoder(password);
 			Map<String,Object> loginUser = workerService.login(userName, password);
 			if (CollectionUtils.isEmpty(loginUser)) {
 				result = setResultMap(RetMsg.USER_PASSWORD_ERROR);

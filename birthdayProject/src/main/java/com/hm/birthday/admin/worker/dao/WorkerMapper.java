@@ -21,6 +21,7 @@ public interface WorkerMapper {
 			+ " birthday birthday,"
 			+ " worker_role workerRole,"
 			+ " worker_img workerImg,"
+			+ " shrink_img shrinkImg,"
 			+ " worker_constellation workerConstellation,"
 			+ " blood_type bloodType,"
 			+ " worker_hobby workerHobby,"
