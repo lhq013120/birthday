@@ -5,8 +5,8 @@ import java.util.Map;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
-import com.hm.birthday.entity.PrizeInfo;
 import com.hm.birthday.entity.WinPrizeInfo;
+import com.hm.birthday.master.prize.vo.PrizeVo;
 
 public interface IWinPrizeInfoService {
 	/**
@@ -43,6 +43,6 @@ public interface IWinPrizeInfoService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<PrizeInfo> allPrize() throws Exception;
+	public List<PrizeVo> allPrize() throws Exception;
 	
 }

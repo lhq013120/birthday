@@ -1,5 +1,6 @@
 package com.hm.birthday.master.prize.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -7,15 +8,18 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
+import com.hm.birthday.admin.prize.dao.PrizeInfoMapper;
 import com.hm.birthday.entity.PrizeInfo;
 import com.hm.birthday.entity.WinPrizeInfo;
 import com.hm.birthday.master.prize.dao.WinPrizeInfoMapper;
 import com.hm.birthday.master.prize.service.IWinPrizeInfoService;
+import com.hm.birthday.master.prize.vo.PrizeVo;
 import com.hm.birthday.utils.DateUtils;
 
 @Service("winPrizeInfoService")
@@ -25,6 +29,8 @@ public class WinPrizeInfoServiceImpl implements IWinPrizeInfoService {
 	
 	@Autowired
 	private WinPrizeInfoMapper winPrizeInfoMapper;
+	@Autowired
+	private PrizeInfoMapper prizeInfoMapper;
 	
 	@Override
 	public PageList<WinPrizeInfo> queryWithPage(Map<String,Object> param, PageBounds pageBounds) throws Exception {
@@ -59,7 +65,19 @@ public class WinPrizeInfoServiceImpl implements IWinPrizeInfoService {
 	}
 
 	@Override
-	public List<PrizeInfo> allPrize() throws Exception {
-		return null;
+	public List<PrizeVo> allPrize() throws Exception {
+		List<PrizeVo> voList = new ArrayList<PrizeVo>();
+		try {
+			List<PrizeInfo> list = prizeInfoMapper.queryWithPage(null);
+			for(PrizeInfo pi : list) {
+				PrizeVo pv = new PrizeVo();
+				BeanUtils.copyProperties(pi, pv);
+				voList.add(pv);
+			}
+		} catch (Exception e) {
+			logger.error("获取奖品信息系统异常", e);
+			throw e;
+		}
+		return voList;
 	}
 }
