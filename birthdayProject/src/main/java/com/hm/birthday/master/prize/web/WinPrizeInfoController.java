@@ -1,11 +1,9 @@
 package com.hm.birthday.master.prize.web;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.hm.birthday.core.controller.AbstractDisplayController;
-import com.hm.birthday.entity.PrizeInfo;
 import com.hm.birthday.entity.WinPrizeInfo;
 import com.hm.birthday.enums.RetMsg;
 import com.hm.birthday.master.prize.service.IWinPrizeInfoService;

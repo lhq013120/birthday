@@ -19,7 +19,7 @@ public interface IBirthBlessingService {
 	 * @param blessing
 	 * @return
 	 */
-	public BirthBlessing addBlessing(BirthBlessing blessing);
+	public int addBlessing(BirthBlessing blessing) throws Exception;
 	
 	/**
 	 * 获取所有寿星的最新的两条留言
@@ -27,7 +27,7 @@ public interface IBirthBlessingService {
 	 * @param blessing
 	 * @return
 	 */
-	public List<BirthBlessing> newBlessing();
+	public List<BirthBlessing> newBlessing() throws Exception;
 	
 	/**
 	 * 获取寿星当年的所以留言祝福
@@ -35,6 +35,6 @@ public interface IBirthBlessingService {
 	 * @param birthPerson 寿星用户名
 	 * @return 
 	 */
-	public List<BirthBlessing> allBlessing(String birthPerson);
+	public List<BirthBlessing> allBlessing(String birthPerson) throws Exception;
 	
 }

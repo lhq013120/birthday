@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hm.birthday.entity.BirthBlessing;
@@ -21,11 +22,12 @@ public class BirthBlessingServiceImpl implements IBirthBlessingService {
 
 	private final static Logger logger = LoggerFactory.getLogger(BirthBlessingServiceImpl.class);
 	
+	@Autowired
 	private BirthBlessingMapper birthBlessingMapper;
 	
 	
 	@Override
-	public BirthBlessing addBlessing(BirthBlessing blessing) {
+	public int addBlessing(BirthBlessing blessing) throws Exception {
 		int count = 0;
 		try {
 			count = birthBlessingMapper.insert(blessing);
@@ -33,10 +35,10 @@ public class BirthBlessingServiceImpl implements IBirthBlessingService {
 				throw new Exception();
 			}
 		} catch (Exception e) {
-			logger.error("");
+			logger.error("添加留言祝福系统异常.........",e);
+			throw e;
 		}
-		
-		return null;
+		return count;
 	}
 
 	@Override

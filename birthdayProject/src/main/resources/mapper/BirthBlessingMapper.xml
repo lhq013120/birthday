@@ -18,15 +18,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from birth_blessing_info
+    from birth_blessing
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from birth_blessing_info
+    delete from birth_blessing
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.hm.birthday.entity.BirthBlessing" >
-    insert into birth_blessing_info (id, birth_person, birth_person_pnum, 
+    insert into birth_blessing (id, birth_person, birth_person_pnum, 
       ble_person, ble_person_pnum, ble_content, 
       update_time, create_time)
     values (#{id,jdbcType=INTEGER}, #{birthPerson,jdbcType=VARCHAR}, #{birthPersonPnum,jdbcType=VARCHAR}, 
@@ -34,7 +34,7 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.hm.birthday.entity.BirthBlessing" >
-    insert into birth_blessing_info
+    insert into birth_blessing
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -89,7 +89,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.hm.birthday.entity.BirthBlessing" >
-    update birth_blessing_info
+    update birth_blessing
     <set >
       <if test="birthPerson != null" >
         birth_person = #{birthPerson,jdbcType=VARCHAR},
@@ -116,7 +116,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.hm.birthday.entity.BirthBlessing" >
-    update birth_blessing_info
+    update birth_blessing
     set birth_person = #{birthPerson,jdbcType=VARCHAR},
       birth_person_pnum = #{birthPersonPnum,jdbcType=VARCHAR},
       ble_person = #{blePerson,jdbcType=VARCHAR},

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.hm.birthday.constant.Constants;
 import com.hm.birthday.utils.ImgUtils;
 import com.hm.birthday.utils.JsonUtils;
 
@@ -59,7 +60,7 @@ public class UpdoadImg {
 			// 上传文件名
 			// System.out.println("key: " + entity.getKey());
 			MultipartFile mf = entity.getValue();
-			final String fileName = new String(mf.getOriginalFilename().getBytes(),"UTF-8");
+			final String fileName = new String(mf.getOriginalFilename().getBytes(),Constants.encode);
 			
 			final String compFileName = prefix+fileName; // 压缩文件的文件名
 			final File uploadFile = new File(ctxPath + fileName);
