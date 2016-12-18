@@ -17,6 +17,7 @@ import com.hm.birthday.core.controller.AbstractDisplayController;
 import com.hm.birthday.entity.BirthBlessing;
 import com.hm.birthday.enums.RetMsg;
 import com.hm.birthday.master.blessing.service.IBirthBlessingService;
+import com.hm.birthday.master.blessing.vo.BlessingLimitVo;
 import com.hm.birthday.master.blessing.vo.BlessingVo;
 import com.hm.birthday.utils.DateUtils;
 import com.hm.birthday.utils.JsonUtils;
@@ -63,6 +64,22 @@ public class BirthBlessingController extends AbstractDisplayController{
 			return JsonUtils.toJsonString(setResultMap(RetMsg.SYSTEM_ERROR));
 		}
 		return  JsonUtils.toJsonString(setResultMap(RetMsg.SUCCESS));
+	}
+	
+	/**
+	 * 获取本月生日的所有人的信息，以及其他人的祝福评价
+	 * 
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("limit.do")
+	public String newBlessing() {
+		try {
+			List<BlessingLimitVo> list = birthBlessingService.newBlessing();
+			return  JsonUtils.toJsonString(setResultMap("birthlimits",list));
+		} catch (Exception e) {
+			return JsonUtils.toJsonString(setResultMap(RetMsg.SYSTEM_ERROR));
+		}
 	}
 	
 	/**

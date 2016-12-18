@@ -6,7 +6,9 @@ import com.hm.birthday.entity.BirthBlessing;
 
 public interface BirthBlessingMapper {
 
-    int insert(BirthBlessing record) throws Exception;
+	int insert(BirthBlessing record) throws Exception;
 
-    List<BirthBlessing> selectAllByMonth(String birthPersonPnum) throws Exception;
+	List<BirthBlessing> selectAllByMonth(String birthPersonPnum) throws Exception;
+
+	List<BirthBlessing> selectBirthLimit2(String birthPersonPnum) throws Exception;
 }

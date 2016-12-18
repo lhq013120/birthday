@@ -3,6 +3,7 @@ package com.hm.birthday.master.blessing.service;
 import java.util.List;
 
 import com.hm.birthday.entity.BirthBlessing;
+import com.hm.birthday.master.blessing.vo.BlessingLimitVo;
 import com.hm.birthday.master.blessing.vo.BlessingVo;
 
 /**
@@ -28,7 +29,7 @@ public interface IBirthBlessingService {
 	 * @param blessing
 	 * @return
 	 */
-	public List<BirthBlessing> newBlessing() throws Exception;
+	public List<BlessingLimitVo> newBlessing() throws Exception;
 	
 	/**
 	 * 获取寿星当年的所以留言祝福

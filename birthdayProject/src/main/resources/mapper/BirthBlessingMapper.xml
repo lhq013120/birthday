@@ -33,6 +33,18 @@
 	ORDER BY
 		id DESC
   </select>
+  <select id="selectBirthLimit2" resultMap="BaseResultMap" parameterType="java.lang.String">
+	SELECT
+	<include refid="Base_Column_List" />
+	FROM
+		birth_blessing
+	WHERE
+		birth_person_pnum = #{birthPersonPnum,jdbcType=VARCHAR}
+		AND date_format(create_time, '%Y-%m') = date_format(now(), '%Y-%m')
+	ORDER BY
+		id DESC
+	LIMIT 2
+  </select>
   <insert id="insert" parameterType="com.hm.birthday.entity.BirthBlessing" >
     insert into birth_blessing (id, birth_person, birth_person_pnum, 
       ble_person, ble_person_pnum, ble_content, 

@@ -7,10 +7,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import com.hm.birthday.admin.worker.service.IWorkerService;
 import com.hm.birthday.entity.BirthBlessing;
+import com.hm.birthday.entity.WorkerInfo;
 import com.hm.birthday.master.blessing.dao.BirthBlessingMapper;
 import com.hm.birthday.master.blessing.service.IBirthBlessingService;
+import com.hm.birthday.master.blessing.vo.BlessingLimitVo;
 import com.hm.birthday.master.blessing.vo.BlessingVo;
 import com.hm.birthday.utils.DateUtils;
 
@@ -27,6 +31,9 @@ public class BirthBlessingServiceImpl implements IBirthBlessingService {
 	
 	@Autowired
 	private BirthBlessingMapper birthBlessingMapper;
+	
+	@Autowired
+	private IWorkerService workerService;
 	
 	
 	@Override
@@ -45,9 +52,47 @@ public class BirthBlessingServiceImpl implements IBirthBlessingService {
 	}
 
 	@Override
-	public List<BirthBlessing> newBlessing() {
-		// TODO
-		return null;
+	public List<BlessingLimitVo> newBlessing() throws Exception {
+		
+		List<BlessingLimitVo> list = new ArrayList<BlessingLimitVo>();
+		
+		List<WorkerInfo> workers = workerService.allBirthWorker(); // 获取本月生日用户
+		if (!CollectionUtils.isEmpty(workers)) {
+			for(WorkerInfo worker : workers) {
+				BlessingLimitVo blv = new BlessingLimitVo(); // 生日用户以及留言 
+				blv.setPhoneNum(worker.getPhoneNum());
+				blv.setWorkName(worker.getWorkName());
+				blv.setWorkerImg(worker.getWorkerImg());
+				blv.setShrinkImg(worker.getShrinkImg());
+				blv.setWorkerConstellation(worker.getWorkerConstellation());
+				blv.setWorkerHobby(worker.getWorkerHobby());
+				blv.setBloodType(worker.getBloodType()); // 血型
+				blv.setBirthday(DateUtils.dateFormat(3,worker.getBirthday())); // 生日
+				
+				// 获取本月生日用户的留言前两条
+				List<BirthBlessing> blessings;
+				try {
+					blessings = birthBlessingMapper.selectBirthLimit2(worker.getPhoneNum());
+					for(BirthBlessing blessing : blessings) {
+						BlessingVo bVo = new BlessingVo(blessing.getId(),
+								blessing.getBirthPerson(),
+								blessing.getBirthPersonPnum(),
+								blessing.getBlePerson(),
+								blessing.getBlePersonPnum(),
+								blessing.getBleContent(),
+								DateUtils.dateFormat(2, blessing.getCreateTime()));
+						blv.getLimit2Blessing().add(bVo);
+					}
+				} catch (Exception e) {
+					logger.error("获取生日用户评价的前两条评价异常",e);
+					throw e;
+				}
+				list.add(blv);
+			}
+		}
+		
+		
+		return list;
 	}
 
 	@Override
