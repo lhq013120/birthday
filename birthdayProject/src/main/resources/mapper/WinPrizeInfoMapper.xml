@@ -52,6 +52,15 @@
 	date_format(create_time, '%Y-%m') = date_format(now(), '%Y-%m')
 	order by id DESC
   </select>
+  <select id="selectByPhoneWithYear" parameterType="java.lang.String" resultMap="BaseResultMap">
+	select 
+		<include refid="Base_Column_List"/>
+	from win_prize_info
+	where
+		phone_num = #{phoneNum,jdbcType=VARCHAR}
+		and date_format(create_time, '%Y') = date_format(now(), '%Y')
+		limit 1
+  </select>
   <insert id="insert" parameterType="com.hm.birthday.entity.WorkerInfo">
     insert into win_prize_info (id, phone_num, work_name, 
       prize_no, prize_grade, prize_name, 

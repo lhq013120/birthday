@@ -82,9 +82,14 @@ public class WinPrizeInfoController extends AbstractDisplayController {
 	@ResponseBody
 	@RequestMapping("lucky.do")
 	public String luckyDraw(@RequestParam String phoneNum, @RequestParam String name) { 
-		
 		Map<String,Object> result = new HashMap<String, Object>();
+		
 		try {
+			// 判断用户是否抽过奖
+			if(winPrizeInfoService.getByPhoneWithYear(phoneNum)!=null) {
+				return JsonUtils.toJsonString(setResultMap(RetMsg.ALREADY_WIN_PRIZE));
+			}
+			
 			WorkerInfo w = workerService.getWorkerByPhone(phoneNum);
 			if (w == null) {
 				return JsonUtils.toJsonString(setResultMap(RetMsg.USER_NOT_EXIST));

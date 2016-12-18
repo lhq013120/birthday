@@ -21,4 +21,6 @@ public interface WinPrizeInfoMapper {
 	
 	public int insert(WinPrizeInfo winPrizeInfo) throws Exception;
 	
+	public WinPrizeInfo selectByPhoneWithYear(String phoneNum) throws Exception;
+	
 }

@@ -17,8 +17,10 @@ import com.hm.birthday.admin.dict.dao.BaseDicInfoMapper;
 import com.hm.birthday.admin.worker.dao.WorkerMapper;
 import com.hm.birthday.admin.worker.service.IWorkerService;
 import com.hm.birthday.entity.BaseDicInfo;
+import com.hm.birthday.entity.WinPrizeInfo;
 import com.hm.birthday.entity.WorkerInfo;
 import com.hm.birthday.enums.RetMsg;
+import com.hm.birthday.master.prize.dao.WinPrizeInfoMapper;
 import com.hm.birthday.utils.DateUtils;
 
 
@@ -29,6 +31,9 @@ public class WorkerServiceImpl implements IWorkerService {
 	
 	@Autowired
 	private WorkerMapper workerMapper;
+	
+	@Autowired
+	private WinPrizeInfoMapper winPrizeInfoMapper;
 	
 	@Autowired
 	private BaseDicInfoMapper baseDicInfoMapper;
@@ -68,6 +73,10 @@ public class WorkerServiceImpl implements IWorkerService {
 				final String crrMonthBir = DateUtils.dateFormat(6, map.containsKey("birthday")? (Date) map.get("birthday"): null);
 				final String nowMonth = DateUtils.dateFormat(6, new Date());
 				boolean isLucky = false; // 是否已抽奖
+				WinPrizeInfo winPrizeInfo = winPrizeInfoMapper.selectByPhoneWithYear(phoneNum);
+				if (winPrizeInfo != null) {
+					isLucky = true;
+				}
 				boolean isBirthday = false; // 是否本月生日
 				if (nowMonth.equals(crrMonthBir)) {
 					isBirthday = true;

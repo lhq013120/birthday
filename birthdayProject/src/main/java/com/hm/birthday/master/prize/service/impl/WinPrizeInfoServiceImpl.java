@@ -128,4 +128,16 @@ public class WinPrizeInfoServiceImpl implements IWinPrizeInfoService {
 		}
 		return voList;
 	}
+
+	@Override
+	public WinPrizeInfo getByPhoneWithYear(String phoneNum) throws Exception {
+		WinPrizeInfo winPrizeInfo = null;
+		try {
+			winPrizeInfo = winPrizeInfoMapper.selectByPhoneWithYear(phoneNum);
+		} catch (Exception e) {
+			logger.error("获取用户中奖记录查询系统异常...", e);
+			throw e;
+		}
+		return winPrizeInfo;
+	}
 }

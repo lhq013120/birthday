@@ -47,4 +47,10 @@ public interface IWinPrizeInfoService {
 	 */
 	public List<PrizeVo> allPrize() throws Exception;
 	
+	/**
+	 * 获取用户当年的抽奖记录
+	 * @return
+	 * @throws Exception 
+	 */
+	public WinPrizeInfo getByPhoneWithYear(String phoneNum) throws Exception;
 }
