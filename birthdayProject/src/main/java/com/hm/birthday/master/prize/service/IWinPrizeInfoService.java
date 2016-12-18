@@ -7,6 +7,7 @@ import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.hm.birthday.entity.WinPrizeInfo;
 import com.hm.birthday.master.prize.vo.PrizeVo;
+import com.hm.birthday.master.prize.vo.WinPrizeVo;
 
 public interface IWinPrizeInfoService {
 	/**
@@ -26,16 +27,17 @@ public interface IWinPrizeInfoService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<WinPrizeInfo> queryWithPage(Map<String,Object> param) throws Exception;
+	public List<WinPrizeVo> currentMonthWinPrizeInfo() throws Exception;
 	
 	/**
 	 * 用户抽奖
 	 * 
 	 * @param phoneNum 用户名
-	 * @return
+	 * @param workerName 员工姓名
+	 * @return 抽奖结果
 	 * @throws Exception
 	 */
-	public WinPrizeInfo luckyDraw(String phoneNum) throws Exception;
+	public PrizeVo luckyDraw(String phoneNum,String workerName) throws Exception;
 
 	/**
 	 * 获取所有的奖品信息

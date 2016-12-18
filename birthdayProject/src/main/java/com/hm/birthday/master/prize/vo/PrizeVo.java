@@ -41,4 +41,10 @@ public class PrizeVo {
 	public void setPrizeName(String prizeName) {
 		this.prizeName = prizeName;
 	}
+
+	@Override
+	public String toString() {
+		return "PrizeVo [id=" + id + ", prizeNo=" + prizeNo + ", prizeGrade=" + prizeGrade + ", prizeName=" + prizeName
+				+ "]";
+	}
 }

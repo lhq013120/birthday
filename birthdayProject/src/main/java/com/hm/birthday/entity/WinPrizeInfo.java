@@ -21,7 +21,27 @@ public class WinPrizeInfo {
 
     private Date createTime;
 
-    public Integer getId() {
+    public WinPrizeInfo() {
+		super();
+	}
+    
+	public WinPrizeInfo(Integer id, String phoneNum, String workName, String prizeNo, String prizeGrade,
+			String prizeName, String workAddress, Date updateTime, Date createTime) {
+		super();
+		this.id = id;
+		this.phoneNum = phoneNum;
+		this.workName = workName;
+		this.prizeNo = prizeNo;
+		this.prizeGrade = prizeGrade;
+		this.prizeName = prizeName;
+		this.workAddress = workAddress;
+		this.updateTime = updateTime;
+		this.createTime = createTime;
+	}
+
+
+
+	public Integer getId() {
         return id;
     }
 

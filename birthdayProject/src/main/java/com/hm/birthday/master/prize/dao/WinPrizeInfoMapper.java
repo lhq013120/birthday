@@ -1,5 +1,6 @@
 package com.hm.birthday.master.prize.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
@@ -10,15 +11,14 @@ public interface WinPrizeInfoMapper {
 	
 	public PageList<WinPrizeInfo> queryWithPage(Map<String, Object> param, PageBounds pageBounds) throws Exception;
 	
-	int deleteByPrimaryKey(Integer id);
-
-	int insert(WinPrizeInfo record);
-
-	int insertSelective(WinPrizeInfo record);
-
-	WinPrizeInfo selectByPrimaryKey(Integer id);
-
-	int updateByPrimaryKeySelective(WinPrizeInfo record);
-
-	int updateByPrimaryKey(WinPrizeInfo record);
+	/**
+	 * 获取当月获奖用户信息
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public List<WinPrizeInfo> selectCurrentMonthLucky() throws Exception;
+	
+	public int insert(WinPrizeInfo winPrizeInfo) throws Exception;
+	
 }

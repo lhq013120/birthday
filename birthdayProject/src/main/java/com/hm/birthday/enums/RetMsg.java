@@ -11,6 +11,7 @@ public enum RetMsg {
 	PASSWORD_ERROR("1102","密码错误"),
 	PHONENUM_ERROR("1201","手机号格式不正确"),
 	USER_PASSWORD_ERROR("1103","用户名或密码错误"),
+	PRIZE_NULL("2101","奖品信息不存在,请联系管理员"),
 	ILLEGALITY_OPERATION("9000","非法操作"),
 	SYSTEM_ERROR("9999","系统异常");
 	
