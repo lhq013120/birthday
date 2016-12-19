@@ -21,6 +21,18 @@ app.config(['$routeProvider','$httpProvider',function($routeProvider,$httpProvid
 	.when("/companyBenediction",{
 		templateUrl:"companyBenediction.html"
 	})
+	.when("/iWantSay",{
+		templateUrl:"iWantSay.html"
+	})
+	.when("/lottery",{
+		templateUrl:"lottery.html"
+	})
+	.when("/msg",{
+		templateUrl:"msgList.html"
+	})
+	.when("/explain",{
+		templateUrl:"explain.html"
+	})
 	.otherwise({redirectTo:"/"});
 }])
 

@@ -1,7 +1,7 @@
 <div class="login_containere " ng-controller="login">
 	<a class="login_btn btn col-xs-6" ng-click="login_Handler()">登录</a>
 </div>
-<!--<div class="modal fade" id="login" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="login" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header border_none">
@@ -11,22 +11,22 @@
 				<div class="pdLR10">
 					<div class="positionR">
 						<span class="userIcon login_icon"></span>
-						<input class="userIpt" placeholder="手机号" maxlength="11" />
+						<input id="userName" class="userIpt" placeholder="手机号" maxlength="11" />
 					</div>
 					<div class="positionR">
 						<span class="passwordIcon login_icon"></span>
-						<input class="userIpt" placeholder="密码"/>
+						<input id="pasword" class="userIpt" placeholder="密码"/>
 					</div>
 				</div>
 				
 			</div>
 			<div class="modal-footer text-center border_none">
-				<button type="button" class="login">登录</button>
+				<button type="button" class="login" ng-click="login()">登录</button>
 			</div>
 		</div>
 	</div>
-</div>-->
-<!--<div class="modal fade" id="login" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+</div>
+<div class="modal fade" id="firstChangePass" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header border_none bckRed">
@@ -54,9 +54,9 @@
 			</div>
 		</div>
 	</div>
-</div>-->
+</div>
 
-<div class="modal fade" id="login" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="lottery" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header border_none bckRed">
