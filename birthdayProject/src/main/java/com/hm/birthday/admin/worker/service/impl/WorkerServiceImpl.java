@@ -60,7 +60,7 @@ public class WorkerServiceImpl implements IWorkerService {
 				List<BaseDicInfo> bloodTypes = baseDicInfoMapper.selectByType("blood_type");
 				final String btCode = (String) map.get("bloodType"); // 血型的字典码
 				String btName = "A型";
-				if(StringUtils.isEmpty(btCode)) {
+				if(!StringUtils.isEmpty(btCode)) {
 					for(BaseDicInfo bdi : bloodTypes) {
 						if (btCode.equals(bdi.getCode())) {
 							btName = bdi.getName();
