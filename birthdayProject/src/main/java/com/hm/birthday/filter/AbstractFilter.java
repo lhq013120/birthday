@@ -44,7 +44,6 @@ public abstract class AbstractFilter implements Filter {
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		chain.doFilter(request, response);
 		
 		if ((!(request instanceof HttpServletRequest)) || (!(response instanceof HttpServletResponse))) {
 				throw new ServletException("AbstractFilter just supports HTTP requests");

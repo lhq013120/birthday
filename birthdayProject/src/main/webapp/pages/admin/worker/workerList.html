@@ -1,9 +1,9 @@
-<form id="pagerForm" method="get" action="worker/doSerach.do">
+<form id="pagerForm" method="get" action="$!{context.contextPath}/worker/doSerach.do">
 	#parse("admin/core/paginationForm.html")
 </form>
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="worker/doSerach.do" method="get">
+	<form onsubmit="return navTabSearch(this);" action="$!{context.contextPath}/worker/doSerach.do" method="get">
 	<div class="searchBar">
 		<table class="searchContent">
 			<tr>
@@ -26,9 +26,9 @@
 <div class="pageContent">
 	<div class="panelBar">
 		<ul class="toolBar">
-			<li><a class="add" target="dialog" width="700" height="500"  href="worker/showAdd.do"><span>添加</span></a></li>
-			<li><a class="edit" href="worker/showEdit.do?workid={workid}" width="700" height="500" target="dialog"><span>修改</span></a></li>
-			<li><a class="delete" href="worker/del.do?workid={workid}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
+			<li><a class="add" target="dialog" width="700" height="500"  href="$!{context.contextPath}/worker/showAdd.do"><span>添加</span></a></li>
+			<li><a class="edit" href="$!{context.contextPath}/worker/showEdit.do?workid={workid}" width="700" height="500" target="dialog"><span>修改</span></a></li>
+			<li><a class="delete" href="$!{context.contextPath}/worker/del.do?workid={workid}" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
 			<li class="line">line</li>
 		</ul>
 	</div>

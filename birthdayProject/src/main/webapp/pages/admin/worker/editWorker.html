@@ -4,8 +4,8 @@
 				'height'        : 10,
 				'width'         : 100,
 				'buttonText'    : '添加附件',  
-				'swf'           : 'uploadify/scripts/uploadify.swf?ver=' + Math.random(),  
-				'uploader'      : 'img/updoad.do',  
+				'swf'           : '../uploadify/scripts/uploadify.swf?ver=' + Math.random(),  
+				'uploader'      : '../img/updoad.do',  
 				'auto'          : true,
 				'fileSizeLimit' : '512KB',
 				'fileTypeExts'  : '*.png; *.jpg', 
@@ -17,7 +17,7 @@
 				'onUploadSuccess':function(file, data, response){  
 					//alert('The file ' + file.name + ' was successfully uploaded with a response of ' + response + ':' + data);
 					var data = jQuery.parseJSON(data);
-					$("#iworkerImg").attr("src",data['shrinkFile']); // 缩略图
+					$("#iworkerImg").attr("src",'$!{context.contextPath}/' + data['shrinkFile']); // 缩略图
 					$("#shrinkImg").val(data['shrinkFile']); // 缩略图
 					$("#workerImg").val(data['srcFile']); // 原尺寸图片
 				},
@@ -28,7 +28,7 @@
 	});
 </script>
 <div class="pageContent">
-	<form id="workerCreateFrom" name="workerCreateFrom" onsubmit="return validateCallback(this,dialogAjaxDone);" action="worker/edit.do"  class="required-validate" method="post">
+	<form id="workerCreateFrom" name="workerCreateFrom" onsubmit="return validateCallback(this,dialogAjaxDone);" action="../worker/edit.do"  class="required-validate" method="post">
 	<div class="pageFormContent" layoutH="86">
 			<input id="workerImg" type="hidden" name="workerImg" value="$!{worker.workerImg}">
 			<input id="shrinkImg" type="hidden" name="shrinkImg" value="$!{worker.shrinkImg}">
@@ -100,7 +100,7 @@
 						<div style="width: 225px; height: 170px; border: 1px solid #99BBE8">
 							<table border="0" class="perview">
 								<tr>
-									<td align="center"><img id="iworkerImg" alt="头像预览" src="$!{worker.shrinkImg}"/></td>
+									<td align="center"><img id="iworkerImg" alt="头像预览" src="../$!{worker.shrinkImg}"/></td>
 								</tr>
 							</table>
 						</div>

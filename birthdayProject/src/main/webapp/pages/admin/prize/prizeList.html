@@ -1,9 +1,9 @@
-<form id="pagerForm" method="get" action="prize/doSerach.do">
+<form id="pagerForm" method="get" action="$!{context.contextPath}/prize/doSerach.do">
 	#parse("admin/core/paginationForm.html")
 </form>
 
 <div class="pageHeader">
-	<form onsubmit="return navTabSearch(this);" action="prize/doSerach.do" method="get">
+	<form onsubmit="return navTabSearch(this);" action="$!{context.contextPath}/prize/doSerach.do" method="get">
 	<div class="searchBar">
 		<table class="searchContent">
 			<tr>

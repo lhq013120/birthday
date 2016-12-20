@@ -15,7 +15,7 @@
 			<div class="login_headerContent">
 				<div class="navList">
 					<ul>
-						<li><a href="#">设为首页</a></li>
+<!-- 						<li><a href="#">设为首页</a></li> -->
 <!-- 						<li><a href="http://bbs.dwzjs.com">反馈</a></li> -->
 <!-- 						<li><a href="doc/dwz-user-guide.pdf" target="_blank">帮助</a></li> -->
 					</ul>
@@ -28,13 +28,17 @@
 		<div id="login_content">
 			<div class="loginForm">
 				<form action="$!{context.contextPath}/admin/login.do" method="post">
+					
 					<p>
 						<label>用户名：</label>
-						<input type="text" name="userName" size="20" class="login_input" />
+						<input type="text" name="userName" size="20" value="$!userName" class="login_input" />
 					</p>
 					<p>
 						<label>密码：</label>
 						<input type="password" name="password" size="20" class="login_input" />
+					</p>
+					<p>
+						<label style="color: red;">$!info</label>
 					</p>
 <!-- 					<p> -->
 <!-- 						<label>验证码：</label> -->

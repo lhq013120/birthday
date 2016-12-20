@@ -13,6 +13,7 @@ public enum RetMsg {
 	USER_PASSWORD_ERROR("1103","用户名或密码错误"),
 	PRIZE_NULL("2101","奖品信息不存在,请联系管理员"),
 	ALREADY_WIN_PRIZE("2102","您已经抽过奖品,不允许重复抽奖"),
+	AUTH_LIMITED("3101","权限不足"),
 	ILLEGALITY_OPERATION("9000","非法操作"),
 	SYSTEM_ERROR("9999","系统异常");
 	
