@@ -4,6 +4,11 @@ html,body,document{
 	margin: 0;
 	padding: 0;
 }
+ul,li{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
 @font-face {
 	font-family:fzcyjt;
 	src: url(../../fonts/fzcyjt.ttf);
@@ -104,9 +109,205 @@ html,body,document{
 	position: fixed;
 	-webkit-animation: arrow 0.5s infinite linear;
 }
+.cb{
+	
+}
+.cb-back{
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+}
 .cb-title{
 	width: 100%;
 	height: 150px;
+}
+.cb-content{
+	border-radius: 10px;
+	outline: none;
+	height: 400px;
+	padding: 5px 15px 0 15px;
+	margin: -10px 15px 0 15px;
+	font-size: 16px;
+}
+.cb-line{
+	width: 120px;
+	height: 20px;
+	background: url(../../imgs/master/companyBenediction/hmyy.png) no-repeat;
+	background-size: contain;
+	position: absolute;
+	right: 8px;
+}
+.cb-footer{
+	margin: 0 15px;
+}
+.cb-f-img{
+	/*background: url(../../imgs/master/companyBenediction/companyBenediction_footer.png) no-repeat;
+	background-size: contain;*/
+	width: 100%;
+	height: 40px;
+	margin-top: -10px;
+	z-index: -1;
+	position: absolute;
+}
+.say{
+	/*width: 280px;*/
+	/*width: 350px;*/
+}
+.say-title{
+	height: 52px;
+	margin-top: 30px;
+}
+.say-title .title-img{
+	width: 200px;
+}
+.say-body{
+	background: url(../../imgs/master/iWantSay/textbox.png) no-repeat;
+	background-size:100% 100%;
+	/*width: 280px;*/
+	height: 370px;
+	margin-top: 20px !important;
+	text-align: center;
+	padding-top: 30px;
+}
+.say-body p{
+	margin: 0 0 5px;
+	color: #ffffff;
+}
+.say-footer{
+	background: url(../../imgs/master/iWantSay/logo.png) no-repeat;
+	background-size:contain;
+	width: 120px;
+	height: 40px;
+	margin-top:10px ;
+	float:right;
+	margin-bottom: 20px;
+}
+.le-container p{
+	margin: 0;
+	padding: 0;
+}
+.le-img-border{
+	background: url(../../imgs/master/longevity/box-border.png);
+	background-size: 100% 100%;
+	height: 200px;
+	width: 220px;
+}
+.le-img{
+	height: 159px;
+	width: 172px;
+	margin-top: 16px;
+	margin-left: 24px;
+}
+.le-msg{
+	margin-top: -18px;
+	width: 20px;
+}
+.le-arrow{
+	width: 30px;
+	margin-top: 16px;
+	margin-left: -35px;
+}
+.m-list{
+	
+}
+.m-list-line{
+	height: 1px;
+	border: 1px;
+	background:#b3b3b3;
+}
+.msg-li{
+	border-bottom: 1px solid #b3b3b3;
+}
+.msg-li span{
+	color: #bdbdbd;
+}
+/**抽奖**/
+.banner{display:block;margin-left:auto;margin-right:auto;margin-bottom: 20px;}
+.banner .turnplate{display:block;width:80%;position:relative;}
+.banner .turnplate canvas.item{width:100%;}
+.banner .turnplate img.pointer{position:absolute;width:31.5%;height:42.5%;left:34.6%;top:23%;}
+.ly-bck{
+	background: #e72920;
+	height: 100%;
+}
+.ly-title{
+	height: 80px;
+}
+.ly-title-text{
+	color: #ffe656;
+}
+.ly-body{
+	background-color: #ffbe04;
+	margin-top: -25px;
+	border-radius: 10px;
+	min-height: 100px;
+}
+.ly-body ul li{
+	border-bottom: 2px solid #ffe172;
+	margin: 0 15px;
+}
+.ly-body p{
+	margin: 0;
+	padding: 0 0 5px 5px;
+}
+.ly-list-footer{
+	margin-top: 15px;
+	margin-bottom: 15px;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+.ly-car{
+	width: 30px;
+}
+.ly-box{
+	background: url(../../imgs/master/lottery/box.png) no-repeat;
+	background-size: 100% 100%;
+	width: 100%;
+	height: 300px;
+}
+.ly-box .text-container{
+	position: relative;
+	top: 65%;
+	font-size: 12px;
+}
+.ly-box p{
+	margin: 0;
+	padding: 0;
+}
+.ly-box .lyImg{
+	width: 35%;
+	height: 75px;
+	top: 33%;
+}
+.ly-leave-msg{
+	background:#fee868;
+}
+.el{
+	
+}
+.el-activity{
+	
+}
+.el-title{
+	
+}
+.el-bck-title{
+	background: url(../../imgs/master/explain/arrow.png);
+	background-size: 100% 100%;
+	width: 40%;
+	height: 30px;
+}
+.el-bck-sawtooth{
+	background: url(../../imgs/master/explain/sawtooth.png);
+	background-size: cover;
+	height: 15px;
+	bottom: -8px;
+}
+.el-awards{
+	
+}
+.el-satisfaction{
+	
 }
 @-webkit-keyframes arrow{
 	0%{
@@ -116,7 +317,10 @@ html,body,document{
 		bottom: 10px;
 	}
 }
-@media(min-width:769px ) {
+@media(max-width:992px ) {
+	body{
+		/*background: #000000;*/
+	}
 }
 @media(max-width: 768px){
 	.login_containere{
@@ -151,7 +355,12 @@ html,body,document{
 		height: 100%;
 	}
 }
-
+.center{
+	position: absolute;
+	margin: 0 auto;
+	left: 0;
+	right: 0;
+}
 .login-border-bottom{
 	border-bottom: 2px solid #e0e0e0;
 }
@@ -159,7 +368,10 @@ html,body,document{
 	background: #FF0000;
 }
 .bck-yellow{
-	
+	background: #fdfc12;
+}
+.bck-white{
+	background: white;
 }
 .overflow_hidden{
 	overflow: hidden;
@@ -171,6 +383,9 @@ html,body,document{
 }
 .text-center{
 	text-align: center;
+}
+.text-indent2{
+	text-indent: 2em;
 }
 .font-bold{
 	font-weight: bold;
@@ -196,6 +411,12 @@ html,body,document{
 .ft16{
 	font-size: 16px;
 }
+.ft25{
+	font-size: 25px;
+}
+.ft30{
+	font-size: 30px;
+}
 .pd0{
 	padding: 0;
 }
@@ -205,14 +426,38 @@ html,body,document{
 .pdLR10{
 	padding: 0 10px;
 }
+.pdL5{
+	padding-left: 5px;
+}
 .pdL40{
 	padding-left: 40px;
+}
+.pt8{
+	padding-top: 8px !important;
+}
+.pt50{
+	padding-top: 50px;
+}
+.positionA{
+	position: absolute;
 }
 .positionR{
 	position: relative;
 }
+.positionF{
+	position: fixed;
+}
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
 .m0{
 	margin: 0;
+}
+.mt5{
+	margin-top: 5px;
 }
 .mt10{
 	margin-top: 10px;
@@ -220,6 +465,57 @@ html,body,document{
 .mt20{
 	margin-top: 20px;
 }
+.mt50{
+	margin-top: 50px;
+}
+.mt-40{
+	margin-top: -40px;
+}
+.mt35b{
+	margin-top: 35%;
+}
+.ml5{
+	margin-left: 5px;
+}
+.ml10{
+	margin-left: 10px;
+}
+.ml30{
+	margin-left: 30px !important;
+}
+.mr10{
+	margin-right: 10px;
+}
+.mb50{
+	margin-bottom: 50px;
+}
+.t200{
+	top: 200px;
+}
+.dis-inblock{
+	display: inline-block;
+}
+.disblock{
+	display: block;
+}
 .disTab{
 	display: table-cell;
+}
+.line-height30{
+	line-height: 30px;
+}
+.line-height55{
+	line-height:55px;
+}
+.line-height60{
+	line-height:60px;
+}
+.index-1{
+	z-index: -1;
+}
+.index-0{
+	z-index: 0;
+}
+.index-1000{
+	z-index: 1000;
 }
