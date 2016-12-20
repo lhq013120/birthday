@@ -23,4 +23,13 @@ public interface WinPrizeInfoMapper {
 	
 	public WinPrizeInfo selectByPhoneWithYear(String phoneNum) throws Exception;
 	
+	/**
+	 * 删除获奖信息
+	 * 
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public int deleteByPrimaryKey(Integer id) throws Exception;
+	
 }

@@ -53,4 +53,13 @@ public interface IWinPrizeInfoService {
 	 * @throws Exception 
 	 */
 	public WinPrizeInfo getByPhoneWithYear(String phoneNum) throws Exception;
+	
+	/**
+	 * 删除中奖信息
+	 * 
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public int deleteWinPrize(Integer id) throws Exception;
 }

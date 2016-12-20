@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.hm.birthday.admin.worker.service.IWorkerService;
+import com.hm.birthday.constant.Constants;
 import com.hm.birthday.core.controller.AbstractDisplayController;
 import com.hm.birthday.entity.WinPrizeInfo;
 import com.hm.birthday.entity.WorkerInfo;
@@ -22,8 +24,8 @@ import com.hm.birthday.master.prize.vo.PrizeVo;
 import com.hm.birthday.master.prize.vo.WinPrizeVo;
 import com.hm.birthday.utils.JsonUtils;
 
-@RequestMapping("winPrize")
 @Controller
+@RequestMapping("winPrize")
 public class WinPrizeInfoController extends AbstractDisplayController {
 	
 	@Autowired
@@ -126,5 +128,26 @@ public class WinPrizeInfoController extends AbstractDisplayController {
 		return JsonUtils.toJsonString(result);
 	}
 	
+	/**
+	 * 
+	 * 删除获奖信息
+	 * 
+	 * @param workid
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("del.do")
+	public ModelAndView delete(@RequestParam String id) throws Exception {
+		if (StringUtils.isEmpty(id)) {
+			Map<String,Object> modelMap = setResultMap(RetMsg.ILLEGALITY_OPERATION);
+			return setModelView(Constants.page_ajaxError,modelMap);
+		}
+		
+		Integer winid = Integer.parseInt(id);
+		
+		winPrizeInfoService.deleteWinPrize(winid);
+		
+		return setModelView(Constants.page_ajaxDone);
+	}
 
 }

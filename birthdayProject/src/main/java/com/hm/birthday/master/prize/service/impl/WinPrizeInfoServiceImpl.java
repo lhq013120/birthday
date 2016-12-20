@@ -140,4 +140,14 @@ public class WinPrizeInfoServiceImpl implements IWinPrizeInfoService {
 		}
 		return winPrizeInfo;
 	}
+	
+	@Override
+	public int deleteWinPrize(Integer id) throws Exception  {
+		try {
+			return  winPrizeInfoMapper.deleteByPrimaryKey(id);
+		} catch (Exception e) {
+			logger.error("删除用户获奖信息系统异常", e);
+			throw e;
+		}
+	}
 }

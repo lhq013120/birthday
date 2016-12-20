@@ -71,4 +71,8 @@
       #{workAddress,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from win_prize_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
 </mapper>
