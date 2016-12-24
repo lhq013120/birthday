@@ -8,8 +8,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
+import com.hm.birthday.admin.dict.dao.BaseDicInfoMapper;
 import com.hm.birthday.admin.worker.service.IWorkerService;
+import com.hm.birthday.entity.BaseDicInfo;
 import com.hm.birthday.entity.BirthBlessing;
 import com.hm.birthday.entity.WorkerInfo;
 import com.hm.birthday.master.blessing.dao.BirthBlessingMapper;
@@ -35,6 +38,9 @@ public class BirthBlessingServiceImpl implements IBirthBlessingService {
 	@Autowired
 	private IWorkerService workerService;
 	
+	@Autowired
+	private BaseDicInfoMapper baseDicInfoMapper;
+	
 	
 	@Override
 	public int addBlessing(BirthBlessing blessing) throws Exception {
@@ -58,6 +64,8 @@ public class BirthBlessingServiceImpl implements IBirthBlessingService {
 		
 		List<WorkerInfo> workers = workerService.allBirthWorker(); // 获取本月生日用户
 		if (!CollectionUtils.isEmpty(workers)) {
+			// 查询血型字典
+			List<BaseDicInfo> bloodTypes = baseDicInfoMapper.selectByType("blood_type");
 			for(WorkerInfo worker : workers) {
 				BlessingLimitVo blv = new BlessingLimitVo(); // 生日用户以及留言 
 				blv.setPhoneNum(worker.getPhoneNum());
@@ -66,7 +74,17 @@ public class BirthBlessingServiceImpl implements IBirthBlessingService {
 				blv.setShrinkImg(worker.getShrinkImg());
 				blv.setWorkerConstellation(worker.getWorkerConstellation());
 				blv.setWorkerHobby(worker.getWorkerHobby());
-				blv.setBloodType(worker.getBloodType()); // 血型
+				final String btCode = (String) worker.getBloodType(); // 血型的字典码
+				String btName = "A型";
+				if(!StringUtils.isEmpty(btCode)) {
+					for(BaseDicInfo bdi : bloodTypes) {
+						if (btCode.equals(bdi.getCode())) {
+							btName = bdi.getName();
+							break;
+						}
+					}
+				}
+				blv.setBloodType(btName); // 血型
 				blv.setBirthday(DateUtils.dateFormat(3,worker.getBirthday())); // 生日
 				
 				// 获取本月生日用户的留言前两条
