@@ -4,31 +4,37 @@
   <resultMap id="BaseResultMap" type="com.hm.birthday.entity.WinPraise" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="phone_num" property="phoneNum" jdbcType="VARCHAR" />
+    <result column="activity_type" property="activityType" jdbcType="VARCHAR" />
+    <result column="is_praise" property="isPraise" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="crete_time" property="creteTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, phone_num, update_time, crete_time
+    id, phone_num, activity_type, is_praise, update_time, crete_time
   </sql>
   
-  <select id="selectCount" resultType="java.lang.Integer">
+  <select id="selectCount" resultType="java.lang.Integer" parameterType="java.util.Map">
   	SELECT
 		count(id)
-	FROM
-		win_praise
+	from win_praise
+	where activity_type = #{activityType, jdbcType=VARCHAR}
+	and is_praise = #{isPraise, jdbcType=VARCHAR}
   </select>
-  <select id="selectByPhoneNum" parameterType="java.lang.String" resultType="com.hm.birthday.entity.WinPraise">
+  <select id="selectByPhoneNum" parameterType="java.util.Map" resultType="com.hm.birthday.entity.WinPraise">
 	select 
 	<include refid="Base_Column_List" />
 	from win_praise
 	where phone_num = #{phoneNum,jdbcType=VARCHAR}
+	and activity_type = #{activityType,jdbcType=VARCHAR}
 	limit 1
   </select>
   <insert id="insert" parameterType="com.hm.birthday.entity.WinPraise" >
-    insert into win_praise (id, phone_num, update_time, 
-      crete_time)
-    values (#{id,jdbcType=INTEGER}, #{phoneNum,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{creteTime,jdbcType=TIMESTAMP})
+    insert into win_praise (id, phone_num, activity_type, 
+      is_praise, update_time, crete_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{phoneNum,jdbcType=VARCHAR}, #{activityType,jdbcType=VARCHAR}, 
+      #{isPraise,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{creteTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   
 </mapper>

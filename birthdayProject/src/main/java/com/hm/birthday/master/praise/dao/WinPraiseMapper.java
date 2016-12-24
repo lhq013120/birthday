@@ -1,5 +1,7 @@
 package com.hm.birthday.master.praise.dao;
 
+import java.util.Map;
+
 import com.hm.birthday.entity.WinPraise;
 
 /**
@@ -11,11 +13,11 @@ import com.hm.birthday.entity.WinPraise;
  */
 public interface WinPraiseMapper {
 	
-	int selectCount() throws Exception;
+	int selectCount(Map<String, Object> param) throws Exception;
 
     int insert(WinPraise record) throws Exception;
 
-    WinPraise selectByPhoneNum(String phoneNum) throws Exception;
+    WinPraise selectByPhoneNum(Map<String, Object> param) throws Exception;
     
     
 }

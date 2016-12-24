@@ -7,6 +7,10 @@ public class WinPraise {
 
     private String phoneNum;
 
+    private String activityType;
+
+    private String isPraise;
+
     private Date updateTime;
 
     private Date creteTime;
@@ -25,6 +29,22 @@ public class WinPraise {
 
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum == null ? null : phoneNum.trim();
+    }
+
+    public String getActivityType() {
+        return activityType;
+    }
+
+    public void setActivityType(String activityType) {
+        this.activityType = activityType == null ? null : activityType.trim();
+    }
+
+    public String getIsPraise() {
+        return isPraise;
+    }
+
+    public void setIsPraise(String isPraise) {
+        this.isPraise = isPraise == null ? null : isPraise.trim();
     }
 
     public Date getUpdateTime() {

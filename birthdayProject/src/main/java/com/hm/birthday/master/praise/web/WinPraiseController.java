@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hm.birthday.core.controller.AbstractDisplayController;
 import com.hm.birthday.entity.WinPraise;
+import com.hm.birthday.enums.PraiseEnum;
 import com.hm.birthday.enums.RetMsg;
 import com.hm.birthday.master.praise.service.IWinPraiseService;
+import com.hm.birthday.master.praise.vo.PraiseVo;
 import com.hm.birthday.utils.JsonUtils;
 
 /**
@@ -49,13 +51,19 @@ public class WinPraiseController extends AbstractDisplayController{
 			return JsonUtils.toJsonString(result);
 		}
 		
-		boolean isPraise = false; // 用户是否点过赞
-		int praCount = winPraiseService.getPraise(); // 用户点赞总数
-		WinPraise wp = winPraiseService.get(userName);
+		boolean isActivePra = false; // 用户是否点过赞
+		boolean isPrizePra = false; // 用户是否点过赞
+		PraiseVo praCount = winPraiseService.getPraise(); // 用户点赞总数
+		WinPraise wp = winPraiseService.get(userName,PraiseEnum.TYPE_ACTIVE.value());
 		if (wp != null) {
-			isPraise = true;
+			isActivePra = true;
 		}
-		result.put("isPraise", isPraise);
+		wp = winPraiseService.get(userName,PraiseEnum.TYPE_PRIZE.value());
+		if (wp != null) {
+			isPrizePra = true;
+		}
+		result.put("isActivePra", isActivePra);
+		result.put("isPrizePra", isPrizePra);
 		result.put("praCount", praCount);
 		result.put("result", RetMsg.SUCCESS.name());
 		result.put("info", RetMsg.SUCCESS.value());
@@ -63,21 +71,37 @@ public class WinPraiseController extends AbstractDisplayController{
 	}
 	
 	/**
-	 * 用户点赞接口
+	 * 用户过奖方式点赞接口
 	 * 
 	 * @param userName
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping("add.do")
-	public String addPraise(@RequestParam String userName) {
+	@RequestMapping("active/add.do")
+	public String addPraise(@RequestParam String userName,@RequestParam String isEndorse) {
 		Map<String,Object> result = new HashMap<String, Object>();
 		if (StringUtils.isEmpty(userName)) {
 			result = setResultMap(RetMsg.USER_ANME_NULL);
 			return JsonUtils.toJsonString(result);
 		}
-		int praCount  =winPraiseService.add(userName);
-		result.put("isPraise", true); // 已经点赞
+		PraiseVo praCount  =winPraiseService.add(userName,PraiseEnum.TYPE_ACTIVE.value(),isEndorse);
+		result.put("isActivePra", true); // 已经点赞
+		result.put("praCount", praCount); // 点赞总数
+		result.put("result", RetMsg.SUCCESS.name());
+		result.put("info", RetMsg.SUCCESS.value());
+		return JsonUtils.toJsonString(result);
+	}
+	
+	@ResponseBody
+	@RequestMapping("prize/add.do")
+	public String addPrizePraise(@RequestParam String userName,@RequestParam String isEndorse) {
+		Map<String,Object> result = new HashMap<String, Object>();
+		if (StringUtils.isEmpty(userName)) {
+			result = setResultMap(RetMsg.USER_ANME_NULL);
+			return JsonUtils.toJsonString(result);
+		}
+		PraiseVo praCount  =winPraiseService.add(userName,PraiseEnum.TYPE_PRIZE.value(),isEndorse);
+		result.put("isPrizePra", true); // 已经点赞
 		result.put("praCount", praCount); // 点赞总数
 		result.put("result", RetMsg.SUCCESS.name());
 		result.put("info", RetMsg.SUCCESS.value());

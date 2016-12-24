@@ -1,6 +1,7 @@
 package com.hm.birthday.master.praise.service;
 
 import com.hm.birthday.entity.WinPraise;
+import com.hm.birthday.master.praise.vo.PraiseVo;
 
 /**
  * 
@@ -15,7 +16,7 @@ public interface IWinPraiseService {
 	 * 
 	 * @return
 	 */
-	int getPraise();
+	PraiseVo getPraise();
 	
 	/**
 	 * 
@@ -24,7 +25,7 @@ public interface IWinPraiseService {
 	 * @param phoneNum
 	 * @return
 	 */
-	WinPraise get(String phoneNum);
+	WinPraise get(String phoneNum, String typeActive);
 	
 	/**
 	 * 插入用户点赞，并返回当前点赞的总数
@@ -32,5 +33,5 @@ public interface IWinPraiseService {
 	 * @param phoneNum
 	 * @return
 	 */
-	int add(String phoneNum);
+	PraiseVo add(String phoneNum,  String typeActive, String isPraise);
 }
