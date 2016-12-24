@@ -49,6 +49,24 @@
 							<input type="text" class="date required" id="birthday" name="birthday" value="$!dateTool.format('yyyy-MM-dd',$worker.birthday)" format="yyyy-MM-dd" size="10" readonly="true"/>
 						</p>
 						<p>
+							<label>星座</label>
+							<select class="combox" name="workerConstellation">
+								<option value="">--选择星座--</option>
+								<option value="水瓶座" #if($!{worker.workerConstellation}=='水瓶座') selected="selected" #end>水瓶座</option>
+								<option value="双鱼座" #if($!{worker.workerConstellation}=='双鱼座') selected="selected" #end>双鱼座</option>
+								<option value="白羊座" #if($!{worker.workerConstellation}=='白羊座') selected="selected" #end>白羊座</option>
+								<option value="金牛座" #if($!{worker.workerConstellation}=='金牛座') selected="selected" #end>金牛座</option>
+								<option value="双子座" #if($!{worker.workerConstellation}=='双子座') selected="selected" #end>双子座</option>
+								<option value="巨蟹座" #if($!{worker.workerConstellation}=='巨蟹座') selected="selected" #end>巨蟹座</option>
+								<option value="狮子座" #if($!{worker.workerConstellation}=='狮子座') selected="selected" #end>狮子座</option>
+								<option value="处女座" #if($!{worker.workerConstellation}=='处女座') selected="selected" #end>处女座</option>
+								<option value="天秤座" #if($!{worker.workerConstellation}=='天秤座') selected="selected" #end>天秤座</option>
+								<option value="天蝎座" #if($!{worker.workerConstellation}=='天蝎座') selected="selected" #end>天蝎座</option>
+								<option value="射手座" #if($!{worker.workerConstellation}=='射手座') selected="selected" #end>射手座</option>
+								<option value="魔羯座" #if($!{worker.workerConstellation}=='魔羯座') selected="selected" #end>魔羯座</option>
+							</select>
+						</p>
+						<p>
 							<label>血型</label>
 							<select class="combox required" name="bloodType" >
 								#foreach($bloodType in $bloodTypes)

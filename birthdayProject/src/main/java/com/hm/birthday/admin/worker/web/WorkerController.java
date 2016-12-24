@@ -97,7 +97,10 @@ public class WorkerController extends AbstractDisplayController {
 		final String workerRole = (String) params.get("workerRole") == null ? "": ((String) params.get("workerRole")).trim();
 		final String workerImg = (String) params.get("workerImg") == null ? "" : ((String) params.get("workerImg")).trim();
 		final String shrinkImg = (String) params.get("shrinkImg") == null ? "" : ((String) params.get("shrinkImg")).trim();
-		final String workerConstellation = Constellation.date2Constellation(birthday);
+		String workerConstellation = Constellation.date2Constellation(birthday);
+		if(!StringUtils.isEmpty(params.get("workerConstellation"))) {
+			workerConstellation = params.get("workerConstellation").toString();
+		}
 		final String bloodType = (String) params.get("bloodType");
 		final String workerHobby = (String) params.get("workerHobby") == null? "" : ((String) params.get("workerHobby")).trim();
 		
@@ -189,7 +192,10 @@ public class WorkerController extends AbstractDisplayController {
 		final String workerRole = (String) params.get("workerRole") == null ? "": ((String) params.get("workerRole")).trim();
 		final String workerImg = (String) params.get("workerImg") == null ? "" : ((String) params.get("workerImg")).trim();
 		final String shrinkImg = (String) params.get("shrinkImg") == null ? "" : ((String) params.get("shrinkImg")).trim();
-		final String workerConstellation = Constellation.date2Constellation(birthday);
+		String workerConstellation = Constellation.date2Constellation(birthday);
+		if(!StringUtils.isEmpty(params.get("workerConstellation"))) {
+			workerConstellation = params.get("workerConstellation").toString();
+		}
 		final String bloodType = (String) params.get("bloodType");
 		final String workerHobby = (String) params.get("workerHobby") == null? "" : ((String) params.get("workerHobby")).trim();
 		
