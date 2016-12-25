@@ -14,6 +14,7 @@ public class DateUtils {
 	public final static String pattern_hms_interval = "HH:mm:ss";
 	public final static String pattern_fill = "yyyyMMddHHmmss";
 	public final static String pattern_m = "MM";
+	public final static String pattern_y = "YYYY";
 	
     /**
      * 格式化当前日期，以字符串形式输出
@@ -24,6 +25,7 @@ public class DateUtils {
      * 		i=4  ->{HH:mm:ss}
      * 		i=5  ->{yyyyMMddHHmmss}
      * 		i=6  ->{MM}
+     * 		i=7  ->{YYYY}
      * 		default  ->{yyyyMMddHHmmss}
      * @param i
      * @param date 时间
@@ -53,6 +55,9 @@ public class DateUtils {
                 break;
             case 6:
             	pattern = pattern_m;
+            	break;
+            case 7:
+            	pattern = pattern_y;
             	break;
             default:
                 pattern = pattern_fill;
