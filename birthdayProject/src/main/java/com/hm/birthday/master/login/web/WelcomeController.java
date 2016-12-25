@@ -7,11 +7,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hm.birthday.core.controller.AbstractDisplayController;
 
 @Controller
-@RequestMapping("master")
 public class WelcomeController extends AbstractDisplayController{
 	
 	
-	@RequestMapping("welcome.do")
+	@RequestMapping("master")
 	public ModelAndView welcomePage() {
 		return setModelView("master/index");
 	}
