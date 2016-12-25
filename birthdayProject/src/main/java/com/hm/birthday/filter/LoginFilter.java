@@ -29,7 +29,7 @@ public class LoginFilter extends AbstractFilter {
 	private final static String master_logout_url = "user/logout.do";
 	
 	// 不进行过滤的请求url
-	private final static String[] unFileter = new String[]{"admin/login.html", "admin","admin/", 
+	private final static String[] unFileter = new String[]{"master/index.html","admin/login.html", "admin","admin/", 
 			admin_login_url,
 			admin_logout_url,
 			master_login_url,
@@ -61,7 +61,7 @@ public class LoginFilter extends AbstractFilter {
 					out.println("{\"statusCode\":\"301\", \"message\":\"访问超时请重新登录！\"}");
 					
 				} else {
-					String forworUrl = request.getContextPath() +"/admin";
+					String forworUrl = request.getContextPath() +"/master";
 					response.sendRedirect(forworUrl);
 				}
 			} else {
