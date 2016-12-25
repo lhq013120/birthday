@@ -198,11 +198,11 @@ app.controller("longevity",function($scope,$location,$rootScope)
 			$scope.$apply(function(){
 				var obj={'blePerson': getCookie("userName"),'bleContent': txt};
 				$scope.userMsg.limit2Blessing.unshift(obj);
+				$scope.userMsg.more=true;
 				while($scope.userMsg.limit2Blessing.length>=3)
 				{
 					$scope.userMsg.limit2Blessing.pop();
 				}
-//			
 //				$scope.userMsg.limit2Blessing[1]=$scope.userMsg.limit2Blessing[0];
 //				
 //				$scope.userMsg.limit2Blessing[0]=obj;
