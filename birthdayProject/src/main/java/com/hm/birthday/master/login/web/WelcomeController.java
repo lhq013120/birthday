@@ -10,7 +10,7 @@ import com.hm.birthday.core.controller.AbstractDisplayController;
 public class WelcomeController extends AbstractDisplayController{
 	
 	
-	@RequestMapping("master")
+	@RequestMapping("/")
 	public ModelAndView welcomePage() {
 		return setModelView("master/index");
 	}
