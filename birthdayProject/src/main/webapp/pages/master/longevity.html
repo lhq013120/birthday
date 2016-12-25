@@ -28,8 +28,11 @@
 						</li>
 						<li class="overflow_hidden" ng-repeat="xx in x.limit2Blessing">
 							<!--<img class="fr le-msg mr10" ng-click="lyMsg_Handler()" src="../../imgs/master/longevity/leave-msg.png" />-->
-							<p class="col-xs-4 m0 pd0 text-right">{{xx.blePerson}}&nbsp;:</p>
-							<p class="col-xs-6 break-all text-left">{{xx.bleContent}}&nbsp;</p>
+							<div class="overflow_hidden">
+								<p class="col-xs-4 m0 pd0 text-right">{{xx.blePerson}}:</p>
+								<p class="col-xs-6 break-all text-left">{{xx.bleContent}}</p>
+							</div>
+							
 						</li>
 						<li>
 							<a ng-show="{{x.more}}" class="fr mt-20" ng-click="moreMsg(x)">>>更多</a>

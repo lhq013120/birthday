@@ -3,6 +3,7 @@ var user="";//登录人姓名
 var blePersonPnum="";//登录人手机号
 app.controller("app",function($scope,$location,$http,$rootScope)
 {
+	$('.in').remove();
 	$rootScope.check=function()
 	{
 		if(!isBirthday)
@@ -99,6 +100,7 @@ app.controller("app",function($scope,$location,$http,$rootScope)
 //首页登录
 app.controller("login",function($scope,$location,$http,$rootScope)
 {
+	$('.in').remove();
 	$scope.login_Handler=function()
 	{
 //		$location.path("/companyBenediction");
@@ -119,6 +121,7 @@ app.controller("login",function($scope,$location,$http,$rootScope)
 //公司祝福
 app.controller('companyBenediction',function($scope,$location)
 {
+	$('.in').remove();
 	setBodyClass(["bckRed"]);
 	if(user==""||blePersonPnum==""){
 		$location.path("/index");
@@ -128,6 +131,7 @@ app.controller('companyBenediction',function($scope,$location)
 //我想对他说
 app.controller("iWantSay",function($scope,$location)
 {
+	$('.in').remove();
 	if(user==""||blePersonPnum==""){
 		$location.path("/index");
 		return;
@@ -137,6 +141,7 @@ app.controller("iWantSay",function($scope,$location)
 //本月寿星
 app.controller("longevity",function($scope,$location,$rootScope)
 {
+	$('.in').remove();
 	if(user==""||blePersonPnum==""){
 		$location.path("/index");
 		return;
@@ -191,10 +196,16 @@ app.controller("longevity",function($scope,$location,$rootScope)
 		function bck(data)
 		{
 			$scope.$apply(function(){
-			
-				$scope.userMsg.limit2Blessing[1]=$scope.userMsg.limit2Blessing[0];
 				var obj={'blePerson': getCookie("userName"),'bleContent': txt};
-				$scope.userMsg.limit2Blessing[0]=obj;
+				$scope.userMsg.limit2Blessing.unshift(obj);
+				while($scope.userMsg.limit2Blessing.length>=3)
+				{
+					$scope.userMsg.limit2Blessing.pop();
+				}
+//			
+//				$scope.userMsg.limit2Blessing[1]=$scope.userMsg.limit2Blessing[0];
+//				
+//				$scope.userMsg.limit2Blessing[0]=obj;
 			});
 		}
 		if(txt=="")
@@ -221,6 +232,7 @@ app.controller("longevity",function($scope,$location,$rootScope)
 //留言板
 app.controller('msg',function($scope,$location)
 {
+	$('.in').remove();
 	if(user==""||blePersonPnum==""){
 		$location.path("/index");
 		return;
@@ -251,6 +263,7 @@ app.controller('msg',function($scope,$location)
 //活动说明
 app.controller('explain',function($scope,$location,$rootScope)
 {
+	$('.in').remove();
 	if(!$rootScope.check()||user==""){
 		return;
 	}
