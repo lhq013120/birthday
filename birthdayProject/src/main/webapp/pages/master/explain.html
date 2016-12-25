@@ -1,0 +1,72 @@
+<div ng-controller="explain">
+	<div class="activity mt50 positionR fl">
+		<div class="el-bck-title text-center font-bold font-red positionR index-1000 ml10">
+			<span class="line-height30">活动说明</span>
+		</div>
+		<div class="bck-white col-xs-10 col-xs-offset-1 pt50 mt-40">
+			<p>为保证抽奖活动的公开、公平、公正，抽奖有关规则说明如下：</p>
+			<p>1、所有员工的生日时间均已本人身份证上的时间为准；</p>
+			<p>2、凡在当月过生日员工均可参加转盘抽奖活动；</p>
+			<p>3、转盘上共有十个奖品，每个奖品价值不同，每人每次只限1次机会；</p>
+			<p>4、员工点击“开始抽奖”进行抽奖，当转盘上奖品项停在“幸运指针”上时，抽奖人可获得该项奖品；</p>
+			<p>5、H5发布后的三天内完成抽奖，过期将不能进行抽奖。</p>
+		</div>
+		<div class="el-bck-sawtooth col-xs-10 center index-1"></div>
+	</div>
+	
+	<div class="awards positionR fl mt50 w100b">
+			<div class="el-bck-title text-center font-bold font-red positionR index-1000 ml10 fl">
+				<span class="line-height30">活动奖项</span>
+			</div>
+			<div class="bck-white col-xs-10 col-xs-offset-1 pt50 mt-40">
+				<p>1、鸿茅药酒2瓶、鸿茅白酒1瓶</p>
+				<p>2、价值300元奖品：北京中欣卡、优丽可迷你投影仪</p>
+				<p>3、价值200元奖品：北京商通卡、床上四件套</p>
+				<p>4、价值100元奖品： 1号店礼品卡、加湿器</p>
+				<p>5、价值50元奖品：天堂折叠伞、保温杯</p>
+			</div>
+			<div class="el-bck-sawtooth col-xs-10 center index-1"></div>
+	</div>
+	
+	
+	
+	<div class="awards positionR fl mt50 w100b mb50">
+			<div class="el-bck-title text-center font-bold font-red positionR index-1000 ml10 fl">
+				<span class="line-height30">满意度调查</span>
+			</div>
+			<div class="bck-white col-xs-10 col-xs-offset-1 pt50 mt-40">
+				<div class=" mt10 ft16 overflow_hidden">
+					<p class="font-bold">1、您对本次生日福利形式是否满意？</p>
+					<div class="w50b fl pr50 pl20">
+						<img ng-click="active(1)" class="w30 h30" src="../../imgs/master/satisficing/like_icon.png"/>
+						<span>{{activeEndorse}}</span>
+					</div>
+					<div class="w50b fl text-left">
+						<img ng-click="active(0)" class="w30 h30" src="../../imgs/master/satisficing/dislike.png"/>
+						<span>{{activeOppose}}</span>
+					</div>
+				</div>
+				<div id="" class=" mt10 ft16 overflow_hidden">
+					<p class="font-bold">2、您对本次奖品是否满意？</p>
+					<div class="w50b fl pr50 pl20">
+						<img ng-click="prize(1)" class="w30 h30" src="../../imgs/master/satisficing/like_icon.png"/>
+						<span>{{prizeEndorse}}</span>
+					</div>
+					<div class="w50b fl">
+						<img ng-click="prize(0)" class="w30 h30" src="../../imgs/master/satisficing/dislike.png" />
+						<span>{{prizeOppose}}</span>
+					</div>
+				</div>
+			</div>
+			<div class="el-bck-sawtooth col-xs-10 center index-1"></div>
+	</div>
+	<!--<div class="satisfaction  mt50 mb50 positionR  fl">
+		<div class="el-bck-title text-center font-bold font-red positionR index-1000 ml10 fl">
+			
+		</div>
+		<div class="bck-white col-xs-10 col-xs-offset-1 pt50 mt-40">
+			
+		</div>
+		<div class="el-bck-sawtooth col-xs-10 center"></div>
+	</div>-->
+</div>

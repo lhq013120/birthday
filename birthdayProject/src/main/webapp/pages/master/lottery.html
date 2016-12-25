@@ -1,0 +1,90 @@
+<!--<div class="ly-bck col-xs-12 positionF index-1"></div>-->
+<div class="banner col-xs-12" ng-controller="lottery">
+	
+	<p class="text-center mt10 ft25 ly-title-text font-bold">小寿星们开始抽奖了......</p>
+	<div class="turnplate overflow_hidden center" style="background:url(../../imgs/master/lottery/turnplate-bg.png) no-repeat;background-size:100% 98.5%;">
+		<canvas class="item" id="wheelcanvas" width="422px" height="422px"></canvas>
+		<img class="pointer" src="../../imgs/master/lottery/turnplate-pointer.png"/ >
+	</div>
+	<div class="mt20">
+		<div class="positionR">
+			<img class="center index-0 col-xs-8 ly-title" src="../../imgs/master/lottery/record-title.png" />
+			<p class="text-center line-height55 font-bold font-red ft25 positionR">中奖纪录</p>
+		</div>
+		<div class="ly-body col-xs-10 col-xs-offset-1 pd0 index-1">
+			<ul class="mt50">
+				<li class="overflow_hidden" ng-repeat="x in monthList">
+					<p class="col-xs-4">{{x.workName}}</p>
+					<p class="col-xs-8 text-center">{{x.prizeName}}</p>
+				</li>
+			</ul>
+			<div id="" class="ly-list-footer positionR">
+				<img class="ly-car positionA " src="../../imgs/master/lottery/car.png" />
+				<p class="ml30 pt8">人力资源小妹儿将于生日当天送到您手中!</p>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade in" id="lottery" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog pd0 m0 mt35b">
+			<div class="">
+				<div class="modal-body pd0">
+					<div class="ly-box h350">
+						<img class="center w300 t-76" src="../../imgs/master/lottery/gold.png" />
+						<img src="{{imgUrl}}" class="center lyImg" />
+						<div class="text-center positionR text-container">
+							<h4 class="m0 font-bold font-red">恭喜你!</h4>
+							<p class="w175 centerLR">{{prizeMsg}}</p>
+							<p>人力资源小妹儿正在派送中......</p>
+							<button ng-click="goSatisficing()" type="button" class="changePassword col-xs-3 text-center border_none outline-none positionR bt0">确定</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="satisficing" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header border_none bckRed">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<div class="modal-title changePassword-title">
+					<img class="reminder" src="../../imgs/master/satisficing/icon.png" />
+					<!--<span class="reminder-img reminder"></span>-->
+					<span class="ft16">满意度调查</span>
+				</div>
+			</div>
+			<div class="modal-body overflow_hidden">
+				<div class=" mt10 ft16 overflow_hidden">
+					<p class="font-bold">1、您对本次生日福利形式是否满意？</p>
+					<div class="w50b fl pr50 pl20">
+						<img ng-click="active(1)" class="w30 h30" src="../../imgs/master/satisficing/like_icon.png"/>
+						<span>{{activeEndorse}}</span>
+					</div>
+					<div class="w50b fl text-left">
+						<img ng-click="active(0)" class="w30 h30" src="../../imgs/master/satisficing/dislike.png"/>
+						<span>{{activeOppose}}</span>
+					</div>
+				</div>
+				<div id="" class=" mt10 ft16 overflow_hidden">
+					<p class="font-bold">2、您对本次奖品是否满意？</p>
+					<div class="w50b fl pr50 pl20">
+						<img ng-click="prize(1)" class="w30 h30" src="../../imgs/master/satisficing/like_icon.png"/>
+						<span>{{prizeEndorse}}</span>
+					</div>
+					<div class="w50b fl">
+						<img ng-click="prize(0)" class="w30 h30" src="../../imgs/master/satisficing/dislike.png" />
+						<span>{{prizeOppose}}</span>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer text-center border_none">
+				<button ng-click="isEndorse('companyBenediction')" type="button" class="mt-40 changePassword col-xs-6 outline-none">确认</button>
+			</div>
+		</div>
+	</div>
+</div>
+	
+	
+	
+</div>

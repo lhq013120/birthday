@@ -1,0 +1,55 @@
+<div ng-controller="longevity" class="">
+	<!--<div class="longevity-back-img longevity-back-set"></div>-->
+	<div class="le-title positionR col-xs-12 mt20">
+		<img class="col-xs-8 positionR col-xs-offset-2" src="../../imgs/master/longevity/le-logo.png"/>
+		<img class="col-xs-8 positionR col-xs-offset-2 mt10" src="../../imgs/master/longevity/le-title.png"/>
+	</div>
+	<div class="le-container">
+		<ul class="">
+			<li class="col-xs-12 mt10 mb30" ng-repeat="x in birthlimits">
+				<div style="height: 200px;position: relative;">
+					<div class="le-img-border center">
+						<img class="le-img" src="../../{{x.workerImg}}" />
+					</div>
+				</div>
+				
+				<div class="col-xs-8 col-xs-offset-3 pd0 positionR mt5">
+					<img class="positionA le-arrow" src="../../imgs/master/longevity/arrow.png" />
+					<p class="text-right col-xs-4 m0 pd0">偶滴大名:</p><p class="text-left col-xs-8">{{x.workName}}</p>
+					<p class="text-right col-xs-4 m0 pd0">偶滴生日:</p><p class="text-left col-xs-8">{{x.birthday}}</p>
+					<p class="text-right col-xs-4 m0 pd0">偶滴星座:</p><p class="text-left col-xs-8">{{x.workerConstellation}}</p>
+					<p class="text-right col-xs-4 m0 pd0">偶滴血型:</p><p class="text-left col-xs-8">{{x.bloodType}}</p>
+					<p class="text-right col-xs-4 m0 pd0">偶滴爱好:</p><p class="text-left col-xs-8">{{x.workerHobby}}</p>
+				</div>
+				<div class="ly-leave-msg col-xs-10 col-xs-offset-1 pd0 mt10">
+					<ul>
+						<li>
+							<img class="fr le-msg mr10" ng-click="lyMsg_Handler(x)" src="../../imgs/master/longevity/leave-msg.png" />
+						</li>
+						<li class="overflow_hidden" ng-repeat="xx in x.limit2Blessing">
+							<!--<img class="fr le-msg mr10" ng-click="lyMsg_Handler()" src="../../imgs/master/longevity/leave-msg.png" />-->
+							<p class="col-xs-4 m0 pd0 text-right">{{xx.blePerson}}&nbsp;:</p>
+							<p class="col-xs-6 break-all text-left">{{xx.bleContent}}&nbsp;</p>
+						</li>
+						<li>
+							<a ng-show="{{x.more}}" class="fr mt-20" ng-click="moreMsg(x)">>>更多</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<img ng-click="gotoNext()" class="centerLR arrow " src="../../imgs/master/arrow.png" />
+	<div class="modal fade" id="longevity" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body pd0 text-center">
+					<textarea id="lvy-textarea" class="lvy-textarea"></textarea>
+					<div class="modal-footer text-center border_none">
+						<button ng-click="upMsg()" type="button" class="changePassword col-xs-6 outline-none">确认</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
