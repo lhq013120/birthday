@@ -14,7 +14,7 @@ app.controller("app",function($scope,$location,$http,$rootScope)
 		return true;
 	}
 	//修改密码接口
-	var passChange="/birthday/user/editPass.do";
+	var passChange="/user/editPass.do";
 	$scope.moreMsgList={};
 	$scope.next_Handler=function(url)
 	{
@@ -60,7 +60,7 @@ app.controller("app",function($scope,$location,$http,$rootScope)
 				}
 			})
 		}
-		$.post("/birthday/user/login.do",{'userName':userName,'password':pasword},login_back,'json');
+		$.post("/user/login.do",{'userName':userName,'password':pasword},login_back,'json');
 		//修改密码
 		$scope.pasChange=function()
 		{
@@ -147,7 +147,7 @@ app.controller("longevity",function($scope,$location,$rootScope)
 		return;
 	}
 	//本月所有生日人相关信息及留言(2条)
-	var allBirthday="/birthday/blessing/limit.do";
+	var allBirthday="/blessing/limit.do";
 	$scope.birthlimits;
 	setBodyClass(["longevity-back-img","longevity-back-set"]);
 	function init(data)
@@ -191,7 +191,7 @@ app.controller("longevity",function($scope,$location,$rootScope)
 	{
 		
 		//留言接口
-		var msgUrl="/birthday/blessing/add.do";
+		var msgUrl="/blessing/add.do";
 		var txt=$("#lvy-textarea").val();
 		function bck(data)
 		{
@@ -258,7 +258,7 @@ app.controller('msg',function($scope,$location)
 //		console.log(data)
 	}
 	var par={birthPersonPnum:p}//*******************************
-	$.post("/birthday/blessing/all.do",par,msg_Handler,"json");
+	$.post("/blessing/all.do",par,msg_Handler,"json");
 })
 //活动说明
 app.controller('explain',function($scope,$location,$rootScope)
@@ -285,7 +285,7 @@ app.controller('explain',function($scope,$location,$rootScope)
 		});
 	}
 	var countPar={userName:getCookie("blePersonPnum")};
-	$.post("/birthday/praise/count.do",countPar,countBck,"json");
+	$.post("/praise/count.do",countPar,countBck,"json");
 })
 app.controller("lottery",function($scope,$location,$rootScope)
 {
@@ -353,7 +353,7 @@ app.controller("lottery",function($scope,$location,$rootScope)
 		$(".pointer").click(function(){
 			if(turnplate.bRotate)return;
 			var par={'phoneNum':getCookie("blePersonPnum"),'name':getCookie("userName")};
-			$.post("/birthday/winPrize/lucky.do",par,bck,"json");
+			$.post("/winPrize/lucky.do",par,bck,"json");
 			
 		})
 		function bck(data)
@@ -442,7 +442,7 @@ app.controller("lottery",function($scope,$location,$rootScope)
 		  }     
 	  } 
 	}
-	$.post("/birthday/winPrize/prizes.do","",$scope.init,"json");
+	$.post("/winPrize/prizes.do","",$scope.init,"json");
 //	$scope.init
 //	$scope.drawRouletteWheel();
 //	$("#lottery").modal("toggle");
@@ -460,7 +460,7 @@ app.controller("lottery",function($scope,$location,$rootScope)
 		})
 	}
 	//当月生日的所有用户抽奖中奖信息
-	$.post("/birthday/winPrize/month.do","",monthBck,"json");
+	$.post("/winPrize/month.do","",monthBck,"json");
 	
 	
 	//获取用户是否点过赞(包含过生日形式满意度,奖品满意度)  及点赞数量
@@ -489,7 +489,7 @@ app.controller("lottery",function($scope,$location,$rootScope)
 		});
 	}
 	var countPar={userName:getCookie("blePersonPnum")};
-	$.post("/birthday/praise/count.do",countPar,countBck,"json");
+	$.post("/praise/count.do",countPar,countBck,"json");
 	
 	//用户过奖形式点赞
 	$scope.active=function(n)
@@ -552,7 +552,7 @@ app.controller("lottery",function($scope,$location,$rootScope)
 		par.isEndorse=$scope.satisficing.active;
 		par.userName=getCookie("blePersonPnum");
 		//用户过奖形式点赞
-		$.post("/birthday/praise/active/add.do",par,activeBck,"json");
+		$.post("/praise/active/add.do",par,activeBck,"json");
 	}
 	function prizeRequest()
 	{
@@ -564,7 +564,7 @@ app.controller("lottery",function($scope,$location,$rootScope)
 		par.isEndorse=$scope.satisficing.prize;
 		par.userName=getCookie("blePersonPnum");
 		//奖品满意度点赞接口
-		$.post("/birthday/praise/prize/add.do",par,activeBck,"json");
+		$.post("/praise/prize/add.do",par,activeBck,"json");
 	}
 	//中奖弹窗点击确定按钮处理函数
 	$scope.goSatisficing=function()

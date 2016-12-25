@@ -10,28 +10,28 @@ app.config(['$routeProvider','$httpProvider',function($routeProvider,$httpProvid
     
 	$routeProvider
 	.when("/",{
-		templateUrl:"login.html"
+		templateUrl:"pages/master/login.html"
 	})
 	.when("/login",{
-		templateUrl:"login.html"
+		templateUrl:"pages/master/login.html"
 	})
 	.when("/longevity",{
-		templateUrl:"longevity.html"
+		templateUrl:"pages/master/longevity.html"
 	})
 	.when("/companyBenediction",{
-		templateUrl:"companyBenediction.html"
+		templateUrl:"pages/master/companyBenediction.html"
 	})
 	.when("/iWantSay",{
-		templateUrl:"iWantSay.html"
+		templateUrl:"pages/master/iWantSay.html"
 	})
 	.when("/lottery",{
-		templateUrl:"lottery.html"
+		templateUrl:"pages/master/lottery.html"
 	})
 	.when("/msg",{
-		templateUrl:"msgList.html"
+		templateUrl:"pages/master/msgList.html"
 	})
 	.when("/explain",{
-		templateUrl:"explain.html"
+		templateUrl:"pages/master/explain.html"
 	})
 	.otherwise({redirectTo:"/"});
 }])
