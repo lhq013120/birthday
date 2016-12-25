@@ -35,21 +35,3 @@ app.config(['$routeProvider','$httpProvider',function($routeProvider,$httpProvid
 	})
 	.otherwise({redirectTo:"/"});
 }])
-
-// angular.module("app", [
-//        "ngRoute"
-//    ]).config(["$routeProvider", function($routeProvider) {
-//        $routeProvider
-//            .when("/index", {
-//            templateUrl: "views/page1.html",
-//            controller: "Page1Controller"
-//        })
-//         // .when("/child", {
-//            .when("/child/:content", {
-//            templateUrl: "views/page2.html",
-//            controller: "Page2Controller"
-//        })
-//            .otherwise({
-//            redirectTo: "/index"
-//        });
-//    }])

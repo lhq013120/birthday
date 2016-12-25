@@ -1,7 +1,23 @@
-app.controller("app",function($scope,$location,$http)
+var isBirthday=false;//是否过生日
+var user="";//登录人姓名
+var blePersonPnum="";//登录人手机号
+app.controller("app",function($scope,$location,$http,$rootScope)
 {
+	$rootScope.check=function()
+	{
+		if(!isBirthday)
+		{
+			$location.path("/index");
+			return false;
+		}
+		return true;
+	}
+	//修改密码接口
+	var passChange="/birthday/user/editPass.do";
+	$scope.moreMsgList={};
 	$scope.next_Handler=function(url)
 	{
+		$('.in').remove();
 		$location.path("/"+url);
 	}
 	$scope.login=function()
@@ -10,20 +26,27 @@ app.controller("app",function($scope,$location,$http)
 		var pasword=document.getElementById("pasword").value;
 		function login_back(data)
 		{
-			console.log(data,$scope.$apply);
 			$scope.$apply(function(){
 				if(data.result!='SUCCESS')
 				{
 					alert(data.info);
 					return;
 				}
+				isBirthday=data.userinfo.isBirthday;
+				user=data.userinfo.workName;
+				blePersonPnum=data.userinfo.phoneNum;
+				setCookie("userName",data.userinfo.workName);
+				setCookie("isBirthday",isBirthday);
+				setCookie("blePersonPnum",blePersonPnum);
 				$("#login").modal("hide");
-				if(data.userinfo.isfirstLogin=='01')
+				if(data.userinfo.isfirstLogin=='01'||data.userinfo.isfirstLogin=='1')
 				{
+					document.getElementById("newPas").value="";
+					document.getElementById("newPas1").value="";
 					$("#firstChangePass").modal("toggle");
 					return;
 				}
-				if(data.userinfo.isfirstLogin=='02'){
+				if(data.userinfo.isfirstLogin=='02'||data.userinfo.isfirstLogin=='2'){
 					if(data.userinfo.isBirthday)
 					{
 						$('.in').remove();
@@ -35,62 +58,227 @@ app.controller("app",function($scope,$location,$http)
 					}
 				}
 			})
-			
 		}
 		$.post("/birthday/user/login.do",{'userName':userName,'password':pasword},login_back,'json');
-//		$http.post("/birthday/user/login",{'userName':'sdd','password':'111'});
+		//修改密码
+		$scope.pasChange=function()
+		{
+			var newPas=document.getElementById("newPas").value;
+			var newPas1=document.getElementById("newPas1").value;
+			if(newPas==pasword)
+			{
+				alert("新密码不能与原密码相同");
+				return;
+			}
+			if(newPas==="")
+			{
+				alert("新密码不能为空");
+				return;
+			}
+			if(newPas!=newPas1)
+			{
+				alert("两次密码输入不同,请重新输入");
+				return;
+			}
+			
+			function bck(data)
+			{
+				if(data.result=="SUCCESS")
+				{
+					alert("密码修改成功,请重新登录");
+					$("#firstChangePass").modal("hide");
+				}else{
+					alert(data.info);
+				}
+			}
+			var par={"userName":userName,"oldPass":pasword,"newPass":newPas}
+			$.post(passChange,par,bck,"json");
+		}
 	}
 })
 //首页登录
-app.controller("login",function($scope,$location,$http)
+app.controller("login",function($scope,$location,$http,$rootScope)
 {
 	$scope.login_Handler=function()
 	{
 //		$location.path("/companyBenediction");
+		document.getElementById("userName").value="";
+		document.getElementById("pasword").value="";
 		$("#login").modal("toggle");
 	}
 	$scope.cb_path=function()
 	{
 		$location.path("/companyBenediction");
 	}
-	
+	$scope.birthday=function()
+	{
+		$("#lottery").modal("toggle");
+	}
 })
 
 //公司祝福
 app.controller('companyBenediction',function($scope,$location)
 {
-	
+	setBodyClass(["bckRed"]);
+	if(user==""||blePersonPnum==""){
+		$location.path("/index");
+		return;
+	}
 })
 //我想对他说
 app.controller("iWantSay",function($scope,$location)
 {
-	
+	if(user==""||blePersonPnum==""){
+		$location.path("/index");
+		return;
+	}
+	setBodyClass(["bck-yellow"]);
 })
 //本月寿星
-app.controller("longevity",function($scope,$location)
+app.controller("longevity",function($scope,$location,$rootScope)
 {
-	$scope.lyMsg_Handler=function()
+	if(user==""||blePersonPnum==""){
+		$location.path("/index");
+		return;
+	}
+	//本月所有生日人相关信息及留言(2条)
+	var allBirthday="/birthday/blessing/limit.do";
+	$scope.birthlimits;
+	setBodyClass(["longevity-back-img","longevity-back-set"]);
+	function init(data)
+	{
+		$scope.$apply(function()
+		{
+			if(data.result!="SUCCESS")
+			{
+				alert(data.info);
+				return;
+			}
+			for(var i=0;i<data.birthlimits.length;i++)
+			{
+				if(data.birthlimits[i].limit2Blessing.length==0)
+				{
+					data.birthlimits[i].more=false;
+				}else{
+					data.birthlimits[i].more=true;
+				}
+//				data.birthlimits[i].more=true;
+			}
+			$scope.birthlimits=data.birthlimits;
+		})
+		
+	}
+	var par={};
+	$.post(allBirthday,par,init,"json");
+	//点击更多按钮时处理函数
+	$scope.moreMsg=function(x)
+	{
+		var s=angular.element(document.querySelector('[ng-controller=app]')).scope().moreMsgList=x;
+		$location.path("/msg");
+	}
+	//点击信息框时处理函数
+	$scope.lyMsg_Handler=function(x)
+	{
+		$scope.userMsg=x;
+		$("#longevity").modal("toggle");
+	}
+	$scope.upMsg=function()
 	{
 		
+		//留言接口
+		var msgUrl="/birthday/blessing/add.do";
+		var txt=$("#lvy-textarea").val();
+		function bck(data)
+		{
+			$scope.$apply(function(){
+			
+				$scope.userMsg.limit2Blessing[1]=$scope.userMsg.limit2Blessing[0];
+				var obj={'blePerson': getCookie("userName"),'bleContent': txt};
+				$scope.userMsg.limit2Blessing[0]=obj;
+			});
+		}
+		if(txt=="")
+		{
+			$("#longevity").modal("hide");
+			return;
+		}
+//		console.log("$scope.userMsg==",$scope.userMsg);
+		var par={birthPerson:$scope.userMsg.workName,birthPersonPnum:$scope.userMsg.phoneNum,blePerson:getCookie("userName"),bleContent:txt}
+		$.post(msgUrl,par,bck,"json");
+		$("#longevity").modal("hide");
+		$("#lvy-textarea").val("");
+	}
+	
+	//点击下一页按钮时处理函数
+	$scope.gotoNext=function()
+	{
+		if(isBirthday)
+		{
+			$location.path("/lottery");
+		}
 	}
 })
 //留言板
 app.controller('msg',function($scope,$location)
 {
+	if(user==""||blePersonPnum==""){
+		$location.path("/index");
+		return;
+	}
+//	console.log('moreMsgList==',$scope.moreMsgList)
+	var p=$scope.moreMsgList.phoneNum;//过生日人的手机号
+	$scope.msgBack=function()
+	{
+		$location.path("/longevity");
+	}
+	setBodyClass([]);
 	function msg_Handler(data)
 	{
-		console.log(data)
+		if(data.result!="SUCCESS")
+		{
+			alert(data.info);
+			return;
+		}
+		$scope.$apply(function()
+		{
+			$scope.list=data.blessings;
+		})
+//		console.log(data)
 	}
-	var par={birthPersonPnum:"15937712253"}
+	var par={birthPersonPnum:p}//*******************************
 	$.post("/birthday/blessing/all.do",par,msg_Handler,"json");
 })
 //活动说明
-app.controller('explain',function($scope,$location)
+app.controller('explain',function($scope,$location,$rootScope)
 {
+	if(!$rootScope.check()||user==""){
+		return;
+	}
 	$("body").addClass("bckRed");
+	//获取用户是否点过赞(包含过生日形式满意度,奖品满意度)  及点赞数量
+	function countBck(data)
+	{
+		$scope.$apply(function()
+		{
+			//生日形式赞同
+			$scope.activeEndorse=data.praCount.activeEndorse;
+			//生日形式不赞同
+			$scope.activeOppose=data.praCount.activeOppose;
+			
+			//奖品赞同
+			$scope.prizeEndorse=data.praCount.prizeEndorse;
+			//奖品不赞同
+			$scope.prizeOppose=data.praCount.prizeOppose;
+		});
+	}
+	var countPar={userName:getCookie("blePersonPnum")};
+	$.post("/birthday/praise/count.do",countPar,countBck,"json");
 })
-app.controller("lottery",function($scope,$location)
+app.controller("lottery",function($scope,$location,$rootScope)
 {
+	if(!$rootScope.check()||user==""){
+		return;
+	}
 	var turnplate={
 					restaraunts:[],				//大转盘奖品名称
 					colors:[],					//大转盘奖品区块对应背景颜色
@@ -100,12 +288,24 @@ app.controller("lottery",function($scope,$location)
 					startAngle:0,				//开始角度
 					bRotate:false				//false:停止;ture:旋转
 				};
-	$scope.init=function()
+	$scope.init=function(data)
 	{
+//		console.log(data);
+		if(data.result!="SUCCESS")
+		{
+			alert(data.info);
+			return;
+		}
+		var arr=[];
+		var imgArr=["../../imgs/master/prize/projector.png","../../imgs/master/prize/bed.png","../../imgs/master/prize/humidifier.png","../../imgs/master/prize/cup.png","../../imgs/master/prize/liquor.png"];
+		for(var i=0;i<data.prizes.length;i++)
+		{
+			arr.push(data.prizes[i].prizeName)
+		}
 		//动态添加大转盘的奖品与奖品区域背景颜色
-		turnplate.restaraunts = ["50M免费流量包", "10闪币", "谢谢参与", "5闪币", "10M免费流量包", "20M免费流量包", "20闪币 ", "30M免费流量包", "100M免费流量包", "2闪币"];
+		turnplate.restaraunts = arr;//["50M免费流量包", "10闪币", "谢谢参与", "5闪币", "10M免费流量包", "20M免费流量包", "20闪币 ", "30M免费流量包", "100M免费流量包", "2闪币"];
 		turnplate.colors = ["#FFF4D6", "#FFFFFF", "#FFF4D6", "#FFFFFF","#FFF4D6", "#FFFFFF", "#FFF4D6", "#FFFFFF","#FFF4D6", "#FFFFFF"];
-		
+//		console.log(arr);
 		var rotateTimeOut = function (){
 			$('#wheelcanvas').rotate({
 				angle:0,
@@ -131,53 +331,39 @@ app.controller("lottery",function($scope,$location)
 				animateTo:angles+1800,
 				duration:8000,
 				callback:function (){
-					alert(txt);
+					$("#lottery").modal("toggle");
+//					alert(txt);
 					turnplate.bRotate = !turnplate.bRotate;
 				}
 			});
 		};
-	
-		$('.pointer').click(function (){
+		$(".pointer").click(function(){
 			if(turnplate.bRotate)return;
+			var par={'phoneNum':getCookie("blePersonPnum"),'name':getCookie("userName")};
+			$.post("/birthday/winPrize/lucky.do",par,bck,"json");
+			
+		})
+		function bck(data)
+		{
+			if(data.result!="SUCCESS")
+			{
+				alert(data.info);
+				return;
+			}
 			turnplate.bRotate = !turnplate.bRotate;
 			//获取随机数(奖品个数范围内)
-			var item = rnd(1,turnplate.restaraunts.length);
+			var item = rnd(Number(data.prizeinfo.id),turnplate.restaraunts.length);
 			//奖品数量等于10,指针落在对应奖品区域的中心角度[252, 216, 180, 144, 108, 72, 36, 360, 324, 288]
-			rotateFn(item, turnplate.restaraunts[item-1]);
-			/* switch (item) {
-				case 1:
-					rotateFn(252, turnplate.restaraunts[0]);
-					break;
-				case 2:
-					rotateFn(216, turnplate.restaraunts[1]);
-					break;
-				case 3:
-					rotateFn(180, turnplate.restaraunts[2]);
-					break;
-				case 4:
-					rotateFn(144, turnplate.restaraunts[3]);
-					break;
-				case 5:
-					rotateFn(108, turnplate.restaraunts[4]);
-					break;
-				case 6:
-					rotateFn(72, turnplate.restaraunts[5]);
-					break;
-				case 7:
-					rotateFn(36, turnplate.restaraunts[6]);
-					break;
-				case 8:
-					rotateFn(360, turnplate.restaraunts[7]);
-					break;
-				case 9:
-					rotateFn(324, turnplate.restaraunts[8]);
-					break;
-				case 10:
-					rotateFn(288, turnplate.restaraunts[9]);
-					break;
-			} */
-			console.log(item);
-		});
+			rotateFn(Number(data.prizeinfo.id), turnplate.restaraunts[item]);
+			$scope.$apply(function()
+			{
+				$scope.imgUrl=imgArr[Number(data.prizeinfo.id)-1];
+				$scope.prizeMsg=arr[Number(data.prizeinfo.id)-1];
+			})
+			
+//			console.log(item);
+		}
+		$scope.drawRouletteWheel();
 	}
 	function rnd(n, m){
 		var random = Math.floor(Math.random()*(m-n+1)+n);
@@ -218,51 +404,234 @@ app.controller("lottery",function($scope,$location)
 			  
 			  //rotate方法旋转当前的绘图
 			  ctx.rotate(angle + arc / 2 + Math.PI / 2);
-			  
-			  /** 下面代码根据奖品类型、奖品名称长度渲染不同效果，如字体、颜色、图片效果。(具体根据实际情况改变) **/
-			  if(text.indexOf("M")>0){//流量包
-				  var texts = text.split("M");
-				  for(var j = 0; j<texts.length; j++){
-					  ctx.font = j == 0?'bold 20px Microsoft YaHei':'16px Microsoft YaHei';
-					  if(j == 0){
-						  ctx.fillText(texts[j]+"M", -ctx.measureText(texts[j]+"M").width / 2, j * line_height);
-					  }else{
-						  ctx.fillText(texts[j], -ctx.measureText(texts[j]).width / 2, j * line_height);
-					  }
-				  }
-			  }else if(text.indexOf("M") == -1 && text.length>6){//奖品名称长度超过一定范围 
+			
+			if(text.length>6&&text.length<=18){//奖品名称长度超过一定范围
 				  text = text.substring(0,6)+"||"+text.substring(6);
 				  var texts = text.split("||");
 				  for(var j = 0; j<texts.length; j++){
 					  ctx.fillText(texts[j], -ctx.measureText(texts[j]).width / 2, j * line_height);
 				  }
-			  }else{
+			  }else if(text.length>18)
+			  {
+			  	text = text.substring(0,12)+"||"+text.substring(12);
+				  var texts = text.split("||");
+				  for(var j = 0; j<texts.length; j++){
+					  ctx.fillText(texts[j], -ctx.measureText(texts[j]).width / 2, j * line_height);
+				  }
+			  }else {
 				  //在画布上绘制填色的文本。文本的默认颜色是黑色
 				  //measureText()方法返回包含一个对象，该对象包含以像素计的指定字体宽度
 				  ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
 			  }
-			  
-			  //添加对应图标
-//			  if(text.indexOf("闪币")>0){
-//				  var img= document.getElementById("shan-img");
-//				  img.onload=function(){  
-//					  ctx.drawImage(img,-15,10);      
-//				  }; 
-//				  ctx.drawImage(img,-15,10);  
-//			  }else if(text.indexOf("谢谢参与")>=0){
-//				  var img= document.getElementById("sorry-img");
-//				  img.onload=function(){  
-//					  ctx.drawImage(img,-15,10);      
-//				  };  
-//				  ctx.drawImage(img,-15,10);  
-//			  }
 			  //把当前画布返回（调整）到上一个save()状态之前 
 			  ctx.restore();
 			  //----绘制奖品结束----
 		  }     
 	  } 
 	}
-	$scope.init();
-	$scope.drawRouletteWheel();
-	$("#lottery").modal("toggle");
+	$.post("/birthday/winPrize/prizes.do","",$scope.init,"json");
+//	$scope.init
+//	$scope.drawRouletteWheel();
+//	$("#lottery").modal("toggle");
+	setBodyClass(["ly-bck"]);
+	function monthBck(data)
+	{
+		$scope.$apply(function()
+		{
+			if(data.result!="SUCCESS")
+			{
+				alert(data.info);
+				return;
+			}
+			$scope.monthList=data.winPrizes;
+		})
+	}
+	//当月生日的所有用户抽奖中奖信息
+	$.post("/birthday/winPrize/month.do","",monthBck,"json");
+	
+	
+	//获取用户是否点过赞(包含过生日形式满意度,奖品满意度)  及点赞数量
+	function countBck(data)
+	{
+		$scope.$apply(function()
+		{
+			//生日形式赞同
+			$scope.activeEndorse=data.praCount.activeEndorse;
+			//生日形式不赞同
+			$scope.activeOppose=data.praCount.activeOppose;
+			
+			//奖品赞同
+			$scope.prizeEndorse=data.praCount.prizeEndorse;
+			//奖品不赞同
+			$scope.prizeOppose=data.praCount.prizeOppose;
+			
+			//生日形式满意度是否点过赞
+			$scope.isActivePra=data.isActivePra;
+			//奖品满意度是否点过赞
+			$scope.isPrizePra=data.isPrizePra;
+			
+			$scope.satisficing={};//点赞参数记录
+			$scope.satisficing.activeState=$scope.isActivePra;
+			$scope.satisficing.prizeState=$scope.isPrizePra;
+		});
+	}
+	var countPar={userName:getCookie("blePersonPnum")};
+	$.post("/birthday/praise/count.do",countPar,countBck,"json");
+	
+	//用户过奖形式点赞
+	$scope.active=function(n)
+	{
+		if($scope.satisficing.activeState!=undefined&&$scope.satisficing.activeState)
+		{
+			alert("您已经参与过评价,不能再次评论");
+			return;
+		}
+		if(n==0)
+		{
+			$scope.activeOppose=Number($scope.activeOppose)+1;
+			$scope.satisficing.active="02";
+		}else{
+			$scope.activeEndorse=Number($scope.activeEndorse)+1;
+			$scope.satisficing.active="01";
+		}
+		$scope.satisficing.activeState=true;
+	}
+	
+	$scope.prize=function(n)
+	{
+		var par={};
+		if($scope.satisficing.prizeState!=undefined&&$scope.satisficing.prizeState)
+		{
+			alert("您已经参与过评价,不能再次评论");
+			return;
+		}
+		if(n==0)
+		{
+			$scope.prizeOppose=Number($scope.prizeOppose)+1;
+			$scope.satisficing.prize="02";
+		}else{
+			$scope.prizeEndorse=Number($scope.prizeEndorse)+1;
+			$scope.satisficing.prize="01";
+		}
+		$scope.satisficing.prizeState=true;
+	}
+	$scope.isEndorse=function()
+	{
+		if(!$scope.isActivePra)
+		{
+			activeRequest();
+		}
+		if(!$scope.isPrizePra)
+		{
+			prizeRequest();
+		}
+		$("#satisficing").modal("hide");
+		$('.in').remove();
+		$location.path("/explain");
+	}
+	function activeRequest()
+	{
+		function activeBck(data)
+		{
+//			console.log("activeBck===",data);
+		}
+		var par={};
+		par.isEndorse=$scope.satisficing.active;
+		par.userName=getCookie("blePersonPnum");
+		//用户过奖形式点赞
+		$.post("/birthday/praise/active/add.do",par,activeBck,"json");
+	}
+	function prizeRequest()
+	{
+		function activeBck(data)
+		{
+//			console.log("activeBck===",data);
+		}
+		var par={};
+		par.isEndorse=$scope.satisficing.prize;
+		par.userName=getCookie("blePersonPnum");
+		//奖品满意度点赞接口
+		$.post("/birthday/praise/prize/add.do",par,activeBck,"json");
+	}
+	//中奖弹窗点击确定按钮处理函数
+	$scope.goSatisficing=function()
+	{
+		$("#lottery").modal("hide");
+		$(".in").remove();
+		$("#satisficing").modal("toggle");
+	}
+	
 })
+
+
+function setBodyClass(cls)
+{
+	$("body").removeClass();
+	for(var i=0;i<cls.length;i++)
+	{
+		$("body").addClass(cls[i]);
+	}
+}
+function getCookie(key)
+{
+	var arr=document.cookie.split(",");
+	var tempArr=[];
+	var str="";
+	for(var i=0;i<arr.length;i++)
+	{
+		tempArr=arr[i].split(':');
+		if(tempArr[0]==key)
+		{
+			str=tempArr[1];
+		}
+	}
+	return str;
+}
+function setCookie(key,val)
+{
+	var coo=document.cookie;
+	var arr=coo.split(",");
+	var tempArr=[];
+	var state=false;
+	
+	a:for(var i=0;i<arr.length;i++)
+	{
+		tempArr=arr[i].split(":");
+		if(tempArr[0]==key)
+		{
+			tempArr[1]=val;
+			state=true;
+			arr[i]=tempArr[0]+":"+tempArr[1];
+			document.cookie=arr.join(",");
+			break a;
+		}
+	}
+	if(!state)
+	{
+		var value=key+":"+val+",";
+		coo+=value;
+		document.cookie=coo;
+	}
+}
+function check()
+{
+//	console.log(getCookie("userName"));
+	var d=new Date();
+	d=d.getTime();
+	var ct=Number(getCookie("timestamp"));
+	var c=d-ct;
+	c=c/1000/60;
+	console.log("c==",c);
+	if(c>=30)
+	{
+		
+	}
+	var flag=false;
+	if(getCookie("isBirthday")=="true")
+	{
+		flag=true;
+	}else{
+		flag=false;
+	}
+	return flag;
+}

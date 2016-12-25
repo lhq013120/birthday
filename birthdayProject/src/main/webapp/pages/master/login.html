@@ -15,7 +15,7 @@
 					</div>
 					<div class="positionR">
 						<span class="passwordIcon login_icon"></span>
-						<input id="pasword" class="userIpt" placeholder="密码"/>
+						<input type="password" id="pasword" class="userIpt" placeholder="密码"/>
 					</div>
 				</div>
 				
@@ -40,17 +40,17 @@
 					</div>
 					<div class="positionR overflow_hidden login-border-bottom mt20">
 						<label class="col-xs-4">新密码</label>
-						<input class="col-xs-8 border_none outline-none" placeholder="请填写4~6位密码" />
+						<input type="password" id="newPas" class="col-xs-8 border_none outline-none" placeholder="请填写4~6位密码" />
 					</div>
 					<div class="positionR overflow_hidden login-border-bottom mt20">
 						<label class="col-xs-4">确认密码</label>
-						<input class="col-xs-8 border_none outline-none" placeholder="请再次填写你的密码"/>
+						<input type="password" id="newPas1" class="col-xs-8 border_none outline-none" placeholder="请再次填写你的密码"/>
 					</div>
 				</div>
 				
 			</div>
 			<div class="modal-footer text-center border_none">
-				<button type="button" class="changePassword col-xs-6 outline-none">确认修改</button>
+				<button type="button" class="changePassword col-xs-6 outline-none" ng-click="pasChange()">确认修改</button>
 			</div>
 		</div>
 	</div>
@@ -75,7 +75,7 @@
 				</div>
 			</div>
 			<div class="modal-footer text-center border_none">
-				<button type="button" class="changePassword col-xs-6 outline-none">确认</button>
+				<button ng-click="next_Handler('companyBenediction')" type="button" class="changePassword col-xs-6 outline-none">确认</button>
 			</div>
 		</div>
 	</div>
