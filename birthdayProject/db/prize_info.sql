@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2016-12-13 23:41:42
+Date: 2016-12-26 20:06:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,13 +27,18 @@ CREATE TABLE `prize_info` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `crete_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='奖品信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='奖品信息表';
 
 -- ----------------------------
 -- Records of prize_info
 -- ----------------------------
-INSERT INTO `prize_info` VALUES ('1', '001', '一等奖', '价值300元奖品：北京中欣卡，优丽可迷你投影仪。', '2016-12-13 13:03:01', '2016-12-13 13:03:05');
-INSERT INTO `prize_info` VALUES ('2', '002', '二等奖', '价值200元奖品：北京商通卡，床上四件套。', '2016-12-13 13:03:01', '2016-12-13 13:03:01');
-INSERT INTO `prize_info` VALUES ('3', '003', '三等奖', '价值100元奖品： 1号店礼品卡，加湿器。', '2016-12-13 13:03:01', '2016-12-13 13:03:01');
-INSERT INTO `prize_info` VALUES ('4', '004', '四等奖', '价值50元奖品：天堂折叠伞，保温杯。', '2016-12-13 13:03:01', '2016-12-13 13:03:01');
-INSERT INTO `prize_info` VALUES ('5', '005', '五等奖', '其他：鸿茅药酒2瓶，鸿茅白酒1瓶。', '2016-12-13 13:03:01', '2016-12-13 13:03:01');
+INSERT INTO `prize_info` VALUES ('1', '001', '一等奖', '价值300元奖品：北京中欣卡', '2016-12-13 13:03:01', '2016-12-13 13:03:05');
+INSERT INTO `prize_info` VALUES ('2', '002', '一等奖', '价值300元奖品：优丽可迷你投影仪', '2016-12-13 13:03:01', '2016-12-13 13:03:01');
+INSERT INTO `prize_info` VALUES ('3', '003', '二等奖', '价值200元奖品：北京商通卡', '2016-12-13 13:03:01', '2016-12-13 13:03:01');
+INSERT INTO `prize_info` VALUES ('4', '004', '二等奖', '价值200元奖品：床上四件套', '2016-12-13 13:03:01', '2016-12-13 13:03:01');
+INSERT INTO `prize_info` VALUES ('5', '005', '三等奖', '价值100元奖品：1号店礼品卡', '2016-12-13 13:03:01', '2016-12-13 13:03:01');
+INSERT INTO `prize_info` VALUES ('6', '006', '三等奖', '价值100元奖品：加湿器', '2016-12-13 13:03:01', '2016-12-13 13:03:01');
+INSERT INTO `prize_info` VALUES ('7', '007', '四等奖', '价值50元奖品：天堂折叠伞', '2016-12-13 13:03:01', '2016-12-13 13:03:01');
+INSERT INTO `prize_info` VALUES ('8', '008', '四等奖', '价值50元奖品：保温杯', '2016-12-13 13:03:01', '2016-12-13 13:03:01');
+INSERT INTO `prize_info` VALUES ('9', '009', '五等奖', '鸿茅药酒2瓶', '2016-12-13 13:03:01', '2016-12-13 13:03:01');
+INSERT INTO `prize_info` VALUES ('10', '010', '五等奖', '鸿茅白酒1瓶', '2016-12-13 13:03:01', '2016-12-13 13:03:01');
