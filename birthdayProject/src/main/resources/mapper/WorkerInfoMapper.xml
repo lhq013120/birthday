@@ -41,6 +41,7 @@
 		worker_info
 	WHERE
 		MONTH(birthday) = MONTH(NOW()) 
+		AND DATE_FORMAT(birthday,'%Y') != '9999'
   </select>
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >

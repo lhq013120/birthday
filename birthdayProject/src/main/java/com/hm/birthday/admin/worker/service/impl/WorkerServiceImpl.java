@@ -81,7 +81,7 @@ public class WorkerServiceImpl implements IWorkerService {
 				if (nowMonth.equals(crrMonthBir) && !"9999".equals(DateUtils.dateFormat(7,(Date)map.get("birthday")))) {
 					isBirthday = true;
 				}
-				map.put("birthday", DateUtils.dateFormat(3, (Date)map.get("birthday")));
+				map.put("birthday", DateUtils.dateFormat(8, (Date)map.get("birthday")));
 				map.put("isLucky", isLucky); // 是否已抽奖
 				map.put("isBirthday", isBirthday);// 是否生日
 			}

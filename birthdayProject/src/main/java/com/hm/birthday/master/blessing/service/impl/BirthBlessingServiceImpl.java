@@ -85,7 +85,7 @@ public class BirthBlessingServiceImpl implements IBirthBlessingService {
 					}
 				}
 				blv.setBloodType(btName); // 血型
-				blv.setBirthday(DateUtils.dateFormat(3,worker.getBirthday())); // 生日
+				blv.setBirthday(DateUtils.dateFormat(8,worker.getBirthday())); // 生日
 				
 				// 获取本月生日用户的留言前两条
 				List<BirthBlessing> blessings;
