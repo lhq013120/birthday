@@ -9,7 +9,7 @@
 	<div class="mt20">
 		<div class="positionR">
 			<img class="center index-0 col-xs-8 ly-title" src="../../imgs/master/lottery/record-title.png" />
-			<p class="text-center line-height55 font-bold font-red ft25 positionR">中奖纪录</p>
+			<p class="text-center line-height55 font-bold font-red ft25 positionR h55"></p>
 		</div>
 		<div class="ly-body col-xs-10 col-xs-offset-1 pd0 index-1">
 			<ul class="mt50">
@@ -24,6 +24,7 @@
 			</div>
 		</div>
 	</div>
+	<img ng-click="goExplain()" class="centerLR arrow " src="../../imgs/master/arrow.png" />
 	<div class="modal fade in" id="lottery" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog pd0 m0 mt35b">
 			<div class="">
@@ -58,22 +59,22 @@
 				<div class=" mt10 ft16 overflow_hidden">
 					<p class="font-bold">1、您对本次生日福利形式是否满意？</p>
 					<div class="w50b fl pr50 pl20">
-						<img ng-click="active(1)" class="w30 h30" src="../../imgs/master/satisficing/like_icon.png"/>
+						<img  class="w30 h30" src="../../imgs/master/satisficing/like_icon.png"/>
 						<span>{{activeEndorse}}</span>
 					</div>
 					<div class="w50b fl text-left">
-						<img ng-click="active(0)" class="w30 h30" src="../../imgs/master/satisficing/dislike.png"/>
+						<img class="w30 h30" src="../../imgs/master/satisficing/dislike.png"/>
 						<span>{{activeOppose}}</span>
 					</div>
 				</div>
 				<div id="" class=" mt10 ft16 overflow_hidden">
 					<p class="font-bold">2、您对本次奖品是否满意？</p>
 					<div class="w50b fl pr50 pl20">
-						<img ng-click="prize(1)" class="w30 h30" src="../../imgs/master/satisficing/like_icon.png"/>
+						<img class="w30 h30" src="../../imgs/master/satisficing/like_icon.png"/>
 						<span>{{prizeEndorse}}</span>
 					</div>
 					<div class="w50b fl">
-						<img ng-click="prize(0)" class="w30 h30" src="../../imgs/master/satisficing/dislike.png" />
+						<img class="w30 h30" src="../../imgs/master/satisficing/dislike.png" />
 						<span>{{prizeOppose}}</span>
 					</div>
 				</div>

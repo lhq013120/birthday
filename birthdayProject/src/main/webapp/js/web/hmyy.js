@@ -223,10 +223,7 @@ app.controller("longevity",function($scope,$location,$rootScope)
 	//点击下一页按钮时处理函数
 	$scope.gotoNext=function()
 	{
-		if(isBirthday)
-		{
-			$location.path("/lottery");
-		}
+		$location.path("/lottery");
 	}
 })
 //留言板
@@ -264,7 +261,8 @@ app.controller('msg',function($scope,$location)
 app.controller('explain',function($scope,$location,$rootScope)
 {
 	$('.in').remove();
-	if(!$rootScope.check()||user==""){
+	if(user==""){
+		$location.path("/index");
 		return;
 	}
 	$("body").addClass("bckRed");
@@ -282,16 +280,84 @@ app.controller('explain',function($scope,$location,$rootScope)
 			$scope.prizeEndorse=data.praCount.prizeEndorse;
 			//奖品不赞同
 			$scope.prizeOppose=data.praCount.prizeOppose;
+			$scope.satisficing={};//点赞参数记录
+			$scope.satisficing.activeState=data.isActivePra;
+			$scope.satisficing.prizeState=data.isPrizePra;
 		});
 	}
 	var countPar={userName:getCookie("blePersonPnum")};
 	$.post("/praise/count.do",countPar,countBck,"json");
+	
+	//用户过奖形式点赞
+	$scope.active=function(n)
+	{
+		if($scope.satisficing.activeState!=undefined&&$scope.satisficing.activeState)
+		{
+			alert("您已经参与过评价,不能再次评论");
+			return;
+		}
+		if(n==0)
+		{
+			$scope.activeOppose=Number($scope.activeOppose)+1;
+			$scope.satisficing.active="02";
+		}else{
+			$scope.activeEndorse=Number($scope.activeEndorse)+1;
+			$scope.satisficing.active="01";
+		}
+		$scope.satisficing.activeState=true;
+		activeRequest();
+	}
+	
+	$scope.prize=function(n)
+	{
+		var par={};
+		if($scope.satisficing.prizeState!=undefined&&$scope.satisficing.prizeState)
+		{
+			alert("您已经参与过评价,不能再次评论");
+			return;
+		}
+		if(n==0)
+		{
+			$scope.prizeOppose=Number($scope.prizeOppose)+1;
+			$scope.satisficing.prize="02";
+		}else{
+			$scope.prizeEndorse=Number($scope.prizeEndorse)+1;
+			$scope.satisficing.prize="01";
+		}
+		$scope.satisficing.prizeState=true;
+		prizeRequest();
+	}
+	function activeRequest()
+	{
+		function activeBck(data)
+		{
+//			console.log("activeBck===",data);
+		}
+		var par={};
+		par.isEndorse=$scope.satisficing.active;
+		par.userName=getCookie("blePersonPnum");
+		//用户过奖形式点赞
+		$.post("/praise/active/add.do",par,activeBck,"json");
+	}
+	function prizeRequest()
+	{
+		function activeBck(data)
+		{
+//			console.log("activeBck===",data);
+		}
+		var par={};
+		par.isEndorse=$scope.satisficing.prize;
+		par.userName=getCookie("blePersonPnum");
+		//奖品满意度点赞接口
+		$.post("/praise/prize/add.do",par,activeBck,"json");
+	}
 })
 app.controller("lottery",function($scope,$location,$rootScope)
 {
-	if(!$rootScope.check()||user==""){
-		return;
-	}
+//	if(user==""){
+//		$location.path("/index");
+//		return;
+//	}
 	var turnplate={
 					restaraunts:[],				//大转盘奖品名称
 					colors:[],					//大转盘奖品区块对应背景颜色
@@ -316,8 +382,8 @@ app.controller("lottery",function($scope,$location,$rootScope)
 			arr.push(data.prizes[i].prizeName)
 		}
 		//动态添加大转盘的奖品与奖品区域背景颜色
-		turnplate.restaraunts = arr;//["50M免费流量包", "10闪币", "谢谢参与", "5闪币", "10M免费流量包", "20M免费流量包", "20闪币 ", "30M免费流量包", "100M免费流量包", "2闪币"];
-		turnplate.colors = ["#FFF4D6", "#FFFFFF", "#FFF4D6", "#FFFFFF","#FFF4D6", "#FFFFFF", "#FFF4D6", "#FFFFFF","#FFF4D6", "#FFFFFF"];
+		turnplate.restaraunts =arr;//["50M免费流量包", "10闪币", "谢谢参与", "5闪币", "10M免费流量包", "20M免费流量包", "20闪币 ", "30M免费流量包", "100M免费流量包", "2闪币"];
+		turnplate.colors = ["#ffeebe", "#ffbe04", "#ffeebe", "#ffbe04", "#ffeebe", "#ffbe04", "#ffeebe", "#ffbe04", "#ffeebe", "#ffbe04"];
 //		console.log(arr);
 		var rotateTimeOut = function (){
 			$('#wheelcanvas').rotate({
@@ -352,6 +418,9 @@ app.controller("lottery",function($scope,$location,$rootScope)
 		};
 		$(".pointer").click(function(){
 			if(turnplate.bRotate)return;
+			if(!$rootScope.check()||user==""){
+					return;
+				}
 			var par={'phoneNum':getCookie("blePersonPnum"),'name':getCookie("userName")};
 			$.post("/winPrize/lucky.do",par,bck,"json");
 			
@@ -373,8 +442,6 @@ app.controller("lottery",function($scope,$location,$rootScope)
 				$scope.imgUrl=imgArr[Number(data.prizeinfo.id)-1];
 				$scope.prizeMsg=arr[Number(data.prizeinfo.id)-1];
 			})
-			
-//			console.log(item);
 		}
 		$scope.drawRouletteWheel();
 	}
@@ -418,10 +485,12 @@ app.controller("lottery",function($scope,$location,$rootScope)
 			  //rotate方法旋转当前的绘图
 			  ctx.rotate(angle + arc / 2 + Math.PI / 2);
 			
-			if(text.length>6&&text.length<=18){//奖品名称长度超过一定范围
-				  text = text.substring(0,6)+"||"+text.substring(6);
+			if(text.length>6){//奖品名称长度超过一定范围
+				text=subStr(text);
+//				  text = text.substring(0,6)+"||"+text.substring(6,10)+"||"+text.substring(10);
 				  var texts = text.split("||");
 				  for(var j = 0; j<texts.length; j++){
+				  	 ctx.font = "bold";
 					  ctx.fillText(texts[j], -ctx.measureText(texts[j]).width / 2, j * line_height);
 				  }
 			  }else if(text.length>18)
@@ -439,8 +508,24 @@ app.controller("lottery",function($scope,$location,$rootScope)
 			  //把当前画布返回（调整）到上一个save()状态之前 
 			  ctx.restore();
 			  //----绘制奖品结束----
+			  ctx.lineWidth=1;
+			  ctx.beginPath();
+			  ctx.strokeStyle="#f19c05";
+			  ctx.arc(canvas.width/2,canvas.height/2,canvas.width/2-18.5,0,2*Math.PI);
+			  ctx.stroke();
 		  }     
 	  } 
+	}
+	function subStr(str)
+	{
+		var s="";
+		var count=6;
+		for(var i=0;i<str.length;i+=6)
+		{
+			s+=str.substr(i,i+count)+"||";
+			count-=1;
+		}
+		return s;
 	}
 	$.post("/winPrize/prizes.do","",$scope.init,"json");
 //	$scope.init
@@ -477,94 +562,16 @@ app.controller("lottery",function($scope,$location,$rootScope)
 			$scope.prizeEndorse=data.praCount.prizeEndorse;
 			//奖品不赞同
 			$scope.prizeOppose=data.praCount.prizeOppose;
-			
-			//生日形式满意度是否点过赞
-			$scope.isActivePra=data.isActivePra;
-			//奖品满意度是否点过赞
-			$scope.isPrizePra=data.isPrizePra;
-			
-			$scope.satisficing={};//点赞参数记录
-			$scope.satisficing.activeState=$scope.isActivePra;
-			$scope.satisficing.prizeState=$scope.isPrizePra;
 		});
 	}
 	var countPar={userName:getCookie("blePersonPnum")};
 	$.post("/praise/count.do",countPar,countBck,"json");
 	
-	//用户过奖形式点赞
-	$scope.active=function(n)
-	{
-		if($scope.satisficing.activeState!=undefined&&$scope.satisficing.activeState)
-		{
-			alert("您已经参与过评价,不能再次评论");
-			return;
-		}
-		if(n==0)
-		{
-			$scope.activeOppose=Number($scope.activeOppose)+1;
-			$scope.satisficing.active="02";
-		}else{
-			$scope.activeEndorse=Number($scope.activeEndorse)+1;
-			$scope.satisficing.active="01";
-		}
-		$scope.satisficing.activeState=true;
-	}
-	
-	$scope.prize=function(n)
-	{
-		var par={};
-		if($scope.satisficing.prizeState!=undefined&&$scope.satisficing.prizeState)
-		{
-			alert("您已经参与过评价,不能再次评论");
-			return;
-		}
-		if(n==0)
-		{
-			$scope.prizeOppose=Number($scope.prizeOppose)+1;
-			$scope.satisficing.prize="02";
-		}else{
-			$scope.prizeEndorse=Number($scope.prizeEndorse)+1;
-			$scope.satisficing.prize="01";
-		}
-		$scope.satisficing.prizeState=true;
-	}
 	$scope.isEndorse=function()
 	{
-		if(!$scope.isActivePra)
-		{
-			activeRequest();
-		}
-		if(!$scope.isPrizePra)
-		{
-			prizeRequest();
-		}
 		$("#satisficing").modal("hide");
 		$('.in').remove();
 		$location.path("/explain");
-	}
-	function activeRequest()
-	{
-		function activeBck(data)
-		{
-//			console.log("activeBck===",data);
-		}
-		var par={};
-		par.isEndorse=$scope.satisficing.active;
-		par.userName=getCookie("blePersonPnum");
-		//用户过奖形式点赞
-		$.post("/praise/active/add.do",par,activeBck,"json");
-	}
-	function prizeRequest()
-	{
-		function activeBck(data)
-		{
-//			console.log("activeBck===",data);
-		}
-		var par={};
-		par.isEndorse=$scope.satisficing.prize;
-		par.userName=getCookie("blePersonPnum");
-		//奖品满意度点赞接口
-		$.post("/praise/prize/add.do",par,activeBck,"json");
 	}
 	//中奖弹窗点击确定按钮处理函数
 	$scope.goSatisficing=function()
@@ -573,7 +580,10 @@ app.controller("lottery",function($scope,$location,$rootScope)
 		$(".in").remove();
 		$("#satisficing").modal("toggle");
 	}
-	
+	$scope.goExplain=function()
+	{
+		$location.path("/explain");
+	}
 })
 
 
