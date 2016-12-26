@@ -745,3 +745,9 @@ ul, li {
 .index-1000 {
 	z-index: 1000;
 }
+.dis-none{
+	display: none;
+}
+.dis-inblock{
+	display: inline-block !important;
+}
