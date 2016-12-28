@@ -6,15 +6,15 @@
 	</div>
 	<div class="le-container">
 		<ul class="">
-			<li class="col-xs-12 mt10 mb30" ng-repeat="x in birthlimits">
+			<li class="col-xs-12 mt10 mb30" style="" ng-repeat="x in birthlimits">
 				<div style="height: 200px;position: relative;">
 					<div class="le-img-border center">
-						<img class="le-img" src="../../{{x.workerImg}}" />
+						<img class="flower" src="../../imgs/master/longevity/flower.png" style="" />
+						<img class="le-img" ng-src="../../{{x.workerImg}}" />
 					</div>
 				</div>
-				
 				<div class="col-xs-8 col-xs-offset-3 pd0 positionR mt5">
-					<img class="positionA le-arrow" src="../../imgs/master/longevity/arrow.png" />
+					<img class="positionA le-arrow" ng-src="../../imgs/master/longevity/arrow.png" />
 					<p class="text-right col-xs-4 m0 pd0">偶滴大名:</p><p class="text-left col-xs-8">{{x.workName}}</p>
 					<p class="text-right col-xs-4 m0 pd0">偶滴生日:</p><p class="text-left col-xs-8">{{x.birthday}}</p>
 					<p class="text-right col-xs-4 m0 pd0">偶滴星座:</p><p class="text-left col-xs-8">{{x.workerConstellation}}</p>

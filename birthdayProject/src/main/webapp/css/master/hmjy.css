@@ -148,7 +148,7 @@ ul, li {
 .cb-content {
 	border-radius: 10px;
 	outline: none;
-	height: 400px;
+	height: 360px;
 	padding: 5px 15px 0 15px;
 	margin: -10px 15px 0 15px;
 	font-size: 16px;
@@ -276,7 +276,7 @@ ul, li {
 
 .banner .turnplate {
 	display: block;
-	width: 80%;
+	width: 90%;
 	position: relative;
 }
 
@@ -360,7 +360,13 @@ ul, li {
 .ly-leave-msg {
 	background: #fee868;
 }
-
+.flower{
+	width: 230px;
+	height: 250px;
+	position: absolute;
+	left: -18px;
+	top: 30px;
+}
 .el {
 	
 }
@@ -547,6 +553,9 @@ ul, li {
 .h30{
 	height: 30px;
 }
+.h40{
+	height: 40px;
+}
 .h55{
 	height: 55px;
 }
@@ -698,6 +707,12 @@ ul, li {
 .mr10 {
 	margin-right: 10px;
 }
+.mb5{
+	margin-bottom: 5px !important;
+}
+.mb10{
+	margin-bottom: 10px;
+}
 .mb30{
 	margin-bottom: 30px;
 }
@@ -724,7 +739,9 @@ ul, li {
 .disTab {
 	display: table-cell;
 }
-
+.line-height20 {
+	line-height: 20px;
+}
 .line-height30 {
 	line-height: 30px;
 }

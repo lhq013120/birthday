@@ -6,7 +6,7 @@ app.controller("app",function($scope,$location,$http,$rootScope)
 	$('.in').remove();
 	$rootScope.check=function()
 	{
-		if(!isBirthday)
+		if(isBirthday===false)
 		{
 			$location.path("/index");
 			return false;
@@ -213,7 +213,6 @@ app.controller("longevity",function($scope,$location,$rootScope)
 			$("#longevity").modal("hide");
 			return;
 		}
-//		console.log("$scope.userMsg==",$scope.userMsg);
 		var par={birthPerson:$scope.userMsg.workName,birthPersonPnum:$scope.userMsg.phoneNum,blePerson:getCookie("userName"),bleContent:txt}
 		$.post(msgUrl,par,bck,"json");
 		$("#longevity").modal("hide");
@@ -234,7 +233,6 @@ app.controller('msg',function($scope,$location)
 		$location.path("/index");
 		return;
 	}
-//	console.log('moreMsgList==',$scope.moreMsgList)
 	var p=$scope.moreMsgList.phoneNum;//过生日人的手机号
 	$scope.msgBack=function()
 	{
@@ -252,7 +250,6 @@ app.controller('msg',function($scope,$location)
 		{
 			$scope.list=data.blessings;
 		})
-//		console.log(data)
 	}
 	var par={birthPersonPnum:p}//*******************************
 	$.post("/blessing/all.do",par,msg_Handler,"json");
@@ -331,7 +328,6 @@ app.controller('explain',function($scope,$location,$rootScope)
 	{
 		function activeBck(data)
 		{
-//			console.log("activeBck===",data);
 		}
 		var par={};
 		par.isEndorse=$scope.satisficing.active;
@@ -343,7 +339,6 @@ app.controller('explain',function($scope,$location,$rootScope)
 	{
 		function activeBck(data)
 		{
-//			console.log("activeBck===",data);
 		}
 		var par={};
 		par.isEndorse=$scope.satisficing.prize;
@@ -354,14 +349,27 @@ app.controller('explain',function($scope,$location,$rootScope)
 })
 app.controller("lottery",function($scope,$location,$rootScope)
 {
-//	if(user==""){
-//		$location.path("/index");
-//		return;
-//	}
+	if(user==""){
+		$location.path("/index");
+		return;
+	}
+	//转盘中奖品名称图片路径
+	var prizeArr=["../../imgs/master/lottery/zxk.png",
+				  "../../imgs/master/lottery/tyy.png", 
+				  "../../imgs/master/lottery/skt.png", 
+				  "../../imgs/master/lottery/sjt.png", 
+				  "../../imgs/master/lottery/lpk.png", 
+				  "../../imgs/master/lottery/jsq.png", 
+				  "../../imgs/master/lottery/zds.png", 
+				  "../../imgs/master/lottery/bwb.png", 
+				  "../../imgs/master/lottery/hmyj.png", 
+				  "../../imgs/master/lottery/hmbj.png"
+				  ];
+	var prizeImgArr=[];//奖品转盘中名称图片
 	var turnplate={
 					restaraunts:[],				//大转盘奖品名称
 					colors:[],					//大转盘奖品区块对应背景颜色
-					outsideRadius:192,			//大转盘外圆的半径
+					outsideRadius:186.5,			//大转盘外圆的半径
 					textRadius:155,				//大转盘奖品位置距离圆心的距离
 					insideRadius:68,			//大转盘内圆的半径
 					startAngle:0,				//开始角度
@@ -369,22 +377,32 @@ app.controller("lottery",function($scope,$location,$rootScope)
 				};
 	$scope.init=function(data)
 	{
-//		console.log(data);
 		if(data.result!="SUCCESS")
 		{
 			alert(data.info);
 			return;
 		}
 		var arr=[];
-		var imgArr=["../../imgs/master/prize/projector.png","../../imgs/master/prize/bed.png","../../imgs/master/prize/humidifier.png","../../imgs/master/prize/cup.png","../../imgs/master/prize/liquor.png"];
+		//奖品图片url
+		var imgArr=["../../imgs/master/prize/zxk.png",
+					"../../imgs/master/prize/tyy.png",
+					"../../imgs/master/prize/skt.png",
+					"../../imgs/master/prize/sjt.png",
+					"../../imgs/master/prize/lpk.png",
+					"../../imgs/master/prize/jsq.png",
+					"../../imgs/master/prize/ys.png",
+					"../../imgs/master/prize/bwb.png",
+					"../../imgs/master/prize/hmyj.png",
+					"../../imgs/master/prize/hmbj.png"
+					];
 		for(var i=0;i<data.prizes.length;i++)
 		{
 			arr.push(data.prizes[i].prizeName)
 		}
+		["北京中欣卡", "优丽可迷你投影仪", "北京商通卡", "床上四件套", "1号店礼品卡", "加湿器", "天堂折叠伞", "保温杯", "鸿茅药酒2瓶", "鸿茅白酒1瓶"]
 		//动态添加大转盘的奖品与奖品区域背景颜色
-		turnplate.restaraunts =arr;//["50M免费流量包", "10闪币", "谢谢参与", "5闪币", "10M免费流量包", "20M免费流量包", "20闪币 ", "30M免费流量包", "100M免费流量包", "2闪币"];
+		turnplate.restaraunts =arr;
 		turnplate.colors = ["#ffeebe", "#ffbe04", "#ffeebe", "#ffbe04", "#ffeebe", "#ffbe04", "#ffeebe", "#ffbe04", "#ffeebe", "#ffbe04"];
-//		console.log(arr);
 		var rotateTimeOut = function (){
 			$('#wheelcanvas').rotate({
 				angle:0,
@@ -474,45 +492,19 @@ app.controller("lottery",function($scope,$location,$rootScope)
 			  ctx.fill();
 			  //锁画布(为了保存之前的画布状态)
 			  ctx.save();   
-			  
 			  //----绘制奖品开始----
 			  ctx.fillStyle = "#E5302F";
 			  var text = turnplate.restaraunts[i];
 			  var line_height = 17;
 			  //translate方法重新映射画布上的 (0,0) 位置
 			  ctx.translate(211 + Math.cos(angle + arc / 2) * turnplate.textRadius, 211 + Math.sin(angle + arc / 2) * turnplate.textRadius);
-			  
 			  //rotate方法旋转当前的绘图
 			  ctx.rotate(angle + arc / 2 + Math.PI / 2);
-			
-			if(text.length>6){//奖品名称长度超过一定范围
-				text=subStr(text);
-//				  text = text.substring(0,6)+"||"+text.substring(6,10)+"||"+text.substring(10);
-				  var texts = text.split("||");
-				  for(var j = 0; j<texts.length; j++){
-				  	 ctx.font = "bold";
-					  ctx.fillText(texts[j], -ctx.measureText(texts[j]).width / 2, j * line_height);
-				  }
-			  }else if(text.length>18)
-			  {
-			  	text = text.substring(0,12)+"||"+text.substring(12);
-				  var texts = text.split("||");
-				  for(var j = 0; j<texts.length; j++){
-					  ctx.fillText(texts[j], -ctx.measureText(texts[j]).width / 2, j * line_height);
-				  }
-			  }else {
-				  //在画布上绘制填色的文本。文本的默认颜色是黑色
-				  //measureText()方法返回包含一个对象，该对象包含以像素计的指定字体宽度
-				  ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
-			  }
+				var img=prizeImgArr[i];
+			  ctx.drawImage(img,-40,-20);   
 			  //把当前画布返回（调整）到上一个save()状态之前 
 			  ctx.restore();
 			  //----绘制奖品结束----
-			  ctx.lineWidth=1;
-			  ctx.beginPath();
-			  ctx.strokeStyle="#f19c05";
-			  ctx.arc(canvas.width/2,canvas.height/2,canvas.width/2-18.5,0,2*Math.PI);
-			  ctx.stroke();
 		  }     
 	  } 
 	}
@@ -527,10 +519,25 @@ app.controller("lottery",function($scope,$location,$rootScope)
 		}
 		return s;
 	}
-	$.post("/winPrize/prizes.do","",$scope.init,"json");
-//	$scope.init
-//	$scope.drawRouletteWheel();
-//	$("#lottery").modal("toggle");
+	var countImg=0;
+	function downImg(src)
+	{
+		var img=document.createElement("img");
+		img.onload=function()
+		{
+			countImg+=1;
+			prizeImgArr.push(img);
+			if(countImg<prizeArr.length)
+			{
+				downImg(prizeArr[countImg]);
+			}else{
+				countImg=0;
+				$.post("/winPrize/prizes.do","",$scope.init,"json");
+			}
+		}
+		img.src=src;
+	}
+	downImg(prizeArr[countImg]);
 	setBodyClass(["ly-bck"]);
 	function monthBck(data)
 	{
@@ -638,13 +645,11 @@ function setCookie(key,val)
 }
 function check()
 {
-//	console.log(getCookie("userName"));
 	var d=new Date();
 	d=d.getTime();
 	var ct=Number(getCookie("timestamp"));
 	var c=d-ct;
 	c=c/1000/60;
-	console.log("c==",c);
 	if(c>=30)
 	{
 		

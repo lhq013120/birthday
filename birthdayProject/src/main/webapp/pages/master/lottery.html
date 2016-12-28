@@ -2,10 +2,14 @@
 <div class="banner col-xs-12" ng-controller="lottery">
 	
 	<p class="text-center mt10 ft25 ly-title-text font-bold">小寿星们开始抽奖了......</p>
-	<div class="turnplate overflow_hidden center" style="background:url(../../imgs/master/lottery/turnplate-bg.png) no-repeat;background-size:100% 98.5%;">
+	<div class="turnplate overflow_hidden center" style="background:url(../../imgs/master/lottery/turntable.png) no-repeat;background-size:100% 98.5%;">
 		<canvas class="item" id="wheelcanvas" width="422px" height="422px"></canvas>
 		<img class="pointer" src="../../imgs/master/lottery/turnplate-pointer.png"/ >
 	</div>
+	<div style="text-align: center;position: relative;top: 0px;z-index: -2;">
+		<img style="width: 70%;height: 16px;margin-top: -13px;" src="../../imgs/master/lottery/yiny.png" />
+	</div>
+	<img src="../../imgs/master/lottery/cd.png" style="position: absolute;top: 50px;width: 95%;height: 64%;z-index: -1;" />
 	<div class="mt20">
 		<div class="positionR">
 			<img class="center index-0 col-xs-8 ly-title" src="../../imgs/master/lottery/record-title.png" />
@@ -20,7 +24,7 @@
 			</ul>
 			<div id="" class="ly-list-footer positionR">
 				<img class="ly-car positionA " src="../../imgs/master/lottery/car.png" />
-				<p class="ml30 pt8">人力资源小妹儿将于生日当天送到您手中!</p>
+				<p class="ml30 pt8" style="color: #7c0600;">人力资源小妹儿将于生日当天送到您手中!</p>
 			</div>
 		</div>
 	</div>
@@ -31,11 +35,11 @@
 				<div class="modal-body pd0">
 					<div class="ly-box h350">
 						<img class="center w300 t-76" src="../../imgs/master/lottery/gold.png" />
-						<img src="{{imgUrl}}" class="center lyImg" />
+						<img ng-src="{{imgUrl}}" class="center lyImg" />
 						<div class="text-center positionR text-container">
 							<h4 class="m0 font-bold font-red">恭喜你!</h4>
-							<p class="w175 centerLR">{{prizeMsg}}</p>
-							<p>人力资源小妹儿正在派送中......</p>
+							<p class="w175 centerLR">获得{{prizeMsg}}</p>
+							<p class="mb5">人力资源小妹儿正在派送中......</p>
 							<button ng-click="goSatisficing()" type="button" class="changePassword col-xs-3 text-center border_none outline-none positionR bt0">确定</button>
 						</div>
 					</div>
