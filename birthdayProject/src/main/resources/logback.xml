@@ -27,7 +27,7 @@
 		</layout>
 	</appender>
 	
-	
+	<logger name="com.hm.birthday" level="DEBUG" />
 	<logger name="org.apache.commons.httpclient" level="ERROR"/>
 	<logger name="org.springframework.core.env" level="ERROR"/>
 	<logger name="org.springframework.beans" level="ERROR"/>
