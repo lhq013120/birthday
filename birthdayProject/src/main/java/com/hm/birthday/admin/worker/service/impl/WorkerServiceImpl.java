@@ -151,6 +151,7 @@ public class WorkerServiceImpl implements IWorkerService {
 
 	@Override
 	public WorkerInfo getWorkerByPhone(String phoneNum) throws Exception {
+		logger.info("按用户手机号查询用户参数手机号{}:",phoneNum);
 		WorkerInfo workerInfo = null;
 		try {
 			workerInfo = workerMapper.selectByPhone(phoneNum);
