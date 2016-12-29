@@ -142,7 +142,7 @@ ul, li {
 
 .cb-title {
 	width: 100%;
-	height: 140px;
+	height: 180px;
 }
 
 .cb-content {
@@ -298,7 +298,7 @@ ul, li {
 }
 
 .ly-title {
-	height: 80px;
+	height: 60px;
 }
 
 .ly-title-text {
@@ -352,9 +352,9 @@ ul, li {
 }
 
 .ly-box .lyImg {
-	width: 35%;
-	height: 75px;
-	top: 33%;
+	width: 100px;
+	height: 65px;
+	top: 38%;
 }
 
 .ly-leave-msg {
@@ -558,6 +558,9 @@ ul, li {
 }
 .h55{
 	height: 55px;
+}
+.h320{
+	height: 320px;
 }
 .h350{
 	height: 350px;
