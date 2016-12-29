@@ -33,6 +33,7 @@ app.controller("app",function($scope,$location,$http,$rootScope)
 					alert(data.info);
 					return;
 				}
+				document.getElementById("audio").play();
 				isBirthday=data.userinfo.isBirthday;
 				user=data.userinfo.workName;
 				blePersonPnum=data.userinfo.phoneNum;
