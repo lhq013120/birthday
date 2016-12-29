@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50553
 File Encoding         : 65001
 
-Date: 2016-12-29 14:00:47
+Date: 2016-12-29 14:16:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,5 +40,5 @@ INSERT INTO `prize_info` VALUES ('5', '002', '一等奖', '优丽可迷你投影
 INSERT INTO `prize_info` VALUES ('6', '010', '五等奖', '鸿茅白酒1瓶', '2016-12-13 13:03:01', '2016-12-13 13:03:01');
 INSERT INTO `prize_info` VALUES ('7', '007', '四等奖', '天堂折叠伞', '2016-12-13 13:03:01', '2016-12-13 13:03:01');
 INSERT INTO `prize_info` VALUES ('8', '009', '五等奖', '鸿茅药酒2瓶', '2016-12-13 13:03:01', '2016-12-13 13:03:01');
+INSERT INTO `prize_info` VALUES ('9', '006', '三等奖', '加湿器', '2016-12-13 13:03:01', '2016-12-13 13:03:01');
 INSERT INTO `prize_info` VALUES ('10', '008', '四等奖', '保温杯', '2016-12-13 13:03:01', '2016-12-13 13:03:01');
-INSERT INTO `prize_info` VALUES ('16', '006', '三等奖', '加湿器', '2016-12-13 13:03:01', '2016-12-13 13:03:01');
