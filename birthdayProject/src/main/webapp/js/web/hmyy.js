@@ -354,17 +354,18 @@ app.controller("lottery",function($scope,$location,$rootScope)
 		return;
 	}
 	//转盘中奖品名称图片路径
-	var prizeArr=["../../imgs/master/lottery/zxk.png",
-				  "../../imgs/master/lottery/tyy.png", 
-				  "../../imgs/master/lottery/skt.png", 
-				  "../../imgs/master/lottery/sjt.png", 
-				  "../../imgs/master/lottery/lpk.png", 
-				  "../../imgs/master/lottery/jsq.png", 
-				  "../../imgs/master/lottery/zds.png", 
-				  "../../imgs/master/lottery/bwb.png", 
-				  "../../imgs/master/lottery/hmyj.png", 
-				  "../../imgs/master/lottery/hmbj.png"
-				  ];
+	var prizeArr=[
+					"../../imgs/master/lottery/skt.png",
+					"../../imgs/master/lottery/zxk.png",
+					"../../imgs/master/lottery/lpk.png",
+					"../../imgs/master/lottery/sjt.png",
+					"../../imgs/master/lottery/tyy.png",
+					"../../imgs/master/lottery/hmbj.png",
+					"../../imgs/master/lottery/zds.png",
+					"../../imgs/master/lottery/hmyj.png",
+					"../../imgs/master/lottery/jsq.png",
+					"../../imgs/master/lottery/bwb.png"
+					];
 	var prizeImgArr=[];//奖品转盘中名称图片
 	var turnplate={
 					restaraunts:[],				//大转盘奖品名称
@@ -384,22 +385,23 @@ app.controller("lottery",function($scope,$location,$rootScope)
 		}
 		var arr=[];
 		//奖品图片url
-		var imgArr=["../../imgs/master/prize/zxk.png",
-					"../../imgs/master/prize/tyy.png",
+		var imgArr=[
 					"../../imgs/master/prize/skt.png",
-					"../../imgs/master/prize/sjt.png",
+					"../../imgs/master/prize/zxk.png",
 					"../../imgs/master/prize/lpk.png",
-					"../../imgs/master/prize/jsq.png",
+					"../../imgs/master/prize/sjt.png",
+					"../../imgs/master/prize/tyy.png",
+					"../../imgs/master/prize/hmbj.png",
 					"../../imgs/master/prize/ys.png",
-					"../../imgs/master/prize/bwb.png",
 					"../../imgs/master/prize/hmyj.png",
-					"../../imgs/master/prize/hmbj.png"
+					"../../imgs/master/prize/jsq.png",
+					"../../imgs/master/prize/bwb.png"
+					
 					];
 		for(var i=0;i<data.prizes.length;i++)
 		{
 			arr.push(data.prizes[i].prizeName)
 		}
-		["北京中欣卡", "优丽可迷你投影仪", "北京商通卡", "床上四件套", "1号店礼品卡", "加湿器", "天堂折叠伞", "保温杯", "鸿茅药酒2瓶", "鸿茅白酒1瓶"]
 		//动态添加大转盘的奖品与奖品区域背景颜色
 		turnplate.restaraunts =arr;
 		turnplate.colors = ["#ffeebe", "#ffbe04", "#ffeebe", "#ffbe04", "#ffeebe", "#ffbe04", "#ffeebe", "#ffbe04", "#ffeebe", "#ffbe04"];
@@ -486,7 +488,7 @@ app.controller("lottery",function($scope,$location,$rootScope)
 			  ctx.fillStyle = turnplate.colors[i];
 			  ctx.beginPath();
 			  //arc(x,y,r,起始角,结束角,绘制方向) 方法创建弧/曲线（用于创建圆或部分圆）    
-			  ctx.arc(211, 211, turnplate.outsideRadius, angle, angle + arc, false);    
+			  ctx.arc(211, 211, turnplate.outsideRadius, angle,angle + arc, false);    
 			  ctx.arc(211, 211, turnplate.insideRadius, angle + arc, angle, true);
 			  ctx.stroke();  
 			  ctx.fill();
