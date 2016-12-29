@@ -116,7 +116,7 @@ public class WinPrizeInfoServiceImpl implements IWinPrizeInfoService {
 	public List<PrizeVo> allPrize() throws Exception {
 		List<PrizeVo> voList = new ArrayList<PrizeVo>();
 		try {
-			List<PrizeInfo> list = prizeInfoMapper.queryWithPage(null);
+			List<PrizeInfo> list = prizeInfoMapper.queryAll(null);
 			for(PrizeInfo pi : list) {
 				PrizeVo pv = new PrizeVo();
 				BeanUtils.copyProperties(pi, pv);

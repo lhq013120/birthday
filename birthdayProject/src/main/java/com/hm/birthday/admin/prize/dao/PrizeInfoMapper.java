@@ -24,7 +24,7 @@ public interface PrizeInfoMapper {
 	 * @return
 	 * @throws Exception
 	 */
-	List<PrizeInfo> queryWithPage(PrizeInfo prizeInfo) throws Exception;
+	List<PrizeInfo> queryAll(PrizeInfo prizeInfo) throws Exception;
     int deleteByPrimaryKey(Integer id) throws Exception;
 
     int insert(PrizeInfo record) throws Exception;
