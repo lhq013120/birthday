@@ -463,7 +463,7 @@ app.controller("lottery",function($scope,$location,$rootScope)
 			if(!$rootScope.check()||user==""){
 					return;
 				}
-			var par={'phoneNum':blePersonPnum,'name':user)};
+			var par={'phoneNum':blePersonPnum,'name':user};
 			$.post("/winPrize/lucky.do",par,bck,"json");
 			
 		})
