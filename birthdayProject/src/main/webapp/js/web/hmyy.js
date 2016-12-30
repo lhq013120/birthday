@@ -218,7 +218,7 @@ app.controller("longevity",function($scope,$location,$rootScope)
 		function bck(data)
 		{
 			$scope.$apply(function(){
-				var obj={'blePerson': getCookie("userName"),'bleContent': txt};
+				var obj={'blePerson': user,'bleContent': txt};
 				$scope.userMsg.limit2Blessing.unshift(obj);
 				$scope.userMsg.more=true;
 				while($scope.userMsg.limit2Blessing.length>=3)
@@ -235,7 +235,7 @@ app.controller("longevity",function($scope,$location,$rootScope)
 			$("#longevity").modal("hide");
 			return;
 		}
-		var par={birthPerson:$scope.userMsg.workName,birthPersonPnum:$scope.userMsg.phoneNum,blePerson:getCookie("userName"),bleContent:txt}
+		var par={birthPerson:$scope.userMsg.workName,birthPersonPnum:$scope.userMsg.phoneNum,blePerson:user,bleContent:txt}
 		$.post(msgUrl,par,bck,"json");
 		$("#longevity").modal("hide");
 		$("#lvy-textarea").val("");
@@ -304,7 +304,7 @@ app.controller('explain',function($scope,$location,$rootScope)
 			$scope.satisficing.prizeState=data.isPrizePra;
 		});
 	}
-	var countPar={userName:getCookie("blePersonPnum")};
+	var countPar={userName:blePersonPnum};
 	$.post("/praise/count.do",countPar,countBck,"json");
 	
 	//用户过奖形式点赞
@@ -353,7 +353,7 @@ app.controller('explain',function($scope,$location,$rootScope)
 		}
 		var par={};
 		par.isEndorse=$scope.satisficing.active;
-		par.userName=getCookie("blePersonPnum");
+		par.userName=blePersonPnum;
 		//用户过奖形式点赞
 		$.post("/praise/active/add.do",par,activeBck,"json");
 	}
@@ -364,7 +364,7 @@ app.controller('explain',function($scope,$location,$rootScope)
 		}
 		var par={};
 		par.isEndorse=$scope.satisficing.prize;
-		par.userName=getCookie("blePersonPnum");
+		par.userName=blePersonPnum;
 		//奖品满意度点赞接口
 		$.post("/praise/prize/add.do",par,activeBck,"json");
 	}
@@ -463,7 +463,7 @@ app.controller("lottery",function($scope,$location,$rootScope)
 			if(!$rootScope.check()||user==""){
 					return;
 				}
-			var par={'phoneNum':getCookie("blePersonPnum"),'name':getCookie("userName")};
+			var par={'phoneNum':blePersonPnum,'name':user)};
 			$.post("/winPrize/lucky.do",par,bck,"json");
 			
 		})
@@ -595,7 +595,7 @@ app.controller("lottery",function($scope,$location,$rootScope)
 			$scope.prizeOppose=data.praCount.prizeOppose;
 		});
 	}
-	var countPar={userName:getCookie("blePersonPnum")};
+	var countPar={userName:blePersonPnum};
 	$.post("/praise/count.do",countPar,countBck,"json");
 	
 	$scope.isEndorse=function()
