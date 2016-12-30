@@ -142,7 +142,7 @@ ul, li {
 
 .cb-title {
 	width: 100%;
-	height: 180px;
+	height: 170px;
 }
 
 .cb-content {
@@ -195,8 +195,8 @@ ul, li {
 .say-body {
 	background: url(../../imgs/master/iWantSay/textbox.png) no-repeat;
 	background-size: 100% 100%;
-	/*width: 280px;*/
-	height: 370px;
+	width: 260px;
+	height: 360px;
 	margin-top: 20px !important;
 	text-align: center;
 	padding-top: 30px;

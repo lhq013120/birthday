@@ -33,7 +33,6 @@ app.controller("app",function($scope,$location,$http,$rootScope)
 					alert(data.info);
 					return;
 				}
-				document.getElementById("audio").play();
 				isBirthday=data.userinfo.isBirthday;
 				user=data.userinfo.workName;
 				blePersonPnum=data.userinfo.phoneNum;
@@ -102,8 +101,30 @@ app.controller("app",function($scope,$location,$http,$rootScope)
 app.controller("login",function($scope,$location,$http,$rootScope)
 {
 	$('.in').remove();
+	var audio=document.getElementById("audio");
+	audio.addEventListener("pause",pause_Handler,false);
+	function pause_Handler()
+	{
+		if(audio.paused)
+		{
+			audio.play();
+			audio.removeEventListener("pause",pause_Handler,false);
+		}
+	}
+	audio.play();
+	setTimeout(function(){
+		playAudio();
+	},3000);
+	function playAudio()
+	{
+		if(audio.paused)
+		{
+			audio.play();
+		}
+	}
 	$scope.login_Handler=function()
 	{
+		playAudio();
 //		$location.path("/companyBenediction");
 		document.getElementById("userName").value="";
 		document.getElementById("pasword").value="";

@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 <title>鸿茅药业</title>
 <script src="../../js/web/jquery.min.js"></script>
 <script src="../../js/web/bootstrap.min.js" /></script>
@@ -16,7 +17,8 @@
 <script src="../../js/web/awardRotate.js"></script>
 </head>
 <body ng-app="app" ng-controller="app">
-	<audio id="audio" loop="loop" src="../../music/birthday.mp3"></audio>
+	<audio id="audio" autoplay="autoplay" loop="loop" src="../../music/birthday.mp3">
+	</audio>
 	<div ng-view class="super positionR"></div>
 </body>
 </html>
