@@ -10,6 +10,8 @@ public class PrizeInfo {
     private String prizeGrade;
 
     private String prizeName;
+    
+    private Integer prizeWeight;
 
     private Date updateTime;
 
@@ -47,7 +49,15 @@ public class PrizeInfo {
         this.prizeName = prizeName == null ? null : prizeName.trim();
     }
 
-    public Date getUpdateTime() {
+    public Integer getPrizeWeight() {
+		return prizeWeight;
+	}
+
+	public void setPrizeWeight(Integer prizeWeight) {
+		this.prizeWeight = prizeWeight;
+	}
+
+	public Date getUpdateTime() {
         return updateTime;
     }
 

@@ -9,6 +9,8 @@ public class PrizeVo {
 	private String prizeGrade;
 	
 	private String prizeName;
+	
+	private Integer prizeWeight;
 
 	public Integer getId() {
 		return id;
@@ -41,10 +43,18 @@ public class PrizeVo {
 	public void setPrizeName(String prizeName) {
 		this.prizeName = prizeName;
 	}
+	
+	public Integer getPrizeWeight() {
+		return prizeWeight;
+	}
+
+	public void setPrizeWeight(Integer prizeWeight) {
+		this.prizeWeight = prizeWeight;
+	}
 
 	@Override
 	public String toString() {
 		return "PrizeVo [id=" + id + ", prizeNo=" + prizeNo + ", prizeGrade=" + prizeGrade + ", prizeName=" + prizeName
-				+ "]";
+				+ ", prizeWeight=" + prizeWeight + "]";
 	}
 }

@@ -83,14 +83,40 @@ public class WinPrizeInfoServiceImpl implements IWinPrizeInfoService {
 		} 
 		return list;
 	}
-
+	
+	/**
+	 * 
+	 * 按照奖品的权重生成奖品信息
+	 * 
+	 * @param list 奖品信息列表
+	 * @return 返回生成的奖品信息下标
+	 */
+	private int getPrize(List<PrizeVo> list) {
+		int index = list.size()-1;
+		Random rand = new Random();
+		double randNum = rand.nextDouble();
+		double star = 0.0;
+		double end = 0.0;
+		for(int i = 0 ; i <list.size();i++) {
+			if (i == 0) {
+				end = new Integer(list.get(i).getPrizeWeight()).doubleValue()/100;
+			} else {
+				end += new Integer(list.get(i).getPrizeWeight()).doubleValue()/100;
+				star += new Integer(list.get(i-1).getPrizeWeight()).doubleValue()/100;
+			}
+			System.out.println("star = " + star + ",end = " + end);
+			if ( star<=randNum && randNum<=end) {
+				index = i;
+			}
+		}
+		return index;
+	}
+	
 	@Override
 	public PrizeVo luckyDraw(String phoneNum,String workerName) throws Exception {
 		List<PrizeVo> list = allPrize();
 		if (!CollectionUtils.isEmpty(list)) {
-			Random rand = new Random();
-			int randNum = rand.nextInt(list.size());
-			PrizeVo prizeVo = list.get(randNum);
+			PrizeVo prizeVo = list.get(getPrize(list));
 			logger.info("用户{},抽到奖品 : {}",new Object[]{phoneNum, prizeVo});
 			if (prizeVo != null) {
 				Date now = DateUtils.now();

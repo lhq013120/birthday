@@ -25,15 +25,5 @@ public interface PrizeInfoMapper {
 	 * @throws Exception
 	 */
 	List<PrizeInfo> queryAll(PrizeInfo prizeInfo) throws Exception;
-    int deleteByPrimaryKey(Integer id) throws Exception;
-
-    int insert(PrizeInfo record) throws Exception;
-
-    int insertSelective(PrizeInfo record) throws Exception;
-
-    PrizeInfo selectByPrimaryKey(Integer id) throws Exception;
-
-    int updateByPrimaryKeySelective(PrizeInfo record) throws Exception;
-
-    int updateByPrimaryKey(PrizeInfo record) throws Exception;
+ 
 }
